@@ -1,0 +1,8 @@
+{
+    "method" : "post",
+    "path" : "district",
+    "operationId" : "district",
+    "tag" : "District",
+    "summary" : "The following APIs are used for District",
+    "content_type" : "application/json"
+}

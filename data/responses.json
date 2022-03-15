@@ -1,0 +1,29 @@
+{
+    "200" : {
+        "rs": "S",
+        "rc": "200",
+        "rd": "OK",
+        "pd": [
+            {
+                "state_name": "WEST BENGAL",
+                "state_code": "19",
+                "state_short_name": "WEST BENGA"
+            },
+            {
+                "state_name": "UTTAR PRADESH",
+                "state_code": "9",
+                "state_short_name": "UTTAR PRAD"
+            },
+            {
+                "state_name": "UTTARAKHAND",
+                "state_code": "5",
+                "state_short_name": "UTTARAKHAN"
+            },
+            {
+                "state_name": "TRIPURA",
+                "state_code": "16",
+                "state_short_name": "TRIPURA"
+            }
+        ]
+    }
+}

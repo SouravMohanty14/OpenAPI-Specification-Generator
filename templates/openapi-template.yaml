@@ -1,0 +1,42 @@
+
+  /{{api.path}}:
+    {{api.method}}:
+      tags:
+      - {{api.tag}}
+      summary: {{api.summary}}
+      operationId: {{api.operationId}}
+      security:
+      - bearerAuth: []
+      parameters:
+      {% for key in api.parameters %}
+        - in: header
+          name: {{key}}
+          schema:
+            type: {{api.parameters[key]|get_type}}
+            example: {{api.parameters[key]}}
+      {% endfor %}
+      requestBody:
+        content:
+          {{api.content_type}}:
+            schema:
+              properties:
+                {% for key in api.requestBody %}
+                  {{key}}:
+                    type: {{api.requestBody[key]|get_type}}
+                    example: {{api.requestBody[key]}}
+                {% endfor %}
+      responses:
+      {% for response_code in api.response %}
+        {{response_code}}:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                properties:
+                {% for param in api.responses[response_code] %}
+                  {{param}}:
+                    type: {{api.responses[response_code][param]|get_type}}
+                    description: Request Status
+                    example: {{api.responses[response_code][param]}}
+                {% endfor %}
+      {% endfor %}
