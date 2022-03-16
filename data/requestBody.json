@@ -13,7 +13,28 @@
      "mode": "web",
      "pltfrm": "andorid",
      "deptid": "344",
-     "subsid": "0",
-     "subsid2": "0",
-     "formtrkr": "0"
+     "achievementList": [
+        {
+            "sports_person_name": "11i",
+            "achievement_doc1": "docs"
+        },
+        {
+            "sports_person_name": "12j",
+            "achievement_doc1": "pdf"
+        }
+    ],
+    "subsid": "0",
+    "subsid2": "0",
+    "AcademicQualificationsList": 
+        {
+            "programme_name": "B.tech",
+            "school_name": "KIT",
+            "school_place": "Raigarh",
+            "board_name": "Agra University",
+            "passed_year": "2014",
+            "specialized_subject": "commerce",
+            "percentage": "76",
+            "academic_doc": "doc"
+        },
+    "formtrkr": "0"
  }

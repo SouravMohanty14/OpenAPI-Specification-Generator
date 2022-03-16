@@ -23,7 +23,34 @@
                 {% for key in api.requestBody %}
                   {{key}}:
                     type: {{api.requestBody[key]|get_type}}
+                    {% if (api.requestBody[key]|get_type) == 'object' %}
+                    properties:
+                     {% for obj_param in api.requestBody[key] %}
+                      {{obj_param}}:
+                        type: {{api.requestBody[key][obj_param]|get_type}}
+                        example: {{api.requestBody[key][obj_param]}}
+                     {% endfor %}
+                    {% elif (api.requestBody[key]|get_type) == 'array' %}
+                    items:
+                      type: object
+                      properties:
+                      {% for element in api.requestBody[key][0] %}
+                        {{element}}:
+                          type: {{api.requestBody[key][0][element]|get_type}}
+                      {% endfor %}
+                    example:
+                     {% for array_param in api.requestBody[key] %}
+                      {% for element in array_param %}
+                       {% if loop.first %}
+                      -  {{element}}: {{array_param[element]}}
+                       {% else %}
+                         {{element}}: {{array_param[element]}}
+                       {% endif %}
+                      {% endfor %}
+                     {% endfor %}
+                    {% else %}
                     example: {{api.requestBody[key]}}
+                    {% endif %}
                 {% endfor %}
       responses:
       {% for response_code in api.responses %}
@@ -31,6 +58,7 @@
           {% if response_code|get_description != "" %}
           description: {{response_code|get_description}}
           {% endif %}
+          {% if api.responses[response_code] %}
           content:
             application/json:
               schema:
@@ -70,4 +98,5 @@
                     example: {{api.responses[response_code][param]}}
                     {% endif %}
                 {% endfor %}
+          {% endif %}
       {% endfor %}

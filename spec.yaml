@@ -80,12 +80,53 @@
                   deptid:
                     type: string
                     example: 344
+                  achievementList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sports_person_name:
+                          type: string
+                        achievement_doc1:
+                          type: string
+                    example:
+                      -  sports_person_name: 11i
+                         achievement_doc1: docs
+                      -  sports_person_name: 12j
+                         achievement_doc1: pdf
                   subsid:
                     type: string
                     example: 0
                   subsid2:
                     type: string
                     example: 0
+                  AcademicQualificationsList:
+                    type: object
+                    properties:
+                      programme_name:
+                        type: string
+                        example: B.tech
+                      school_name:
+                        type: string
+                        example: KIT
+                      school_place:
+                        type: string
+                        example: Raigarh
+                      board_name:
+                        type: string
+                        example: Agra University
+                      passed_year:
+                        type: string
+                        example: 2014
+                      specialized_subject:
+                        type: string
+                        example: commerce
+                      percentage:
+                        type: string
+                        example: 76
+                      academic_doc:
+                        type: string
+                        example: doc
                   formtrkr:
                     type: string
                     example: 0
@@ -148,3 +189,23 @@
                     type: integer
                     description: Response Code
                     example: 200
+        400:
+          description: Bad Request/Validation Error
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  rs:
+                    type: string
+                    description: Request Status
+                    example: S
+                  rd:
+                    type: string
+                    description: Response Description
+                    example: Error
+                  rc:
+                    type: integer
+                    description: Response Code
+                    example: 401
