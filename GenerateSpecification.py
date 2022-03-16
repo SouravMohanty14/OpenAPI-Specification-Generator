@@ -10,8 +10,13 @@ api_dict = {}
 #Erase Spec File
 open('spec.yaml', 'w').close()
 
+#Get Description data from Json File
+file = open('./data/descriptions.json',) 
+descriptions = json.load(file)
+file.close()
+
 def get_type(value):
-    print(type(value))
+    #print(type(value))
     if type(value) == str:
         return "string"
     if type(value) == float:
@@ -20,7 +25,17 @@ def get_type(value):
         return "integer"
     if type(value) == bool:
         return "boolean"
+    if type(value) == list:
+        return "array"
+    if type(value) == dict:
+        return "object"
     return type(value)
+
+def get_description(value):
+    if value in descriptions:
+        return descriptions[value]
+    else:
+        return ""
 
 def generate_api_object():
     obj = API.API_Obj()
@@ -41,6 +56,7 @@ def generate_api_spec():
 
     #Registering Filters
     jinja2.filters.FILTERS['get_type'] = get_type
+    jinja2.filters.FILTERS['get_description'] = get_description
 
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)

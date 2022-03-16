@@ -1,29 +1,39 @@
 {
     "200" : {
         "rs": "S",
-        "rc": "200",
+        "pd": {
+            "message": " RAJIV GANDHI KHEL RATNA AWARD has been Successfully Submitted...",
+            "status": 201,
+            "User Application ID": "AMGPJ-RGKRA-100521-3623"
+            },
         "rd": "OK",
-        "pd": [
+        "payload": [
             {
-                "state_name": "WEST BENGAL",
-                "state_code": "19",
-                "state_short_name": "WEST BENGA"
+                "district_name": "ANANTAPUR",
+                "district_code": "502",
+                "state_code": 28
             },
             {
-                "state_name": "UTTAR PRADESH",
-                "state_code": "9",
-                "state_short_name": "UTTAR PRAD"
+                "district_name": "CHITTOOR",
+                "district_code": "503",
+                "state_code": 28
             },
             {
-                "state_name": "UTTARAKHAND",
-                "state_code": "5",
-                "state_short_name": "UTTARAKHAN"
+                "district_name": "EAST GODAVARI",
+                "district_code": "505",
+                "state_code": 28
             },
             {
-                "state_name": "TRIPURA",
-                "state_code": "16",
-                "state_short_name": "TRIPURA"
+                "district_name": "GUNTUR",
+                "district_code": "506",
+                "state_code": 28
+            },
+            {
+                "district_name": "KRISHNA",
+                "district_code": "510",
+                "state_code": 28
             }
-        ]
+        ],
+        "rc": 200  
     }
 }

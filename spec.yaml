@@ -90,3 +90,61 @@
                     type: string
                     example: 0
       responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                properties:
+                  rs:
+                    type: string
+                    description: Request Status
+                    example: S
+                  pd:
+                    type: object
+                    description: Response Data
+                    properties:
+                      message: 
+                        type: string
+                        example:  RAJIV GANDHI KHEL RATNA AWARD has been Successfully Submitted...
+                      status: 
+                        type: integer
+                        example: 201
+                      User Application ID: 
+                        type: string
+                        example: AMGPJ-RGKRA-100521-3623
+                  rd:
+                    type: string
+                    description: Response Description
+                    example: OK
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        district_name:
+                          type: string
+                        district_code:
+                          type: string
+                        state_code:
+                          type: integer
+                    example:
+                      -  district_name: ANANTAPUR
+                         district_code: 502
+                         state_code: 28
+                      -  district_name: CHITTOOR
+                         district_code: 503
+                         state_code: 28
+                      -  district_name: EAST GODAVARI
+                         district_code: 505
+                         state_code: 28
+                      -  district_name: GUNTUR
+                         district_code: 506
+                         state_code: 28
+                      -  district_name: KRISHNA
+                         district_code: 510
+                         state_code: 28
+                  rc:
+                    type: integer
+                    description: Response Code
+                    example: 200
