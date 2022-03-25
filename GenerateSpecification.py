@@ -15,6 +15,11 @@ file = open('./data/descriptions.json',)
 descriptions = json.load(file)
 file.close()
 
+#Format
+file = open('./data/format.json',) 
+format = json.load(file)
+file.close()
+
 def get_type(value):
     #print(type(value))
     if type(value) == str:
@@ -31,9 +36,31 @@ def get_type(value):
         return "object"
     return type(value)
 
+def get_nestedarray_type(value):
+    #print(type(value))
+    if type(value) == str:
+        return "string"
+    if type(value) == float:
+        return "number"
+    if type(value) == int:
+        return "integer"
+    if type(value) == bool:
+        return "boolean"
+    if type(value) == list:
+        return "object"
+    if type(value) == dict:
+        return "object"
+    return type(value)
+
 def get_description(value):
     if value in descriptions:
         return descriptions[value]
+    else:
+        return ""
+
+def get_format(value):
+    if value in format:
+        return format[value]
     else:
         return ""
 
@@ -57,6 +84,8 @@ def generate_api_spec():
     #Registering Filters
     jinja2.filters.FILTERS['get_type'] = get_type
     jinja2.filters.FILTERS['get_description'] = get_description
+    jinja2.filters.FILTERS['get_nestedarray_type'] = get_nestedarray_type
+    jinja2.filters.FILTERS['get_format'] = get_format
 
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
@@ -95,5 +124,7 @@ if __name__ == "__main__":
         print ("Generating Open API Specification")
         generate_api_spec()
     else:
+        print ("Generating Open API Specification")
+        generate_api_spec()
         print ("Exiting.")
         runner = False

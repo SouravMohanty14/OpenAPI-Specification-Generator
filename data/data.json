@@ -1,8 +1,8 @@
 {
     "method" : "post",
-    "path" : "district",
-    "operationId" : "district",
-    "tag" : "District",
-    "summary" : "The following APIs are used for District",
+    "path" : "vendorsearch",
+    "operationId" : "vendorsearch",
+    "tag" : "Vendor Search",
+    "summary" : "The following APIs are used to view the file.",
     "content_type" : "application/json"
 }

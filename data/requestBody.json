@@ -1,40 +1,19 @@
 {
-     "tkn": "rhfb3d2c6a-4518-4163-a922-fbef65d0c2c1/2",
+    "tkn": "nxb9cab6fb-8afb-427c-9247-bcf8567431f7/3",
      "trkr": "213132",
      "lang": "en",
-     "lat": "12.972",
-     "lon": "77.595",
+     "lat": "21",
+     "lon": "90",
      "lac": "90",
      "did":"123234",
      "usag": "90",
      "apitrkr":"123234",
      "usrid": "09",
-     "srvid": "1544",
+     "srvid": "1112",
      "mode": "web",
      "pltfrm": "andorid",
-     "deptid": "344",
-     "achievementList": [
-        {
-            "sports_person_name": "11i",
-            "achievement_doc1": "docs"
-        },
-        {
-            "sports_person_name": "12j",
-            "achievement_doc1": "pdf"
-        }
-    ],
-    "subsid": "0",
-    "subsid2": "0",
-    "AcademicQualificationsList": 
-        {
-            "programme_name": "B.tech",
-            "school_name": "KIT",
-            "school_place": "Raigarh",
-            "board_name": "Agra University",
-            "passed_year": "2014",
-            "specialized_subject": "commerce",
-            "percentage": "76",
-            "academic_doc": "doc"
-        },
-    "formtrkr": "0"
- }
+     "deptid": "11",
+     "subsid": "0",
+     "subsid2": "0",
+     "formtrkr": "0"
+    }    
