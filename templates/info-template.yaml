@@ -11,3 +11,5 @@ info:
 servers:
 {% for url in info.servers %}
 - url: {{url}}
+{% endfor %}
+paths:

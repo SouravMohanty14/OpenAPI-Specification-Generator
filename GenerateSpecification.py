@@ -9,8 +9,19 @@ api_dict = {}
 
 securitySchemes = { "bearerAuth": False, "cookieAuth": False, "oauthsecurity": False, "oauthAuthorizeCode": False, "basicAuth": False }
 
+#Info
+file = open('./data/info.json',) 
+info = json.load(file)
+file.close()
+
+filename = "spec.yaml"
+try:
+  filename = info["title"] + ".yaml"
+except:
+  filename = "spec.yaml"
+
 #Erase Spec File
-open('spec.yaml', 'w').close()
+open(filename, 'w').close()
 
 #Get Description data from Json File
 file = open('./data/descriptions.json',) 
@@ -108,6 +119,15 @@ def generate_api_spec():
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 
+    # Opening info template file
+    info_template = env.get_template('info-template.yaml')
+    print ("Info Template loaded successfully...")
+    with open(filename, "a") as spec_file:
+        print("Writing Info")
+        info_temp = info_template.render(info=info)
+        spec_file.write(info_temp)
+        spec_file.close()
+
     # Opening template file
     template = env.get_template('openapi-template.yaml')
     print ("Template loaded successfully...")
@@ -115,16 +135,16 @@ def generate_api_spec():
     for path in api_dict:
         api_list = api_dict[path]
         for api in api_list:
-            with open("spec.yaml", "a") as spec_file:
+            with open(filename, "a") as spec_file:
                 print("Creating specification for " + api.path)
                 spec = template.render(api=api)
                 spec_file.write(spec)
                 spec_file.close()
 
-    # Opening template file
+    # Opening components template file
     component_template = env.get_template('components-template.yaml')
     print ("Component Template loaded successfully...")
-    with open("spec.yaml", "a") as spec_file:
+    with open(filename, "a") as spec_file:
         print("Writing Components")
         components = component_template.render()
         spec_file.write(components)
