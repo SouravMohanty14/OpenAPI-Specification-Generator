@@ -1,0 +1,13 @@
+{
+    "openapiVersion": "3.0.1",
+    "title": "PMSVANIDHIApi Wrapper API 1.4",
+    "description": "This is a Central Sector Scheme to facilitate street vendors to access affordable working capital loan for resuming their livelihoods activities, after easing of lockdown.The COVID-19 pandemic and consequent lockdowns have adversely impacted the livelihoods of street vendors.",
+    "termsOfService": "https://web.umang.gov.in/",
+    "contactName": "PMSVANIDHIApi Wrapper API 1.4",
+    "contactUrl": "https://web.umang.gov.in/customer_support",
+    "infoVersion": "1.0.0",
+    "servers":[
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/PMSVANIDHIApi/ws1/1.0",
+        "https://stagapp.umang.gov.in/t/negd.gov.in/umang/depttapi/PMSVANIDHIApi/ws1/1.0"
+    ]
+}

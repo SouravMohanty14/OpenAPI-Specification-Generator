@@ -1,8 +1,10 @@
 {
     "method" : "post",
-    "path" : "vendorsearch",
-    "operationId" : "vendorsearch",
-    "tag" : "Vendor Search",
-    "summary" : "The following APIs are used to view the file.",
-    "content_type" : "application/json"
+    "path" : "contactdetailsofpatient",
+    "operationId" : "contactdetailsofpatient",
+    "tag" : "Contact details of patient",
+    "summary" : "The following APIs are used to fetch contact details of patient",
+    "content_type" : "application/xml",
+    "authorization" : "bearerAuth",
+    "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
 }

@@ -1,0 +1,13 @@
+openapi: {{info.openapiVersion}}
+info:
+  title: {{info.title}}
+  description: |-
+      {{info.description}}
+  termsOfService: {{info.termsOfService}}
+  contact:
+    name: {{info.contactName}}
+    url: {{info.contactUrl}}
+  version: {{info.infoVersion}}
+servers:
+{% for url in info.servers %}
+- url: {{url}}

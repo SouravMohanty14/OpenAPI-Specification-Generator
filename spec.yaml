@@ -1,10 +1,10 @@
 
-  /viewfile:
+  /listofhospitals:
     post:
       tags:
-      - View File
-      summary: The following APIs are used to view the file.
-      operationId: viewfile
+      - List of hospitals
+      summary: This API is used to search the medicine
+      operationId: listofhospitals
       security:
       - bearerAuth: []
       parameters:
@@ -40,7 +40,7 @@
               properties:
                   tkn:
                     type: string
-                    example: nxb9cab6fb-8afb-427c-9247-bcf8567431f7/3
+                    example: 1234
                   trkr:
                     type: string
                     example: 213132
@@ -70,7 +70,7 @@
                     example: 09
                   srvid:
                     type: string
-                    example: 1112
+                    example: 11
                   mode:
                     type: string
                     example: web
@@ -79,7 +79,7 @@
                     example: andorid
                   deptid:
                     type: string
-                    example: 11
+                    example: 1112
                   subsid:
                     type: string
                     example: 0
@@ -89,45 +89,6 @@
                   formtrkr:
                     type: string
                     example: 0
-                  gatewayRequest:
-                    type: object
-                    properties:
-                      header:
-                        type: object
-                        properties:
-                         appVersion:
-                           type: string
-                           example: 1.0.1
-                         deviceId:
-                           type: string
-                           example: c80edd4d-5a80-389a-aed3-5417880b8fbf
-                         os:
-                           type: string
-                           example: Android
-                         osVersion:
-                           type: string
-                           example: 9
-                         requestUUID:
-                           type: string
-                           example: dR7f21596702534157
-                         serReqId:
-                           type: string
-                           example: ViewFile
-                         sVersion:
-                           type: string
-                           example: 4
-                         timeStamp:
-                           type: string
-                           example: 1596702534157
-                      request:
-                        type: object
-                        properties:
-                         id:
-                           type: string
-                           example: Guideline_Hindi_Svanidhi.pdf
-                         path:
-                           type: string
-                           example: MiscFiles
       responses:
         200:
           description: Successful Response
@@ -146,34 +107,35 @@
                   rd:
                     type: string
                     description: Response Description
-                    example: Success.
+                    example: OK
                   pd:
-                    type: object
+                    type: array
                     description: Response Data
-                    properties:
-                      gatewayResponse: 
-                        type: object                        
-                        properties:
-                          response: 
-                            type: string
-                            example: [{'banks': [{'bankId': 293, 'bankName': 'DPA'}], 'bankTypeName': 'Digital Payment Aggregator', 'bankTypeId': 14}, {'banks': [{'bankId': 292, 'bankName': 'NDCC'}, {'bankId': 281, 'bankName': 'SINDHUDURG DISTRICT CENTRAL CO-OPERATIVE BANK LTD. SINDHUDURG'}, {'bankId': 262, 'bankName': 'THE NILGIRIS DISTRICT CENTRAL COOPERATIVE BANK'}, {'bankId': 280, 'bankName': 'UDHAM SINGH NAGAR DISTRICT COOPERATIVE BANK'}], 'bankTypeName': 'District Co-operative Banks', 'bankTypeId': 13}, {'banks': [{'bankId': 161, 'bankName': 'The Saraswat Co-operative Bank Ltd'}], 'bankTypeName': 'External Lenders', 'bankTypeId': 11}, {'banks': [{'bankId': 105, 'bankName': 'SIDBI'}], 'bankTypeName': 'Financial Institutions', 'bankTypeId': 10}, {'banks': [{'bankId': 183, 'bankName': 'Adhikar Microfinance Private Limited'}, {'bankId': 164, 'bankName': 'Agora Microfinance India Ltd'}, {'bankId': 181, 'bankName': 'AJAGAR FINANCE PRIVATE LIMITED'}, {'bankId': 176, 'bankName': 'Annapurna Finance Pvt. Ltd.'}, {'bankId': 165, 'bankName': 'Arohan Financial Services Limited'}, {'bankId': 182, 'bankName': 'Arthimpact Digital Loans Pvt. Ltd.'}, {'bankId': 191, 'bankName': 'ASIRVAD MICROFINANCE LIMITED'}, {'bankId': 198, 'bankName': 'Belghoria Janakalyan Samity'}, {'bankId': 205, 'bankName': 'BHARATHI WOMEN DEVELOPMENT CENTRE'}, {'bankId': 168, 'bankName': 'BLAZE TRUST'}, {'bankId': 203, 'bankName': 'BWDA Finanace Ltd.'}, {'bankId': 178, 'bankName': 'Cashpor Micro Credit'}, {'bankId': 264, 'bankName': 'CENTRUM MICROCREDIT LTD'}, {'bankId': 196, 'bankName': 'Credit Access Grameen Limited'}, {'bankId': 201, 'bankName': 'Fino Finance P Ltd'}, {'bankId': 236, 'bankName': 'FUSION MICROFINANCE PRIVATE LIMITED'}, {'bankId': 186, 'bankName': 'FUTUREAGE INDIA MICRO CREDIT SERVICES'}, {'bankId': 179, 'bankName': 'G U Financial Services Pvt. Ltd'}, {'bankId': 167, 'bankName': 'GODSON MICROFINANCE FEDERATION'}, {'bankId': 263, 'bankName': 'Growing Opportunity Finance (India) Private Limited'}, {'bankId': 238, 'bankName': 'JAGARAN MICROFIN PRIVATE LIMITED'}, {'bankId': 275, 'bankName': 'Jankalyan Social Development Services'}, {'bankId': 200, 'bankName': 'JSCB LTD.'}, {'bankId': 166, 'bankName': 'KIARA MICROCREDIT PRIVATE LIMITED'}, {'bankId': 241, 'bankName': 'KPB Fincare (P) Ltd'}, {'bankId': 235, 'bankName': 'Kuber Kanak Microfinance Association'}, {'bankId': 190, 'bankName': 'LARAKSHA SOCIAL IMPACT TRUST'}, {'bankId': 202, 'bankName': 'Madura Microfinance'}, {'bankId': 169, 'bankName': 'MAGILCHI FOUNDATION'}, {'bankId': 197, 'bankName': 'Margdarshak Financial Services Ltd.'}, {'bankId': 195, 'bankName': 'Midland Microfin Limited'}, {'bankId': 163, 'bankName': 'MSM Microfinance Limited'}, {'bankId': 192, 'bankName': 'Muthoot Microfin Ltd'}, {'bankId': 242, 'bankName': 'Namra Finance Ltd.'}, {'bankId': 171, 'bankName': 'Need Livelihood Microfinance Pvt. Ltd'}, {'bankId': 187, 'bankName': 'Paisalo Digital Limited'}, {'bankId': 172, 'bankName': 'PLANNED SOCIAL CONCERN'}, {'bankId': 193, 'bankName': 'SAIJA FINANCE PVT LTD'}, {'bankId': 204, 'bankName': 'SAKHI COOP CREDIT AND SUPPLY SOCIETY LTD.'}, {'bankId': 276, 'bankName': 'SAMBANDH FINSERVE PVT LTD'}, {'bankId': 184, 'bankName': 'Samhita Community Development Services'}, {'bankId': 194, 'bankName': 'SAMPADA ENTREPRENEURSHIP AND LIVELIHOODS FOUNDATION'}, {'bankId': 177, 'bankName': 'Sampark Fin Services Pvt Ltd'}, {'bankId': 174, 'bankName': 'Sampurna Training and Entrepreneurship Programme'}, {'bankId': 273, 'bankName': 'Satin Creditcare Network Ltd (SCNL)'}, {'bankId': 206, 'bankName': 'SATYA MicroCapital Limited'}, {'bankId': 175, 'bankName': 'SEED CAPITAL PRIVATE LIMITED'}, {'bankId': 233, 'bankName': 'SHARE Microfin Limited'}, {'bankId': 244, 'bankName': 'SHROFF CAPITAL AND FINANCE PVT LTD'}, {'bankId': 173, 'bankName': 'Socio Economic Action Trust (SEAT)'}, {'bankId': 199, 'bankName': 'Sonata Finance Private Limited'}, {'bankId': 170, 'bankName': 'SOUTH INDIA FINVEST PVT LTD'}, {'bankId': 180, 'bankName': 'Stree Nidhi Credit Cooperative Federation Ltd'}, {'bankId': 189, 'bankName': 'Svamaan Financial Services Private Limited'}, {'bankId': 208, 'bankName': 'VEDIKA CREDIT CAPITAL LTD'}, {'bankId': 185, 'bankName': 'WeGrow Financial Services Private Limited'}, {'bankId': 188, 'bankName': 'WOMEN EMPOWERMENT CORPORATION'}, {'bankId': 237, 'bankName': 'YVU Financial Services Private Limited'}], 'bankTypeName': 'Micro Finance Institutions (MFIs)', 'bankTypeId': 8}, {'banks': [{'bankId': 129, 'bankName': 'Aye Finance Pvt Ltd'}, {'bankId': 143, 'bankName': 'Bajaj Finance Ltd.'}, {'bankId': 147, 'bankName': 'Capital First Limited'}, {'bankId': 145, 'bankName': 'Capital Float (Zen Lefin Private Limited)'}, {'bankId': 124, 'bankName': 'CAPITAL TRUST LIMITED'}, {'bankId': 158, 'bankName': 'CapitaWorld Platform Pvt. Ltd.'}, {'bankId': 128, 'bankName': 'CoinTribe Technologies Pvt. Ltd'}, {'bankId': 134, 'bankName': 'D.F.L Finance Limited'}, {'bankId': 109, 'bankName': 'Digamber Capfin Ltd'}, {'bankId': 122, 'bankName': 'DMI Finance Pvt Ltd'}, {'bankId': 137, 'bankName': 'DOLPHIN FINANCE AND INVESTMENT  COMPANY LIMITED'}, {'bankId': 146, 'bankName': 'ECL Finance Limited'}, {'bankId': 144, 'bankName': 'Electronica Finance Ltd.'}, {'bankId': 139, 'bankName': 'Epimoney Private Limited'}, {'bankId': 111, 'bankName': 'Ess Kay Fincorp Limited'}, {'bankId': 162, 'bankName': 'Faircent'}, {'bankId': 142, 'bankName': 'Fedbank Financial Services Ltd'}, {'bankId': 140, 'bankName': 'Fullerton India Credit Company Ltd.'}, {'bankId': 157, 'bankName': 'Funds Tiger'}, {'bankId': 232, 'bankName': 'IIFL Home Finance Limited'}, {'bankId': 133, 'bankName': 'IKF Finance Limited'}, {'bankId': 127, 'bankName': 'Indifi'}, {'bankId': 148, 'bankName': 'IndoStar Capital Finance Ltd'}, {'bankId': 153, 'bankName': 'Intec Capital Ltd.'}, {'bankId': 136, 'bankName': 'Kanakadurga Finance Ltd.'}, {'bankId': 135, 'bankName': 'Kusalava Finance Ltd.'}, {'bankId': 125, 'bankName': 'Lendingkart Finance Limited'}, {'bankId': 159, 'bankName': 'Loan Xpress'}, {'bankId': 108, 'bankName': 'MAGMA FINCORP LIMITED'}, {'bankId': 117, 'bankName': 'Margadarshak Financial Services Ltd.'}, {'bankId': 151, 'bankName': 'MAS Financial Services Limited'}, {'bankId': 155, 'bankName': 'NeoGrowth Credit Pvt. Ltd'}, {'bankId': 141, 'bankName': 'Reliance Commercial Finance Limited'}, {'bankId': 150, 'bankName': 'RELIGARE FINVEST LIMITED'}, {'bankId': 149, 'bankName': 'Rubique'}, {'bankId': 123, 'bankName': 'SE Investments Ltd'}, {'bankId': 112, 'bankName': 'Shriram City Union Finance Ltd.'}, {'bankId': 154, 'bankName': 'Shriram Transport Finance Co. Ltd.'}, {'bankId': 118, 'bankName': 'Sonata Finance Pvt. Ltd.'}, {'bankId': 116, 'bankName': 'Spandana Spoorthy Financials Ltd.'}, {'bankId': 120, 'bankName': 'Srei Equipment Finance Limited'}, {'bankId': 156, 'bankName': 'Tata Capital Financial Services Limited'}, {'bankId': 240, 'bankName': 'Up Money Limited'}, {'bankId': 152, 'bankName': 'Vistaar Financial Services Private Limited'}], 'bankTypeName': 'NBFC / Fintechs', 'bankTypeId': 9}, {'banks': [{'bankId': 3, 'bankName': 'Axis Bank'}, {'bankId': 4, 'bankName': 'Bandhan Bank Ltd.'}, {'bankId': 103, 'bankName': 'City Union Bank'}, {'bankId': 12, 'bankName': 'DCB Bank'}, {'bankId': 285, 'bankName': 'DHANLAXMI BANK LIMITED'}, {'bankId': 40, 'bankName': 'Federal Bank'}, {'bankId': 284, 'bankName': 'HDFC'}, {'bankId': 14, 'bankName': 'HDFC Bank'}, {'bankId': 15, 'bankName': 'ICICI Bank'}, {'bankId': 16, 'bankName': 'IDBI Bank'}, {'bankId': 17, 'bankName': 'IDFC Bank Ltd.'}, {'bankId': 20, 'bankName': 'IndusInd Bank'}, {'bankId': 21, 'bankName': 'Jammu & Kashmir Bank Ltd'}, {'bankId': 101, 'bankName': 'Karnataka Bank Ltd'}, {'bankId': 106, 'bankName': 'Kotak Mahindra Bank Limited'}, {'bankId': 22, 'bankName': 'Lakshmi Vilas Bank'}, {'bankId': 33, 'bankName': 'RBL Bank Limited'}, {'bankId': 99, 'bankName': 'SOUTH INDIAN BANK'}, {'bankId': 160, 'bankName': 'Standard Chartered Bank'}, {'bankId': 98, 'bankName': 'Tamilnad Mercantile Bank Ltd'}, {'bankId': 291, 'bankName': 'test'}, {'bankId': 102, 'bankName': 'The Catholic Syrian Bank Ltd'}, {'bankId': 100, 'bankName': 'The Karur Vysya Bank Ltd'}, {'bankId': 104, 'bankName': 'The Nainital Bank Ltd'}, {'bankId': 38, 'bankName': 'Yes Bank Ltd.'}], 'bankTypeName': 'Private Sector Banks', 'bankTypeId': 3}, {'banks': [{'bankId': 5, 'bankName': 'Bank of Baroda'}, {'bankId': 6, 'bankName': 'Bank of India'}, {'bankId': 7, 'bankName': 'Bank of Maharashtra'}, {'bankId': 9, 'bankName': 'Canara Bank'}, {'bankId': 10, 'bankName': 'Central Bank of India'}, {'bankId': 18, 'bankName': 'Indian Bank'}, {'bankId': 24, 'bankName': 'Punjab and Sind Bank'}, {'bankId': 25, 'bankName': 'Punjab National Bank'}, {'bankId': 28, 'bankName': 'State Bank of India'}, {'bankId': 34, 'bankName': 'UCO Bank'}, {'bankId': 35, 'bankName': 'Union Bank of India'}], 'bankTypeName': 'Public Sector Banks', 'bankTypeId': 2}, {'banks': [{'bankId': 247, 'bankName': 'MIZORAM RURAL BANK'}, {'bankId': 83, 'bankName': 'RRB Andhra Pradesh GVB'}, {'bankId': 41, 'bankName': 'RRB Andhra Pragathi GB'}, {'bankId': 44, 'bankName': 'RRB Arunachal Pradesh RB'}, {'bankId': 92, 'bankName': 'RRB Aryavart Bank'}, {'bankId': 45, 'bankName': 'RRB Assam GVB'}, {'bankId': 94, 'bankName': 'RRB Bangiya GVB'}, {'bankId': 51, 'bankName': 'RRB Baroda Gujarat GB'}, {'bankId': 79, 'bankName': 'RRB Baroda Rajasthan KGB'}, {'bankId': 87, 'bankName': 'RRB Baroda Uttar Pradesh GB'}, {'bankId': 42, 'bankName': 'RRB Chaitanya Godavari GB'}, {'bankId': 50, 'bankName': 'RRB Chhattisgarh GB'}, {'bankId': 47, 'bankName': 'RRB Dakshin Bihar GB'}, {'bankId': 56, 'bankName': 'RRB Ellaquai Dehati Bank'}, {'bankId': 55, 'bankName': 'RRB Himachal Pradesh GB'}, {'bankId': 57, 'bankName': 'RRB J&K GB'}, {'bankId': 58, 'bankName': 'RRB Jharkhand Rajya GB'}, {'bankId': 61, 'bankName': 'RRB Karnataka GB'}, {'bankId': 60, 'bankName': 'RRB Karnataka Vikas GB'}, {'bankId': 88, 'bankName': 'RRB Kashi Gomti Samyut GB'}, {'bankId': 63, 'bankName': 'RRB Kerala GB'}, {'bankId': 64, 'bankName': 'RRB Madhya Pradesh GB'}, {'bankId': 65, 'bankName': 'RRB Madhyanchal GB'}, {'bankId': 67, 'bankName': 'RRB Maharashtra GB'}, {'bankId': 69, 'bankName': 'RRB Manipur Rural Bank'}, {'bankId': 70, 'bankName': 'RRB Meghalaya Rural Bank'}, {'bankId': 71, 'bankName': 'RRB Mizoram Rural Bank'}, {'bankId': 72, 'bankName': 'RRB Nagaland Rural Bank'}, {'bankId': 73, 'bankName': 'RRB Odisha GB'}, {'bankId': 95, 'bankName': 'RRB Paschim Banga GB'}, {'bankId': 89, 'bankName': 'RRB Prathama UP GB'}, {'bankId': 75, 'bankName': 'RRB Puduvai Bharathiar GB'}, {'bankId': 77, 'bankName': 'RRB Punjab GB'}, {'bankId': 90, 'bankName': 'RRB Purvanchal GB'}, {'bankId': 80, 'bankName': 'RRB Rajasthan Marudhara GB'}, {'bankId': 43, 'bankName': 'RRB Saptagiri GB'}, {'bankId': 54, 'bankName': 'RRB Sarva Haryana GB'}, {'bankId': 53, 'bankName': 'RRB Saurashtra GB'}, {'bankId': 81, 'bankName': 'RRB Tamil Nadu GB'}, {'bankId': 84, 'bankName': 'RRB Telangana GB'}, {'bankId': 85, 'bankName': 'RRB Tripura Gramin Bank'}, {'bankId': 74, 'bankName': 'RRB Utkal GB'}, {'bankId': 96, 'bankName': 'RRB Uttar Banga KGB'}, {'bankId': 49, 'bankName': 'RRB Uttar Bihar GB'}, {'bankId': 93, 'bankName': 'RRB Uttarakhand GB'}, {'bankId': 68, 'bankName': 'RRB Vidharbha Konkan GB'}], 'bankTypeName': 'Regional Rural Banks', 'bankTypeId': 6}, {'banks': [{'bankId': 110, 'bankName': 'AU Small Finance bank'}, {'bankId': 121, 'bankName': 'Capital Small Finance Bank'}, {'bankId': 113, 'bankName': 'Equitas Small Finance Bank'}, {'bankId': 130, 'bankName': 'ESAF Small Finance Bank'}, {'bankId': 132, 'bankName': 'Fincare Small Finance Bank'}, {'bankId': 207, 'bankName': 'Jana Small Finance Bank'}, {'bankId': 126, 'bankName': 'North East Small Finance Bank'}, {'bankId': 138, 'bankName': 'Suryoday Small Finance Bank'}, {'bankId': 131, 'bankName': 'Ujjivan Small Finance Bank'}, {'bankId': 119, 'bankName': 'Utkarsh Small Finance Bank'}], 'bankTypeName': 'Small Finance Banks (SFBs)', 'bankTypeId': 12}, {'banks': [{'bankId': 252, 'bankName': 'Adilabad District Central Cooperative Bank Ltd.'}, {'bankId': 266, 'bankName': 'CENTRAL COOPERATIVE BANK'}, {'bankId': 209, 'bankName': 'Chennai Central cooperative Bank Ltd.'}, {'bankId': 267, 'bankName': 'DISTRICT CENTRAL CO-OPERATIVE BANK, THE TAMILNADU STATE APEX COOPERATIVE BANK LIMITED'}, {'bankId': 258, 'bankName': 'GODHRA CITY CO  Cooperative BANK LTD'}, {'bankId': 19, 'bankName': 'Indian Overseas Bank'}, {'bankId': 260, 'bankName': 'Janta Co-Operative Bank LTD'}, {'bankId': 256, 'bankName': 'Mizoram Cooperative Apex Bank'}, {'bankId': 250, 'bankName': 'Nalgonda District Co-Operative Central Bank Ltd'}, {'bankId': 269, 'bankName': 'NEDIYIRUPPU SCBANK LTD NO D1934'}, {'bankId': 251, 'bankName': 'Nizamabad District Cooperative Central Bank Ltd.'}, {'bankId': 272, 'bankName': 'PARAPPANANGADI COOPERATIVE SERVICE BANK'}, {'bankId': 257, 'bankName': 'PRIME CO Cooperative BANK LTD'}, {'bankId': 253, 'bankName': 'Telangana State Co-operative Apex Bank'}, {'bankId': 239, 'bankName': 'The AP State Cooperative Bank Ltd.'}, {'bankId': 278, 'bankName': 'The Bihar State Co-Operative bank Ltd'}, {'bankId': 234, 'bankName': 'The Chittoor District Co-Operative Central Bank Ltd.,'}, {'bankId': 210, 'bankName': 'The Coimbatore District  Central Coop. Bank Ltd.'}, {'bankId': 211, 'bankName': 'The Cuddalore District  Central Coop. Bank Ltd.'}, {'bankId': 212, 'bankName': 'The Dharmapuri District  Central Coop. Bank Ltd.'}, {'bankId': 213, 'bankName': 'The Dindigul District  Central Coop. Bank Ltd.'}, {'bankId': 265, 'bankName': 'The District Cooperative Central Bank Ltd., Kakinada'}, {'bankId': 254, 'bankName': 'The District Cooperative Central Bank Ltd., Mahabubnagar'}, {'bankId': 214, 'bankName': 'The Erode District  Central Coop. Bank Ltd.'}, {'bankId': 268, 'bankName': 'The Goa State Co.op Bank Ltd'}, {'bankId': 215, 'bankName': 'The KanchipuramDistrict  Central Coop. Bank Ltd.'}, {'bankId': 216, 'bankName': 'The Kanniyakumari District  Central Coop. Bank Ltd.'}, {'bankId': 243, 'bankName': 'THE KARIMNAGAR DISTRICT COOPERATIVE CENTRAL BANK LTD'}, {'bankId': 270, 'bankName': 'THE KOTTAKKAL SERVICE COOPERATIVE BANK LTD NO.D1977'}, {'bankId': 217, 'bankName': 'The Kumbakonam Central Co Operative Bank Ltd.,Kumbakonam'}, {'bankId': 218, 'bankName': 'The Madurai District  Central Coop. Bank Ltd.'}, {'bankId': 271, 'bankName': 'THE MALAPPURAM SERVICE  CO-OPERATIVE BANK LTD'}, {'bankId': 219, 'bankName': 'The Nilgiris District  Central Coop. Bank Ltd.'}, {'bankId': 261, 'bankName': 'The Panchmahal District Operative bank ltd'}, {'bankId': 245, 'bankName': 'The PDCC bank ltd, co'}, {'bankId': 220, 'bankName': 'The Pudukottai District  Central Coop. Bank Ltd.'}, {'bankId': 221, 'bankName': 'The Ramanathapuram District  Central Coop. Bank Ltd.'}, {'bankId': 222, 'bankName': 'The Salem District  Central Coop. Bank Ltd.'}, {'bankId': 223, 'bankName': 'The Sivagangai  District  Central Coop. Bank Ltd.'}, {'bankId': 224, 'bankName': 'The Thanjavore  District  Central Coop. Bank Ltd.'}, {'bankId': 227, 'bankName': 'The Thoothukudi  District  Central Coop. Bank Ltd.'}, {'bankId': 226, 'bankName': 'The Tiruchirapalli District  Central Coop. Bank Ltd.'}, {'bankId': 225, 'bankName': 'The Tirunelveli District  Central Coop. Bank Ltd.'}, {'bankId': 228, 'bankName': 'The Tiruvannamalai District  Central Coop. Bank Ltd.'}, {'bankId': 229, 'bankName': 'The Vellore District  Central Coop. Bank Ltd.'}, {'bankId': 231, 'bankName': 'The Villupuram District  Central Coop. Bank Ltd.'}, {'bankId': 230, 'bankName': 'The Virudhu Nagar District  Central Coop. Bank Ltd.'}, {'bankId': 279, 'bankName': 'TRIPURA STATE CO OPERATIVE BANK LTD'}, {'bankId': 255, 'bankName': 'WARANGAL URBAN CO OPERATIVE BANK LTD'}], 'bankTypeName': 'State Co-operative Banks', 'bankTypeId': 5}, {'banks': [{'bankId': 282, 'bankName': 'JILA SAHAKARI KENDRIYA BANK MARYADIT CHHATARPUR (M.P)'}, {'bankId': 248, 'bankName': 'Khammam District Co-Operative Central Bank Ltd'}, {'bankId': 249, 'bankName': 'Medak District Co-Operative Central Bank Ltd'}, {'bankId': 283, 'bankName': 'PRIME CO-OPERATIVE BANK LTD'}, {'bankId': 274, 'bankName': 'Shri Mahalaxmi Co-Operative Bank Limited'}, {'bankId': 259, 'bankName': 'The Godhra Urban Co- Operative bank ltd'}, {'bankId': 246, 'bankName': 'The Krishna DCC BANK'}, {'bankId': 277, 'bankName': 'The Kurmanchal Nagar Sahkari Bank Ltd.'}], 'bankTypeName': 'Urban Co-operative Banks', 'bankTypeId': 7}]
-                          header: 
-                            type: string
-                            example: {'timeStamp': '1596702534157', 'serReqId': 'ViewFile', 'sVersion': '4', 'appVersion': '1.0.1', 'os': 'Android', 'osVersion': '9', 'requestUUID': 'dR7f21596702534157', 'deviceId': 'c80edd4d-5a80-389a-aed3-5417880b8fbf', 'hCheckValue': '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'}
-                          status: 
-                            type: string
-                            example: {'message': 'null', 'isSuccess': True, 'statusCode': 'null'}
+                    items:
+                      type: object
+                      properties:
+                        scode:
+                          type: object
+                        sname:
+                          type: string
+                    example:
+                      -  scode: [{'hospital_id': 4, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Bihar
+                      -  scode: [{'hospital_id': 5, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Delhi
+                      -  scode: [{'hospital_id': 5, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Jharkhand
         400:
           description: Bad Request/Validation Error
         401:
           description: Unauthorized
 
-  /verifylorapplicationno:
+  /contactdetailsofpatient:
     post:
       tags:
-      - Verify LOR Application number
-      summary: The following APIs are used to view the file.
-      operationId: verifylorapplicationno
+      - Contact details of patient
+      summary: The following APIs are used to fetch contact details of patient
+      operationId: contactdetailsofpatient
       security:
       - bearerAuth: []
       parameters:
@@ -204,12 +166,12 @@
             example: "0"
       requestBody:
         content:
-          application/json:
+          application/xml:
             schema:
               properties:
                   tkn:
                     type: string
-                    example: nxb9cab6fb-8afb-427c-9247-bcf8567431f7/3
+                    example: 1234
                   trkr:
                     type: string
                     example: 213132
@@ -239,7 +201,7 @@
                     example: 09
                   srvid:
                     type: string
-                    example: 1112
+                    example: 11
                   mode:
                     type: string
                     example: web
@@ -248,7 +210,7 @@
                     example: andorid
                   deptid:
                     type: string
-                    example: 11
+                    example: 1112
                   subsid:
                     type: string
                     example: 0
@@ -258,48 +220,6 @@
                   formtrkr:
                     type: string
                     example: 0
-                  gatewayRequest:
-                    type: object
-                    properties:
-                      header:
-                        type: object
-                        properties:
-                         appVersion:
-                           type: string
-                           example: 1.0.54
-                         deviceId:
-                           type: string
-                           example: c56cfc76-2e78-3661-8220-452999278a6a
-                         os:
-                           type: string
-                           example: Android
-                         osVersion:
-                           type: string
-                           example: 9
-                         requestUUID:
-                           type: string
-                           example: zbDjv1608278632589
-                         serReqId:
-                           type: string
-                           example: VerifyLORApplicationNo
-                         sVersion:
-                           type: string
-                           example: 1
-                         timeStamp:
-                           type: string
-                           example: 1608278632589
-                         hCheckValue:
-                           type: string
-                           example: ABCXYZ
-                      request:
-                        type: object
-                        properties:
-                         LorApplicationNo:
-                           type: string
-                           example: DL/276400/210218/65589
-                         SVARegistrationId:
-                           type: string
-                           example: 1027635
       responses:
         200:
           description: Successful Response
@@ -318,392 +238,31 @@
                   rd:
                     type: string
                     description: Response Description
-                    example: Success.
+                    example: OK
                   pd:
-                    type: object
+                    type: array
                     description: Response Data
-                    properties:
-                      gatewayResponse: 
-                        type: object                        
-                        properties:
-                          response: 
-                            type: string
-                            example: {'verifyLORNo': {'loR_Details': {'svaRegistrationId': 1027635, 'lorApplicationNo': 'DL/276400/210218/65589', 'lorDocument': '65589_LORCertificate.pdf'}, 'loR_Status': {'statusMsg': 'LOR application number verified sucessfully.', 'statusCode': 'Y'}}}
-                          header: 
-                            type: string
-                            example: {'timeStamp': '1608278632589', 'serReqId': 'VerifyLORApplicationNo', 'sVersion': '1', 'appVersion': '1.0.54', 'os': 'Android', 'osVersion': '9', 'requestUUID': 'zbDjv1608278632589', 'deviceId': 'c56cfc76-2e78-3661-8220-452999278a6a', 'hCheckValue': '867bf81249604fb9ae0bf4d8036e06d0145c88870e964f75f68b5e4c2548ef42'}
-                          status: 
-                            type: string
-                            example: {'message': 'null', 'isSuccess': True, 'statusCode': 'null'}
+                    items:
+                      type: object
+                      properties:
+                        scode:
+                          type: object
+                        sname:
+                          type: string
+                    example:
+                      -  scode: [{'hospital_id': 4, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Bihar
+                      -  scode: [{'hospital_id': 5, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Delhi
+                      -  scode: [{'hospital_id': 5, 'hospital_uid': 'AIIMS, New Delhi'}, {'hospital_id': 10059, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN'}, {'hospital_id': 10063, 'hospital_uid': 'DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI'}, {'hospital_id': 10004, 'hospital_uid': 'DEMO ORS G'}, {'hospital_id': 3, 'hospital_uid': 'Dr. RML Hospital, New Delhi'}, {'hospital_id': 10055, 'hospital_uid': 'LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI'}]
+                         sname: Jharkhand
         400:
           description: Bad Request/Validation Error
         401:
           description: Unauthorized
-
-  /benefitdetailslist:
-    post:
-      tags:
-      - Benefit Details List
-      summary: The following APIs are used to view the file.
-      operationId: benefitdetailslist
-      security:
-      - bearerAuth: []
-      parameters:
-        - in: header
-          name: deptid
-          schema:
-            type: integer
-            example: "11"
-        - in: header
-          name: srvid
-          schema:
-            type: integer
-            example: "1112"
-        - in: header
-          name: subsid
-          schema:
-            type: integer
-            example: "0"
-        - in: header
-          name: subsid2
-          schema:
-            type: integer
-            example: "0"
-        - in: header
-          name: formtrkr
-          schema:
-            type: integer
-            example: "0"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                  tkn:
-                    type: string
-                    example: nxb9cab6fb-8afb-427c-9247-bcf8567431f7/3
-                  trkr:
-                    type: string
-                    example: 213132
-                  lang:
-                    type: string
-                    example: en
-                  lat:
-                    type: string
-                    example: 21
-                  lon:
-                    type: string
-                    example: 90
-                  lac:
-                    type: string
-                    example: 90
-                  did:
-                    type: string
-                    example: 123234
-                  usag:
-                    type: string
-                    example: 90
-                  apitrkr:
-                    type: string
-                    example: 123234
-                  usrid:
-                    type: string
-                    example: 09
-                  srvid:
-                    type: string
-                    example: 1112
-                  mode:
-                    type: string
-                    example: web
-                  pltfrm:
-                    type: string
-                    example: andorid
-                  deptid:
-                    type: string
-                    example: 11
-                  subsid:
-                    type: string
-                    example: 0
-                  subsid2:
-                    type: string
-                    example: 0
-                  formtrkr:
-                    type: string
-                    example: 0
-                  gatewayRequest:
-                    type: object
-                    properties:
-                      header:
-                        type: object
-                        properties:
-                         appVersion:
-                           type: string
-                           example: 1.0.54
-                         deviceId:
-                           type: string
-                           example: c56cfc76-2e78-3661-8220-452999278a6a
-                         os:
-                           type: string
-                           example: Android
-                         osVersion:
-                           type: string
-                           example: 9
-                         requestUUID:
-                           type: string
-                           example: zbDjv1608278632589
-                         serReqId:
-                           type: string
-                           example: BenefitDetailsList
-                         sVersion:
-                           type: string
-                           example: 1
-                         timeStamp:
-                           type: string
-                           example: 1608278632589
-                         hCheckValue:
-                           type: string
-                           example: ABCXYZ
-                      request:
-                        type: object
-                        properties:
-      responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                properties:
-                  rs:
-                    type: string
-                    description: Request Status
-                    example: S
-                  rc:
-                    type: string
-                    description: Response Code
-                    example: 200
-                  rd:
-                    type: string
-                    description: Response Description
-                    example: Success.
-                  pd:
-                    type: object
-                    description: Response Data
-                    properties:
-                      gatewayResponse: 
-                        type: object                        
-                        properties:
-                          response: 
-                            type: string
-                            example: [{'schemeName': 'Ayusman Bharat – Pradhan Mantri Jan Arogya Yojana (PM-JAY)', 'schemeTagName': 'PMJAY'}, {'schemeName': 'Pradhan Mantri Matru Vandana Yojana (PMMVY)', 'schemeTagName': 'PMMVY'}, {'schemeName': 'Deendayal Antyodaya Yojana-National Urban Livelihoods Mission (DAY-NULM)', 'schemeTagName': 'DAYNULM'}, {'schemeName': 'Pradhan Mantri Awas Yojana (PMAY) – Urban/Rural', 'schemeTagName': 'PMAY'}, {'schemeName': 'Pradhan Mantri Ujjwala Yojana (PMUY)', 'schemeTagName': 'PMUY'}, {'schemeName': 'Integrated Child Development Services (ICDS)', 'schemeTagName': 'ICDS'}, {'schemeName': 'Pradhan Mantri Jan Dhan Yojana', 'schemeTagName': 'PM_JanDhan'}, {'schemeName': 'Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)', 'schemeTagName': 'PMJJBY'}, {'schemeName': 'Atal Pension Yojana (APY)', 'schemeTagName': 'APY'}, {'schemeName': 'Pradhan Mantri Kaushal Vikash Yojana (PMKVY)', 'schemeTagName': 'PKKVY'}, {'schemeName': 'Seekho Aur Kamao', 'schemeTagName': 'SeekhoAurKamao'}, {'schemeName': ' Upgrading the Skills and Training in Traditional Arts/ Crafts for Development (USTTAD)', 'schemeTagName': 'USTTAD'}, {'schemeName': 'Rashtriya Poshan Abhiyaan (RPA)', 'schemeTagName': 'RPA'}, {'schemeName': 'Pradhan Mantri Mtrutva Suraksha Abhiyan (PMMSA)', 'schemeTagName': 'PMMSA'}, {'schemeName': 'Swachh Bharat Mission (SBM)', 'schemeTagName': 'SBM'}, {'schemeName': 'Pradhan Mantri Sahaj Bijli Har Ghar Yojana (SAUBHAGYA)', 'schemeTagName': 'SAUBHAGYA'}, {'schemeName': 'National Food Security Act (Ration Card)', 'schemeTagName': 'NationalFoodSecurity'}, {'schemeName': 'One Stop Centre', 'schemeTagName': 'OneStopCentre'}, {'schemeName': 'Pradhan Mantri Mudra Yojana (PMMY)', 'schemeTagName': 'PMMY'}, {'schemeName': 'Pradhan Mantri Suraksha Bima Yojana (PMSBY)', 'schemeTagName': 'PMSBY'}, {'schemeName': 'Pradhan Mantri Shram Yogi Maan-dhan (PM-SYM)', 'schemeTagName': 'PMSYM'}, {'schemeName': 'Hunar se Rozgar tak initiative', 'schemeTagName': 'HunarSeRozgar'}, {'schemeName': 'Nai Roshni', 'schemeTagName': 'NaiRoshni'}, {'schemeName': 'Green Skill Development Programme', 'schemeTagName': 'GreenSKillDev'}, {'schemeName': 'Other Schemes', 'schemeTagName': 'OtherSchemes'}, {'schemeName': 'None of the above', 'schemeTagName': 'IsNone'}]
-                          header: 
-                            type: string
-                            example: {'timeStamp': '1608278632589', 'serReqId': 'BenefitDetailsList', 'sVersion': '1', 'appVersion': '1.0.54', 'os': 'Android', 'osVersion': '9', 'requestUUID': 'zbDjv1608278632589', 'deviceId': 'c56cfc76-2e78-3661-8220-452999278a6a', 'hCheckValue': '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'}
-                          status: 
-                            type: string
-                            example: {'message': 'null', 'isSuccess': True, 'statusCode': 'null'}
-        400:
-          description: Bad Request/Validation Error
-        401:
-          description: Unauthorized
-
-  /vendorsearch:
-    post:
-      tags:
-      - Vendor Search
-      summary: The following APIs are used to view the file.
-      operationId: vendorsearch
-      security:
-      - bearerAuth: []
-      parameters:
-        - in: header
-          name: deptid
-          schema:
-            type: integer
-            example: "11"
-        - in: header
-          name: srvid
-          schema:
-            type: integer
-            example: "1112"
-        - in: header
-          name: subsid
-          schema:
-            type: integer
-            example: "0"
-        - in: header
-          name: subsid2
-          schema:
-            type: integer
-            example: "0"
-        - in: header
-          name: formtrkr
-          schema:
-            type: integer
-            example: "0"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                  tkn:
-                    type: string
-                    example: nxb9cab6fb-8afb-427c-9247-bcf8567431f7/3
-                  trkr:
-                    type: string
-                    example: 213132
-                  lang:
-                    type: string
-                    example: en
-                  lat:
-                    type: string
-                    example: 21
-                  lon:
-                    type: string
-                    example: 90
-                  lac:
-                    type: string
-                    example: 90
-                  did:
-                    type: string
-                    example: 123234
-                  usag:
-                    type: string
-                    example: 90
-                  apitrkr:
-                    type: string
-                    example: 123234
-                  usrid:
-                    type: string
-                    example: 09
-                  srvid:
-                    type: string
-                    example: 1112
-                  mode:
-                    type: string
-                    example: web
-                  pltfrm:
-                    type: string
-                    example: andorid
-                  deptid:
-                    type: string
-                    example: 11
-                  subsid:
-                    type: string
-                    example: 0
-                  subsid2:
-                    type: string
-                    example: 0
-                  formtrkr:
-                    type: string
-                    example: 0
-                  gatewayRequest:
-                    type: object
-                    properties:
-                      header:
-                        type: object
-                        properties:
-                         appVersion:
-                           type: string
-                           example: 1.0.54
-                         deviceId:
-                           type: string
-                           example: c56cfc76-2e78-3661-8220-452999278a6a
-                         os:
-                           type: string
-                           example: Android
-                         osVersion:
-                           type: string
-                           example: 9
-                         requestUUID:
-                           type: string
-                           example: zbDjv1608278632589
-                         serReqId:
-                           type: string
-                           example: SearchVendor
-                         sVersion:
-                           type: string
-                           example: 1
-                         timeStamp:
-                           type: string
-                           example: 1608278632589
-                         hCheckValue:
-                           type: string
-                           example: ABCXYZ
-                      request:
-                        type: object
-                        properties:
-                         pageNo:
-                           type: string
-                           example: 2
-                         cols:
-                           type: string
-                           example: 
-                         order:
-                           type: string
-                           example: Desc
-                         stateId:
-                           type: string
-                           example: 24
-                         districtId:
-                           type: string
-                           example: 0
-                         ulbName:
-                           type: string
-                           example: Lucknow
-                         vendorIdCardNumber:
-                           type: string
-                           example: 
-                         svFirstName:
-                           type: string
-                           example: 
-                         fatherOrSpouseName:
-                           type: string
-                           example: 
-                         mobileNo:
-                           type: string
-                           example: 
-                         coVNo:
-                           type: string
-                           example: 
-                         ulbId:
-                           type: string
-                           example: 0
-      responses:
-        200:
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                properties:
-                  rs:
-                    type: string
-                    description: Request Status
-                    example: S
-                  rc:
-                    type: string
-                    description: Response Code
-                    example: 200
-                  rd:
-                    type: string
-                    description: Response Description
-                    example: Success.
-                  pd:
-                    type: object
-                    description: Response Data
-                    properties:
-                      gatewayResponse: 
-                        type: object                        
-                        properties:
-                          response: 
-                            type: string
-                            example: {'pageCount': 2926, 'sVADataSurveyViewModels': [{'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'SAHAN LAL', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '967572149', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019873', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'GURU DIN', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 42}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'RAJA RAM', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9721959877', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019872', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'SHIVCHARAN', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 64}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'VINIT KUMAR', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '8127784268', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019871', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'JAGDISH PRASAD', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 30}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'PRSANT KUMAR', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9793236791', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019870', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'UJIARILALA', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 28}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'AKHILESH BARMA', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9936190808', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019869', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'RAMPRATAP BARMA', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 37}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'RAM AWTAR GUPTA', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9670790483', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019868', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'GOLANDAS', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 39}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'VINAY KUMAR', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9838299831', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019867', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'SHIV VISHAL', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 27}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'AKASH RATHOR', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9569163797', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Male', 'srn': 'UTT4019866', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'PHOOLCHAND RATOR', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 23}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'PUNAM RATHOR', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '9580698606', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Female', 'srn': 'UTT4019865', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'PHOOLCHAND RATOR', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 43}, {'streetVendorMiddleName': '', 'uniqueIDNo': 'null', 'stateId': 'null', 'streetVendorFirstName': 'RANI', 'genderId': 'null', 'nameOfVendingActivity': 'null', 'dateOfBirth': 'null', 'mobileNo': '8924082774', 'dateOfIssueOfProvisionalCOV': 'null', 'genderName': 'Female', 'srn': 'UTT4019864', 'placeOfVending': 'null', 'districtId': 'null', 'svaDataGujaratSurveysId': 0, 'stateName': 'UTTAR PRADESH', 'dateOfIssueOfLoR': 'null', 'loRNo': 'null', 'fatherOrSpouseName': 'SUNIL', 'ulbName': 'Lucknow', 'typeOfVendingActivity': 'null', 'pCoVNo': 'null', 'streetVendorSurname': '', 'age': 39}], 'index': 10, 'rowCount': 29254, 'page': 2}
-                          header: 
-                            type: string
-                            example: {'timeStamp': '1608278632589', 'serReqId': 'SearchVendor', 'sVersion': '1', 'appVersion': '1.0.54', 'os': 'Android', 'osVersion': '9', 'requestUUID': 'zbDjv1608278632589', 'deviceId': 'c56cfc76-2e78-3661-8220-452999278a6a', 'hCheckValue': 'b56752522906ee2ece2506080a506fbda38f23f299a870812ca3855bc857ff13'}
-                          status: 
-                            type: string
-                            example: {'message': 'null', 'isSuccess': True, 'statusCode': 'null'}
-        400:
-          description: Bad Request/Validation Error
-        401:
-          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Text

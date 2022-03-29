@@ -5,8 +5,12 @@
       - {{api.tag}}
       summary: {{api.summary}}
       operationId: {{api.operationId}}
+      {% if api.authorization != "" %}
+       {% if api.authorization|set_security %}
       security:
-      - bearerAuth: []
+      - {{api.authorization}}: []
+       {% endif %}
+      {% endif %}
       parameters:
       {% for key in api.parameters %}
         - in: header

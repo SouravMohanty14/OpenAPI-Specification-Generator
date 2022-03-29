@@ -1,0 +1,41 @@
+{% if authorization|security_not_empty %}
+components:
+{% if authorization|security_not_empty %}
+  securitySchemes:
+  {% if "bearerAuth"|get_security %}
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Text
+  {% endif %}
+  {% if "basicAuth"|get_security %}
+    basicAuth:
+      type: http
+      scheme: basic
+  {% endif %}
+  {% if "cookieAuth"|get_security %}
+    cookieAuth:         
+      type: apiKey
+      in: cookie
+      name: Cookie name
+  {% endif %}
+  {% if "oauthsecurity"|get_security %}
+    oauthsecurity:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://betaapi.digitallocker.gov.in/public/oauth2/1/token'
+          scopes:
+            default: default scope
+  {% endif %}
+  {% if "oauthAuthorizeCode"|get_security %}
+    oauthAuthorizeCode:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://betaapi.digitallocker.gov.in/public/oauth2/1/authorize'
+          tokenUrl: 'https://betaapi.digitallocker.gov.in/public/oauth2/1/token'
+          scopes: {}
+  {% endif %}
+{% endif %}
+{% endif %}

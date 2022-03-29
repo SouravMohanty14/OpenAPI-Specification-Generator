@@ -7,6 +7,8 @@ import API
 
 api_dict = {}
 
+securitySchemes = { "bearerAuth": False, "cookieAuth": False, "oauthsecurity": False, "oauthAuthorizeCode": False, "basicAuth": False }
+
 #Erase Spec File
 open('spec.yaml', 'w').close()
 
@@ -19,6 +21,19 @@ file.close()
 file = open('./data/format.json',) 
 format = json.load(file)
 file.close()
+
+def get_security(key):
+    if key not in securitySchemes.keys():
+        return False
+    return securitySchemes[key]
+
+def set_security(key):
+    securitySchemes.update({key: True})
+    return True
+
+def security_not_empty(value):
+    res = all(x == False for x in securitySchemes.values())
+    return not res
 
 def get_type(value):
     #print(type(value))
@@ -86,6 +101,9 @@ def generate_api_spec():
     jinja2.filters.FILTERS['get_description'] = get_description
     jinja2.filters.FILTERS['get_nestedarray_type'] = get_nestedarray_type
     jinja2.filters.FILTERS['get_format'] = get_format
+    jinja2.filters.FILTERS['get_security'] = get_security
+    jinja2.filters.FILTERS['set_security'] = set_security
+    jinja2.filters.FILTERS['security_not_empty'] = security_not_empty
 
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
@@ -102,6 +120,15 @@ def generate_api_spec():
                 spec = template.render(api=api)
                 spec_file.write(spec)
                 spec_file.close()
+
+    # Opening template file
+    component_template = env.get_template('components-template.yaml')
+    print ("Component Template loaded successfully...")
+    with open("spec.yaml", "a") as spec_file:
+        print("Writing Components")
+        components = component_template.render()
+        spec_file.write(components)
+        spec_file.close()
 
     print("Specification created successfully")
 
