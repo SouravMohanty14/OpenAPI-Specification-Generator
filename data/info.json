@@ -1,13 +1,13 @@
 {
     "openapiVersion": "3.0.1",
-    "title": "PMSVANIDHIApi Wrapper API 1.4",
-    "description": "This is a Central Sector Scheme to facilitate street vendors to access affordable working capital loan for resuming their livelihoods activities, after easing of lockdown.The COVID-19 pandemic and consequent lockdowns have adversely impacted the livelihoods of street vendors.",
+    "title": "IHHL Application Status Web API",
+    "description": "SBM-IHHL is an initiative to give subsidy to the rural poor households for construction of toilets.",
     "termsOfService": "https://web.umang.gov.in/",
-    "contactName": "PMSVANIDHIApi Wrapper API 1.4",
+    "contactName": "IHHL Application Status Web API",
     "contactUrl": "https://web.umang.gov.in/customer_support",
     "infoVersion": "1.0.0",
     "servers":[
-        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/PMSVANIDHIApi/ws1/1.0",
-        "https://stagapp.umang.gov.in/t/negd.gov.in/umang/depttapi/PMSVANIDHIApi/ws1/1.0"
+        "http://swachhbharaturban.gov.in/sbmwebservicesihhlcallcentre/api",
+        "http://app.swachhbharaturban.gov.in/sbmwebservicesihhlcallcentre/api"
     ]
 }

@@ -11,6 +11,7 @@
       - {{api.authorization}}: []
        {% endif %}
       {% endif %}
+      {% if api.parameters.length != 0 %}
       parameters:
       {% for key in api.parameters %}
         - in: header
@@ -18,7 +19,11 @@
           schema:
             type: {{api.parameters[key]|get_type}}
             example: "{{api.parameters[key]}}"
+          {% if key in api.mandatory %}
+          required: true
+          {% endif %}
       {% endfor %}
+      {% endif %}
       requestBody:
         content:
           {{api.content_type}}:
@@ -26,6 +31,7 @@
             {% if api.content_type == 'multipart/form-data' %}
               type: object
             {% endif %}
+             {% if total_apis == 1%}
               properties:
                 {% for key in api.requestBody %}
                   {{key}}:
@@ -89,6 +95,19 @@
                     example: {{api.requestBody[key]}}
                     {% endif %}
                 {% endfor %}
+             {% elif total_apis>1 %}
+              anyOf:
+                {% for i in range(total_apis) %}
+                {% set i = i + 1 %}
+              - $ref: "#/components/schemas/{{api.path}}_{{i}}"
+                {% endfor %}
+            examples:
+              {% for i in range(total_apis) %}
+              {% set i = i + 1 %}
+              {{api.path}} {{i}}:
+                $ref: "#/components/examples/{{api.path}}_{{i}}"
+              {% endfor %}
+             {% endif %}
       responses:
       {% for response_code in api.responses %}
         {{response_code}}:

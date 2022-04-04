@@ -1,10 +1,11 @@
 {
     "method" : "post",
-    "path" : "contactdetailsofpatient",
-    "operationId" : "contactdetailsofpatient",
-    "tag" : "Contact details of patient",
-    "summary" : "The following APIs are used to fetch contact details of patient",
-    "content_type" : "application/xml",
+    "path" : "AppProfileInfoReq",
+    "operationId" : "AppProfileInfoReq",
+    "tag" : "Application ID Details",
+    "summary" : "This post method verifies the State Code and Application ID",
+    "content_type" : "application/json",
+    "mandatory" : ["deptid","subsid"],
     "authorization" : "bearerAuth",
     "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
 }

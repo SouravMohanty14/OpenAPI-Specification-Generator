@@ -1,98 +1,11 @@
 {
     "200" : {
         "rs": "S",
-            "rc": "200",
-            "rd": "OK",
-            "pd": [
-                {
-                    "scode": [
-                        {
-                            "hospital_id": 4,
-                            "hospital_uid": "AIIMS, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10059,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN"
-                        },
-                        {
-                            "hospital_id": 10063,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI"
-                        },
-                        {
-                            "hospital_id": 10004,
-                            "hospital_uid": "DEMO ORS G"
-                        },
-                        {
-                            "hospital_id": 3,
-                            "hospital_uid": "Dr. RML Hospital, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10055,
-                            "hospital_uid": "LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI"
-                        }
-                    ],
-                    "sname": "Bihar"
-                },
-                {
-                    "scode": [
-                        {
-                            "hospital_id": 5,
-                            "hospital_uid": "AIIMS, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10059,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN"
-                        },
-                        {
-                            "hospital_id": 10063,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI"
-                        },
-                        {
-                            "hospital_id": 10004,
-                            "hospital_uid": "DEMO ORS G"
-                        },
-                        {
-                            "hospital_id": 3,
-                            "hospital_uid": "Dr. RML Hospital, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10055,
-                            "hospital_uid": "LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI"
-                        }
-                    ],
-                    "sname": "Delhi"
-                },
-                {
-                    "scode": [
-                        {
-                            "hospital_id": 5,
-                            "hospital_uid": "AIIMS, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10059,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES (EAST), DILSHAD GARDEN"
-                        },
-                        {
-                            "hospital_id": 10063,
-                            "hospital_uid": "DELHI STATE CANCER INSTITUTES  (WEST),  JANAK PURI"
-                        },
-                        {
-                            "hospital_id": 10004,
-                            "hospital_uid": "DEMO ORS G"
-                        },
-                        {
-                            "hospital_id": 3,
-                            "hospital_uid": "Dr. RML Hospital, New Delhi"
-                        },
-                        {
-                            "hospital_id": 10055,
-                            "hospital_uid": "LHMC   SMT.SUCHETA KRIPLANI HOSPITAL NEW DELHI"
-                        }
-                    ],
-                    "sname": "Jharkhand"
-                }
-            ]
-        },                     
-    "400" : {},
-    "401" : {}
+        "rc": "200",
+        "rd": "Success.",
+        "pd": {
+        "VersionNo": "1.0.0.1"
+            }
+        },
+    "400" : {}        
 }

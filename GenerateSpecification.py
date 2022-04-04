@@ -20,8 +20,11 @@ try:
 except:
   filename = "spec.yaml"
 
+schema_file = "schema.yaml"
+
 #Erase Spec File
 open(filename, 'w').close()
+open(schema_file, 'w').close()
 
 #Get Description data from Json File
 file = open('./data/descriptions.json',) 
@@ -134,12 +137,20 @@ def generate_api_spec():
 
     for path in api_dict:
         api_list = api_dict[path]
-        for api in api_list:
-            with open(filename, "a") as spec_file:
-                print("Creating specification for " + api.path)
-                spec = template.render(api=api)
-                spec_file.write(spec)
-                spec_file.close()
+        #for api in api_list:
+        api = api_list[0]
+        with open(filename, "a") as spec_file:
+            print("Creating specification for " + api.path)
+            spec = template.render(api=api,total_apis=len(api_list))
+            spec_file.write(spec)
+            spec_file.close()
+        if len(api_list) > 1:
+            schema_template = env.get_template('components-schema.yaml')
+            with open(schema_file, "a") as schemas:
+                print("Writing Components Schema")
+                scehma = schema_template.render(api_list=api_list,total_apis=len(api_list))
+                schemas.write(scehma)
+                schemas.close()
 
     # Opening components template file
     component_template = env.get_template('components-template.yaml')
@@ -149,6 +160,17 @@ def generate_api_spec():
         components = component_template.render()
         spec_file.write(components)
         spec_file.close()
+
+    data = data2 = ""
+    with open(filename) as fp:
+        data = fp.read()
+    with open(schema_file) as fp:
+        data2 = fp.read()
+    data += "\n"
+    data += data2
+    open(filename, 'w').close()
+    with open (filename, 'a') as fp:
+        fp.write(data)
 
     print("Specification created successfully")
 

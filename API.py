@@ -13,6 +13,7 @@ class API_Obj:
     self.summary = data["summary"]
     self.content_type = data["content_type"]
     self.authorization = data["authorization"]
+    self.mandatory = data["mandatory"]
 
     file.close()
 

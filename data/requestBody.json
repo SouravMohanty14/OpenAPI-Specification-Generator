@@ -1,21 +1,8 @@
 {
-    "tkn": "1234",
-     "trkr": "213132",
-     "lang": "en",
-     "lat": "21",
-     "lon": "90",
-     "lac": "90",
-     "did":"123234",
-     "usag": "90",
-     "apitrkr":"123234",
-     "usrid": "09",
-     "srvid": "11",
-     "mode": "web",
-     "pltfrm": "andorid",
-     "deptid": "1112",
-     "subsid": "0",
-     "subsid2": "0",
-     "formtrkr": "0"
-
-    }
-    
+    "StateCode": "35",
+    "ApplicationID": "UP1500000002",
+    "usrid":"09",
+    "srvid":1150,
+    "mode":"web",
+    "pltfrm":"ios"
+}
