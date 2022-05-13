@@ -21,10 +21,12 @@ except:
   filename = "spec.yaml"
 
 schema_file = "schema.yaml"
+xml_file = "xml_schema.yaml"
 
 #Erase Spec File
 open(filename, 'w').close()
 open(schema_file, 'w').close()
+open(xml_file, 'w').close()
 
 #Get Description data from Json File
 file = open('./data/descriptions.json',) 
@@ -144,12 +146,21 @@ def generate_api_spec():
             spec = template.render(api=api,total_apis=len(api_list))
             spec_file.write(spec)
             spec_file.close()
+        #xml schema
+        if api.content_type == 'application/xml':
+            xml_template = env.get_template('xml-schema.yaml')
+            with open(xml_file, "a") as xml_schemas:
+                print("Writing Components Schema")
+                xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
+                xml_schemas.write(xml_schema)
+                xml_schemas.close()
+        #AnyOf schema
         if len(api_list) > 1:
             schema_template = env.get_template('components-schema.yaml')
             with open(schema_file, "a") as schemas:
                 print("Writing Components Schema")
-                scehma = schema_template.render(api_list=api_list,total_apis=len(api_list))
-                schemas.write(scehma)
+                schema = schema_template.render(api_list=api_list,total_apis=len(api_list))
+                schemas.write(schema)
                 schemas.close()
 
     # Opening components template file
@@ -161,13 +172,16 @@ def generate_api_spec():
         spec_file.write(components)
         spec_file.close()
 
-    data = data2 = ""
+    data = data2 = data3 = ""
     with open(filename) as fp:
         data = fp.read()
     with open(schema_file) as fp:
         data2 = fp.read()
+    with open(xml_file) as fp:
+        data3 = fp.read()
     data += "\n"
     data += data2
+    data += data3
     open(filename, 'w').close()
     with open (filename, 'a') as fp:
         fp.write(data)

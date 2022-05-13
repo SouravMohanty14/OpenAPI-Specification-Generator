@@ -6,6 +6,7 @@
     "200": "Successful Response",
     "400": "Bad Request/Validation Error",
     "401": "Unauthorized",
+    "204": "No RECORD Found",
     "Tkn": "UMANG user login token",
     "srvid": "UMANG service id",
     "deptid": "UMANG deptid"

@@ -1,0 +1,405 @@
+  schemas:
+   data:
+    type: object
+    properties:
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Liechtenstein"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "1"
+          year:
+            type: string
+            example: "2008"
+          gdppc:
+            type: string
+            example: "141100"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Austria"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Switzerland"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Singapore"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "4"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "59900"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Malaysia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "N"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Panama"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "68"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "13600"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Costa Rica"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Colombia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Liechtenstein"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "1"
+          year:
+            type: string
+            example: "2008"
+          gdppc:
+            type: string
+            example: "141100"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Austria"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Switzerland"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Singapore"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "4"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "59900"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Malaysia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "N"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Panama"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "68"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "13600"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Costa Rica"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Colombia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Liechtenstein"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "1"
+          year:
+            type: string
+            example: "2008"
+          gdppc:
+            type: string
+            example: "141100"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Austria"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Switzerland"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Singapore"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "4"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "59900"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Malaysia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "N"
+                xml:
+                  attribute: true
+      country:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Panama"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "68"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "13600"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Costa Rica"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Colombia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true
+      state:
+        type: object
+        properties:
+          "name":
+            type: string
+            enum:
+              - "Delhi"
+            xml:
+              attribute: true
+          rank:
+            type: string
+            example: "68"
+          year:
+            type: string
+            example: "2011"
+          gdppc:
+            type: string
+            example: "13600"
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Costa Rica"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "W"
+                xml:
+                  attribute: true
+          neighbor:
+            type: object
+            properties:
+              "name":
+                type: string
+                example: "Colombia"
+                xml:
+                  attribute: true
+              "direction":
+                type: string
+                example: "E"
+                xml:
+                  attribute: true

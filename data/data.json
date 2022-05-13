@@ -1,11 +1,11 @@
 {
     "method" : "post",
-    "path" : "AppProfileInfoReq",
-    "operationId" : "AppProfileInfoReq",
-    "tag" : "Application ID Details",
-    "summary" : "This post method verifies the State Code and Application ID",
-    "content_type" : "application/json",
-    "mandatory" : ["deptid","subsid"],
+    "path" : "inwardstatus",
+    "operationId" : "inwardstatus",
+    "tag" : "Inward Status",
+    "summary" : "The following APIs are used for inward status",
+    "content_type" : "application/xml",
+    "mandatory" : ["Tkn"],
     "authorization" : "bearerAuth",
     "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
 }

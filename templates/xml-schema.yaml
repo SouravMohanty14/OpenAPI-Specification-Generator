@@ -1,0 +1,40 @@
+  schemas:
+   {{ api.requestBody.getroot().tag }}:
+    type: object
+    properties:
+    {% for child in api.requestBody.getroot() %}
+      {% for subchild in api.requestBody.getroot().findall(child.tag) %}
+      {{ subchild.tag }}:
+        type: object
+        properties:
+        {% for attribute in subchild.attrib %}
+          "{{attribute}}":
+            type: string
+            enum:
+              - "{{subchild.get(attribute)}}"
+            xml:
+              attribute: true
+        {% endfor %}
+        {% for element in subchild %}
+          {{element.tag}}:
+            {% if element.attrib|length > 0 %}
+            type: object
+            properties:
+            {% for attribute in element.attrib %}
+              "{{attribute}}":
+                type: string
+                example: "{{element.get(attribute)}}"
+                xml:
+                  attribute: true
+            {% endfor %}
+            {% else %}
+            type: string
+            {% if subchild.find(element.tag).text is not none %}
+            example: "{{subchild.find(element.tag).text}}"
+            {% else %}
+            example: ""
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}

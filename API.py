@@ -1,4 +1,5 @@
 import json
+import xml.etree.ElementTree as ET
 
 class API_Obj:
   def __init__(self):
@@ -21,8 +22,17 @@ class API_Obj:
     self.parameters = json.load(file)
     file.close()
 
-    file = open('./data/requestBody.json',) 
-    self.requestBody = json.load(file)
+    #file = open('./data/requestBody.json',)
+    if self.content_type=='application/json':
+      file = open('./data/requestBody.json',)
+      self.requestBody = json.load(file)
+    elif self.content_type=='application/x-www-form-urlencoded':
+      file = open('./data/requestBody.json',)
+      self.requestBody = json.load(file)
+    else:
+      file = open('./data/requestBody.xml',)
+      self.requestBody = ET.parse(file)
+    
     file.close()
 
     file = open('./data/responses.json',) 

@@ -1,13 +1,12 @@
 {
     "openapiVersion": "3.0.1",
-    "title": "IHHL Application Status Web API",
-    "description": "SBM-IHHL is an initiative to give subsidy to the rural poor households for construction of toilets.",
+    "title": "Umang Services – Coffee Board API",
+    "description": "Coffee board services to be onboarded onUMANGPlatform",
     "termsOfService": "https://web.umang.gov.in/",
-    "contactName": "IHHL Application Status Web API",
+    "contactName": "Umang Services – Coffee Board API",
     "contactUrl": "https://web.umang.gov.in/customer_support",
     "infoVersion": "1.0.0",
     "servers":[
-        "http://swachhbharaturban.gov.in/sbmwebservicesihhlcallcentre/api",
-        "http://app.swachhbharaturban.gov.in/sbmwebservicesihhlcallcentre/api"
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/cbApi/ws1"
     ]
 }
