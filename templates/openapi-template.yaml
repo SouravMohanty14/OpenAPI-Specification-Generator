@@ -18,7 +18,11 @@
           name: {{key}}
           schema:
             type: {{api.parameters[key]|get_type}}
+            {% if api.parameters[key]|get_type == 'string' %}
             example: "{{api.parameters[key]}}"
+            {% else %}
+            example: {{api.parameters[key]}}
+            {% endif %}
           {% if key in api.mandatory %}
           required: true
           {% endif %}
