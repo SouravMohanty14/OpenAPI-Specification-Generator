@@ -1,7 +1,7 @@
 import json
 import xml.etree.ElementTree as ET
 
-class API_Obj:
+class apiObject:
   def __init__(self):
 
     file = open('./data/data.json',)

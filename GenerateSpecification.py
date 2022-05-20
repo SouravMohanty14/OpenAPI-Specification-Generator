@@ -1,25 +1,45 @@
+'''Author : Sourav Mohanty, Sukhpreet Kaur
+   Code Review : Moorchanna Pattnaik
+   description: It's a Jinja App to generate Open API Specification using JSON data.
+   Last Modified On:  17/05/2022 
+'''
+#Import libraries
+from glob import glob
 from xmlrpc.client import Boolean
 import json
 import sys
 import jinja2
 from jinja2 import Environment, FileSystemLoader
 import API
+import data.xmlResponses as xml_responses
+import xml.etree.ElementTree as ET
+import os
 
+#Dictionary to store all the API Objects
 api_dict = {}
 
-securitySchemes = { "bearerAuth": False, "cookieAuth": False, "oauthsecurity": False, "oauthAuthorizeCode": False, "basicAuth": False }
+security_schemes = { "bearerAuth": False, "cookieAuth": False, "oauthsecurity": False, "oauthAuthorizeCode": False, "basicAuth": False }
 
-#Info
-file = open('./data/info.json',) 
-info = json.load(file)
-file.close()
+#A dict to keep track of all xml tags
+xml_tags = {}
 
+#Info about API [openapiVersion, title, description, termsOfService, contactName, contactUrl, infoVersion, servers]
+try:
+    info_file = open('./data/info.json') 
+    info = json.load(info_file) #Dictionary data of info_file
+    info_file.close()
+except:
+    print("info.json not found")
+    exit()
+
+#Specifying yaml file name
 filename = "spec.yaml"
 try:
   filename = info["title"] + ".yaml"
 except:
   filename = "spec.yaml"
 
+#Loading schema & xml files
 schema_file = "schema.yaml"
 xml_file = "xml_schema.yaml"
 
@@ -29,28 +49,38 @@ open(schema_file, 'w').close()
 open(xml_file, 'w').close()
 
 #Get Description data from Json File
-file = open('./data/descriptions.json',) 
-descriptions = json.load(file)
-file.close()
+try:
+    descriptions_file = open('./data/descriptions.json',) 
+    descriptions = json.load(descriptions_file)
+    descriptions_file.close()
+except:
+    print("descriptions.json not found")
+    exit()
 
-#Format
-file = open('./data/format.json',) 
-format = json.load(file)
-file.close()
+#Get Format data from Json File
+try:
+    format_file = open('./data/format.json',) 
+    format = json.load(format_file)
+    format_file.close()
+except:
+    print("format.json not found")
+    exit()
 
+#Functions for Security Schemes
 def get_security(key):
-    if key not in securitySchemes.keys():
+    if key not in security_schemes.keys():
         return False
-    return securitySchemes[key]
+    return security_schemes[key]
 
 def set_security(key):
-    securitySchemes.update({key: True})
+    security_schemes.update({key: True})
     return True
 
 def security_not_empty(value):
-    res = all(x == False for x in securitySchemes.values())
+    res = all(x == False for x in security_schemes.values())
     return not res
 
+#Function to check datatype of parameter using value
 def get_type(value):
     #print(type(value))
     if type(value) == str:
@@ -67,6 +97,7 @@ def get_type(value):
         return "object"
     return type(value)
 
+#Function to check datatype of parameter using value in a nested array
 def get_nestedarray_type(value):
     #print(type(value))
     if type(value) == str:
@@ -83,6 +114,7 @@ def get_nestedarray_type(value):
         return "object"
     return type(value)
 
+#Function to get description for parameter
 def get_description(value):
     if value in descriptions:
         return descriptions[value]
@@ -95,8 +127,55 @@ def get_format(value):
     else:
         return ""
 
+#Function to get xml data from responses.py using param
+def get_xml_data(param):
+    if param in xml_responses.xml_data.keys():
+        return xml_responses.xml_data[param]
+    else:
+        print("xml data not found, param {}".format(param))
+
+#Function to convert string to XML
+def string_to_xml(param):
+    #Get xml data as string from responses.py
+    xml_string = get_xml_data(param)
+
+    #Initialise xml_tags
+    xml_tags = {}
+
+    #Convert xml string to xml
+    return ET.fromstring(xml_string)
+
+#Function to get Tags within a xml response
+def get_child_name(child_node):
+    if(child_node not in xml_tags.keys()):
+        xml_tags[child_node] = 1
+    else:
+        xml_tags[child_node] += 1
+    print("Tag DICT")
+    print(xml_tags)
+    print()
+    return "{}{}".format(child_node,xml_tags[child_node])
+
+#Function to reset xml_tags
+def reset_xml_tags(value):
+    global xml_tags
+    xml_tags = {}
+
+#Fuction to check child node present in xml_tags
+def child_not_present(child_node):
+    print(child_node.tag)
+    global xml_tags
+    if(child_node.tag in xml_tags):
+        print("not present")
+        return False
+    else:
+        print("present")
+        return True
+
+#
 def generate_api_object():
-    obj = API.API_Obj()
+    #Creating API Object
+    obj = API.apiObject()
 
     if obj.path in api_dict: #Key Exists, Add to Value
         print("adding to value")
@@ -120,7 +199,13 @@ def generate_api_spec():
     jinja2.filters.FILTERS['get_security'] = get_security
     jinja2.filters.FILTERS['set_security'] = set_security
     jinja2.filters.FILTERS['security_not_empty'] = security_not_empty
+    jinja2.filters.FILTERS['get_xml_data'] = get_xml_data
+    jinja2.filters.FILTERS['string_to_xml'] = string_to_xml
+    jinja2.filters.FILTERS['get_child_name'] = get_child_name
+    jinja2.filters.FILTERS['reset_xml_tags'] = reset_xml_tags
+    jinja2.filters.FILTERS['child_not_present'] = child_not_present
 
+    #try:
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader, trim_blocks=True, lstrip_blocks=True)
 
@@ -147,13 +232,13 @@ def generate_api_spec():
             spec_file.write(spec)
             spec_file.close()
         #xml schema
-        if api.content_type == 'application/xml':
-            xml_template = env.get_template('xml-schema.yaml')
-            with open(xml_file, "a") as xml_schemas:
-                print("Writing Components Schema")
-                xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
-                xml_schemas.write(xml_schema)
-                xml_schemas.close()
+        #if api.content_type == 'application/xml':
+        xml_template = env.get_template('xml-schema.yaml')
+        with open(xml_file, "a") as xml_schemas:
+            print("Writing XML Schema")
+            xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
+            xml_schemas.write(xml_schema)
+            xml_schemas.close()
         #AnyOf schema
         if len(api_list) > 1:
             schema_template = env.get_template('components-schema.yaml')
@@ -187,6 +272,13 @@ def generate_api_spec():
         fp.write(data)
 
     print("Specification created successfully")
+    # except Exception as e:
+    #     print("Error while generating Specification")
+    #     exc_type, exc_obj, exc_traceback = sys.exc_info()
+    #     fname = os.path.split(exc_traceback.tb_frame.f_code.co_filename)
+    #     print(exc_type) #Exception
+    #     print(fname) #Exception occured in which file
+    #     print(exc_traceback.tb_lineno) #Exception lineno
 
 if __name__ == "__main__":
 

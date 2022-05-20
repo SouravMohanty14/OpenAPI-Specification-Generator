@@ -4,7 +4,7 @@
     "operationId" : "inwardstatus",
     "tag" : "Inward Status",
     "summary" : "The following APIs are used for inward status",
-    "content_type" : "application/xml",
+    "content_type" : "application/json",
     "mandatory" : ["Tkn"],
     "authorization" : "bearerAuth",
     "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}

@@ -46,62 +46,44 @@
         {% if response_content_type == 'application/xml' %}
           {% for param in api.responses[response_code][response_content_type] %}
           {% set param = param|string_to_xml %}
-    {{param.tag}}:
-      type: object
-      properties:
-      {% set temp = child|reset_xml_tags %}
-      {% for child in param %}
-      {% set child_name = child.tag|get_child_name %}
-          {{child_name}}:
-            $ref: '#/components/schemas/{{child_name}}'
-      {% endfor %}
-
-    {% set temp = subchild|reset_xml_tags %}
+   {{ param.tag }}:
+    type: object
+    properties:
     {% for child in param %}
-    {% if child|child_not_present %}     
       {% for subchild in param.findall(child.tag) %}
-      {% set subchild_name = subchild.tag|get_child_name %}
-    {{ subchild_name }}:
-      type: object
-      properties:
-        {% if subchild.attrib|length > 0 %}
+      {{ subchild.tag }}:
+        type: object
+        properties:
         {% for attribute in subchild.attrib %}
-        "{{attribute}}":
-          type: string
-          example:
-            - "{{subchild.get(attribute)}}"
-          xml:
-                attribute: true
-          {% endfor %}
-        {% endif %}
+          "{{attribute}}":
+            type: string
+            enum:
+              - "{{subchild.get(attribute)}}"
+            xml:
+              attribute: true
+        {% endfor %}
         {% for element in subchild %}
+          {{element.tag}}:
             {% if element.attrib|length > 0 %}
-        "{{element.tag}}":
-          type: string
-          example:
-          {% for attribute in element.attrib %}
-            - "{{attribute}}"
-          xml:
-                attribute: true
-      
-        name: '{{subchild.tag}}'
+            type: object
+            properties:
+            {% for attribute in element.attrib %}
+              "{{attribute}}":
+                type: string
+                example: "{{element.get(attribute)}}"
+                xml:
+                  attribute: true
             {% endfor %}
             {% else %}
-        {{element.tag}}:
             type: string
             {% if subchild.find(element.tag).text is not none %}
             example: "{{subchild.find(element.tag).text}}"
-      
             {% else %}
             example: ""
             {% endif %}
             {% endif %}
         {% endfor %}
-      xml:
-        wrapped: true
-        name: '{{subchild.tag}}'
       {% endfor %}
-    {% endif %}
     {% endfor %}
 
           {% endfor %}
