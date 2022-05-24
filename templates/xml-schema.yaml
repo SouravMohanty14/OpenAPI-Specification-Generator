@@ -88,12 +88,62 @@
             {% endfor %}
             {% else %}
         {{element.tag}}:
-            type: string
-            {% if subchild.find(element.tag).text is not none %}
-            example: "{{subchild.find(element.tag).text}}"
+            {% if subchild.find(element.tag)|child_exists %}
+            type: object
+            properties:
+            {{"#has children"}}
+            {% for nested_subchild in element %}
+              "{{nested_subchild.tag}}":
+              {% if element.find(nested_subchild.tag)|child_exists %}
+              {{"#has sub children"}}
+                type: object
+                properties:
+              {% for inner_nested_subchild in nested_subchild %}
+                  "{{inner_nested_subchild.tag}}":
+                  {% if nested_subchild.find(inner_nested_subchild.tag)|child_exists %}
+                    type: object
+                    properties:
+                    {% for inner_inner_nested_subchild in inner_nested_subchild %}
+                      "{{inner_inner_nested_subchild.tag}}":
+                      {% if inner_nested_subchild.find(inner_inner_nested_subchild.tag)|child_exists %}
+                        type: object
+                        properties:
+                        {% for inner_inner_inner_nested_subchild in inner_inner_nested_subchild %}
+                          "{{inner_inner_inner_nested_subchild.tag}}":
+                          {% if inner_inner_nested_subchild.find(inner_inner_inner_nested_subchild.tag)|child_exists %}
+                            type: object
+                            properties:
+                            {% for inner_inner_inner_inner_nested_subchild in inner_inner_inner_nested_subchild %}
+                              "{{inner_inner_inner_inner_nested_subchild.tag}}":
+                                type: string
+                                example: "{{inner_inner_inner_nested_subchild.find(inner_inner_inner_inner_nested_subchild.tag).text}}"
+                              {% endfor %}
+                          {% else %}
+                            type: string
+                            example: "{{inner_inner_nested_subchild.find(inner_inner_inner_nested_subchild.tag).text}}"
+                          {% endif %}
+                        {% endfor %}
+                      {% else %}
+                        type: string
+                        example: "{{inner_nested_subchild.find(inner_inner_nested_subchild.tag).text}}"
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    type: string
+                    example: "{{nested_subchild.find(inner_nested_subchild.tag).text}}"
+                  {% endif %}
+              {% endfor %}
+              {% else %}
+              {{"#no sub children"}}
+                    type: string
+                    properties: {{{}}}
+              {% endif %}
+            {% endfor %}
       
             {% else %}
-            example: ""
+            {{"#no children"}}
+            type: string
+            example: "{{subchild.find(element.tag).text}}"
             {% endif %}
             {% endif %}
         {% endfor %}

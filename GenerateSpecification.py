@@ -151,9 +151,9 @@ def get_child_name(child_node):
         xml_tags[child_node] = 1
     else:
         xml_tags[child_node] += 1
-    print("Tag DICT")
-    print(xml_tags)
-    print()
+    # print("Tag DICT")
+    # print(xml_tags)
+    # print()
     return "{}{}".format(child_node,xml_tags[child_node])
 
 #Function to reset xml_tags
@@ -163,14 +163,24 @@ def reset_xml_tags(value):
 
 #Fuction to check child node present in xml_tags
 def child_not_present(child_node):
-    print(child_node.tag)
+    #print(child_node.tag)
     global xml_tags
     if(child_node.tag in xml_tags):
-        print("not present")
+        #print("not present")
         return False
     else:
-        print("present")
+        #print("present")
         return True
+
+#Function to check if Parent node has any children nodes
+def child_exists(parent_node):
+    count = 0
+    for child in parent_node:
+        count += 1
+    if count>0:
+        return True #has children
+    else:
+        return False #no children
 
 #
 def generate_api_object():
@@ -204,6 +214,7 @@ def generate_api_spec():
     jinja2.filters.FILTERS['get_child_name'] = get_child_name
     jinja2.filters.FILTERS['reset_xml_tags'] = reset_xml_tags
     jinja2.filters.FILTERS['child_not_present'] = child_not_present
+    jinja2.filters.FILTERS['child_exists'] = child_exists
 
     #try:
     file_loader = FileSystemLoader('templates')
