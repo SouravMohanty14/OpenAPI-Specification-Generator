@@ -204,10 +204,24 @@
                 {% endif %}
 
                 {% elif content_type == "application/xml" %}
-                {% for param in api.responses[response_code][content_type] %}
+                  {% if api.responses[response_code][content_type]|length > 1 %}
+                anyOf:
+                  {% for param in api.responses[response_code][content_type] %}
                   {% set xml_data = param|string_to_xml %}
+                  - $ref: '#/components/schemas/{{xml_data.tag}}'
+                  {% endfor %}
+              examples:
+                  {% for param in api.responses[response_code][content_type] %}
+                  {% set xml_data = param|string_to_xml %}
+                  {{xml_data.tag}}:
+                    $ref: "#/components/examples/{{xml_data.tag}}"
+                  {% endfor %}
+                  {% else %}
+                    {% for param in api.responses[response_code][content_type] %}
+                    {% set xml_data = param|string_to_xml %}
                   $ref: '#/components/schemas/{{xml_data.tag}}'
-                {% endfor %}
+                    {% endfor %}
+                  {% endif %}
                 {% endif %}
             {% endfor %}   
           {% endif %}

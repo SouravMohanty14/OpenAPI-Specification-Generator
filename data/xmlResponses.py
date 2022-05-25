@@ -18,18 +18,8 @@ xml_data = {
                     <Mobile>1-551-754-3010</Mobile>
                     <EmailId>mark@yourcomany.com</EmailId>
                   </Employee>
-                  <country name="Liechtenstein">
-                      <rank>1</rank>
-                      <year>2008</year>
-                      <gdppc>141100</gdppc>
-                  </country>
-                  <country name="Austria">
-                      <rank>5</rank>
-                      <year>2005</year>
-                      <gdppc>141100</gdppc>
-                  </country>
                 </Employees>''',
-    "country" : '''<?xml version="1.0"?>
+    "data" : '''<?xml version="1.0"?>
                     <data>
                         <country name="Liechtenstein">
                             <rank>1</rank>
@@ -176,5 +166,35 @@ xml_data = {
 			<FinalResponse>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48TGlzdE9mUGdTdHVkZW50TWFzdGVySW8KPjxIbHNEaXNlYXNlCj48RXJyb3JDb2RlCj48L0Vycm9yQ29kZQo+PEVycm9yTWVzc2FnZQo+U3R1ZGVudCBEYXRhIGlzIHNhdmVkIGFuZCBzdWJtaXR0ZWQuPC9FcnJvck1lc3NhZ2UKPjwvSGxzRGlzZWFzZQo+PC9MaXN0T2ZQZ1N0dWRlbnRNYXN0ZXJJbwo+</FinalResponse>
 		</rpc:SubmitApplicationResponse>
 	</SOAP-ENV:Body>
-</SOAP-ENV:Envelope>'''
+</SOAP-ENV:Envelope>''',
+"employee2" : '''<Employees>
+                  <Employee>
+                    <EmpId>001</EmpId>
+                    <Name>Steven</Name>
+                    <Mobile>1-541-754-3010</Mobile>
+                    <EmailId>steven@yourcomany.com</EmailId>
+                  </Employee>
+                  <Employee>
+                    <EmpId>002</EmpId>
+                    <Name>Mark</Name>
+                    <Mobile>1-551-754-3010</Mobile>
+                    <EmailId>mark@yourcomany.com</EmailId>
+                  </Employee>
+                  <Employee>
+                    <EmpId>003</EmpId>
+                    <Name>Adam</Name>
+                    <Mobile>1-551-754-3010</Mobile>
+                    <EmailId>mark@yourcomany.com</EmailId>
+                  </Employee>
+                  <country name="Liechtenstein">
+                      <rank>1</rank>
+                      <year>2008</year>
+                      <gdppc>141100</gdppc>
+                  </country>
+                  <country name="Austria">
+                      <rank>5</rank>
+                      <year>2005</year>
+                      <gdppc>141100</gdppc>
+                  </country>
+                </Employees>'''
 }
