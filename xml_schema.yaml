@@ -1,0 +1,244 @@
+  schemas:
+    DemoAuthResponse1:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+    DemoAuthResponse2:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+
+
+    EaadharXamlSchema:
+      type: object
+      properties:
+          KycRes1:
+            $ref: '#/components/schemas/KycRes1'
+
+     
+    KycRes1:
+      type: object
+      properties:
+        Rar:
+            #no children
+            type: string
+            example: "string"
+        UidData:
+            type: object
+            properties:
+            #has children
+              "Poi":
+              #has sub children
+                type: object
+                properties:
+                  "dob":
+                    type: string
+                    example: "string"
+                  "gender":
+                    type: string
+                    example: "string"
+                  "name":
+                    type: string
+                    example: "string"
+              "Poa":
+              #has sub children
+                type: object
+                properties:
+                  "co":
+                    type: string
+                    example: "string"
+                  "country":
+                    type: string
+                    example: "string"
+                  "dist":
+                    type: string
+                    example: "string"
+                  "lm":
+                    type: string
+                    example: "string"
+                  "loc":
+                    type: string
+                    example: "string"
+                  "pc":
+                    type: string
+                    example: "string"
+                  "state":
+                    type: string
+                    example: "string"
+                  "vtc":
+                    type: string
+                    example: "string"
+              "LData":
+              #has sub children
+                type: object
+                properties:
+                  "co":
+                    type: string
+                    example: "string"
+                  "country":
+                    type: string
+                    example: "string"
+                  "dist":
+                    type: string
+                    example: "string"
+                  "lang":
+                    type: string
+                    example: "string"
+                  "lm":
+                    type: string
+                    example: "string"
+                  "loc":
+                    type: string
+                    example: "string"
+                  "name":
+                    type: string
+                    example: "string"
+                  "pc":
+                    type: string
+                    example: "string"
+                  "state":
+                    type: string
+                    example: "string"
+                  "vtc":
+                    type: string
+                    example: "string"
+              "Pht":
+              #no sub children
+                    type: string
+                    properties: {}
+              "Prn":
+              #has sub children
+                type: object
+                properties:
+                  "type":
+                    type: string
+                    example: "string"
+                  "text":
+                    type: string
+                    example: "string"
+              "tkn":
+              #no sub children
+                    type: string
+                    properties: {}
+              "uid":
+              #no sub children
+                    type: string
+                    properties: {}
+      
+        Signature:
+            type: object
+            properties:
+            #has children
+              "SignedInfo":
+              #has sub children
+                type: object
+                properties:
+                  "CanonicalizationMethod":
+                    type: object
+                    properties:
+                      "Algorithm":
+                        type: string
+                        example: "string"
+                  "SignatureMethod":
+                    type: object
+                    properties:
+                      "Algorithm":
+                        type: string
+                        example: "string"
+                  "Reference":
+                    type: object
+                    properties:
+                      "Transforms":
+                        type: object
+                        properties:
+                          "Transform":
+                            type: object
+                            properties:
+                              "Algorithm":
+                                type: string
+                                example: "string"
+                      "DigestMethod":
+                        type: object
+                        properties:
+                          "Algorithm":
+                            type: string
+                            example: "string"
+                      "DigestValue":
+                        type: string
+                        example: "string"
+                      "URI":
+                        type: string
+                        example: "string"
+              "SignatureValue":
+              #no sub children
+                    type: string
+                    properties: {}
+              "KeyInfo":
+              #has sub children
+                type: object
+                properties:
+                  "X509Data":
+                    type: object
+                    properties:
+                      "X509SubjectName":
+                        type: string
+                        example: "string"
+                      "X509Certificate":
+                        type: string
+                        example: "string"
+              "xmlns":
+              #no sub children
+                    type: string
+                    properties: {}
+      
+        code:
+            #no children
+            type: string
+            example: "string"
+        ret:
+            #no children
+            type: string
+            example: "string"
+        ts:
+            #no children
+            type: string
+            example: "string"
+        ttl:
+            #no children
+            type: string
+            example: "string"
+        txn:
+            #no children
+            type: string
+            example: "string"
+      xml:
+        wrapped: true
+        name: 'KycRes'
+
+
+
+  examples:
+    DemoAuthResponse1:
+      value:
+        rs: S
+        rc: 200
+        rd: OK
+        pd: {'Status': {'Status': 'Issued Order', 'code': 2003}, 'apiVersion': '1.0', 'success': True}
+    DemoAuthResponse2:
+      value:
+        rs: S1
+        rc: 200
+        rd: OK
+        pd: {'Status': {'Status': 'Issued Order', 'code': 2005}, 'apiVersion': '2.0', 'success': True}

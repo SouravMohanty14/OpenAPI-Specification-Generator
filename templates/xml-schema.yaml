@@ -1,4 +1,21 @@
   schemas:
+  {% for response_code in api.responses %}
+      {% for response_content_type in api.responses[response_code] %}
+        {% if response_content_type == 'application/json' %}
+          {% if api.responses[response_code][response_content_type]|length > 1 %}
+            {% for i in api.responses[response_code][response_content_type] %}
+    {{i}}:
+      properties:
+      {% for key in api.responses[response_code][response_content_type][i]  %}
+        {{key}}:
+          type: {{ api.responses[response_code][response_content_type][i][key]|get_type}}
+      {% endfor %}
+{% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+
   {% if api.content_type == 'application/xml' %}
    {{ api.requestBody.getroot().tag }}:
     type: object
@@ -158,3 +175,21 @@
         {% endif %}
       {% endfor %}
     {% endfor %}
+
+
+  {% for response_code in api.responses %}
+      {% for response_content_type in api.responses[response_code] %}
+        {% if response_content_type == 'application/json' %}
+          {% if api.responses[response_code][response_content_type]|length > 1 %}
+  examples:
+{% for i in api.responses[response_code][response_content_type] %}
+    {{i}}:
+      value:
+      {% for key in  api.responses[response_code][response_content_type][i] %}
+        {{key}}: {{ api.responses[response_code][response_content_type][i][key]}}
+      {% endfor %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+  {% endfor %}

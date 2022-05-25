@@ -11,3 +11,380 @@ info:
 servers:
 - url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/cbApi/ws1
 paths:
+  /inwardstatus:
+    post:
+      tags:
+      - Inward Status
+      summary: The following APIs are used for inward status
+      operationId: inwardstatus
+      security:
+      - bearerAuth: []
+      parameters:
+        - in: header
+          name: Tkn
+          schema:
+            type: string
+            example: ""
+          required: true
+        - in: header
+          name: deptid
+          schema:
+            type: integer
+            example: 371
+        - in: header
+          name: srvid
+          schema:
+            type: integer
+            example: 1740
+        - in: header
+          name: subsid
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: subsid2
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: formtrkr
+          schema:
+            type: integer
+            example: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                  tkn:
+                    type: string
+                    example: rhfb3d2c6a-4518-4163-a922-fbef65d0c2c1/2
+                  trkr:
+                    type: string
+                    example: 213132
+                  lang:
+                    type: string
+                    example: en
+                  lat:
+                    type: string
+                    example: 12.972
+                  lon:
+                    type: string
+                    example: 77.595
+                  lac:
+                    type: string
+                    example: 90
+                  did:
+                    type: string
+                    example: 123234
+                  usag:
+                    type: string
+                    example: 90
+                  apitrkr:
+                    type: string
+                    example: 123234
+                  usrid:
+                    type: string
+                    example: 09
+                  srvid:
+                    type: string
+                    example: 1544
+                  mode:
+                    type: string
+                    example: web
+                  pltfrm:
+                    type: string
+                    example: andorid
+                  deptid:
+                    type: string
+                    example: 344
+                  subsid:
+                    type: string
+                    example: 0
+                  subsid2:
+                    type: string
+                    example: 0
+                  formtrkr:
+                    type: string
+                    example: 0
+                  Grower_ID:
+                    type: string
+                    example: KA00007516
+                  Inward_No:
+                    type: string
+                    example: EKA00036716
+                  Authorization:
+                    type: string
+                    example: Tamil News Doordarshan Podhigai
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: "#/components/schemas/DemoAuthResponse1"
+                - $ref: "#/components/schemas/DemoAuthResponse2"
+              examples:
+                DemoAuthResponse1:
+                  $ref: "#/components/examples/DemoAuthResponse1"
+                DemoAuthResponse2:
+                  $ref: "#/components/examples/DemoAuthResponse2"
+
+            application/xml:
+              schema:
+                  $ref: '#/components/schemas/EaadharXamlSchema'
+   
+        400:
+          description: Bad Request/Validation Error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Text
+
+  schemas:
+    DemoAuthResponse1:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+    DemoAuthResponse2:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+
+
+    EaadharXamlSchema:
+      type: object
+      properties:
+          KycRes1:
+            $ref: '#/components/schemas/KycRes1'
+
+     
+    KycRes1:
+      type: object
+      properties:
+        Rar:
+            #no children
+            type: string
+            example: "string"
+        UidData:
+            type: object
+            properties:
+            #has children
+              "Poi":
+              #has sub children
+                type: object
+                properties:
+                  "dob":
+                    type: string
+                    example: "string"
+                  "gender":
+                    type: string
+                    example: "string"
+                  "name":
+                    type: string
+                    example: "string"
+              "Poa":
+              #has sub children
+                type: object
+                properties:
+                  "co":
+                    type: string
+                    example: "string"
+                  "country":
+                    type: string
+                    example: "string"
+                  "dist":
+                    type: string
+                    example: "string"
+                  "lm":
+                    type: string
+                    example: "string"
+                  "loc":
+                    type: string
+                    example: "string"
+                  "pc":
+                    type: string
+                    example: "string"
+                  "state":
+                    type: string
+                    example: "string"
+                  "vtc":
+                    type: string
+                    example: "string"
+              "LData":
+              #has sub children
+                type: object
+                properties:
+                  "co":
+                    type: string
+                    example: "string"
+                  "country":
+                    type: string
+                    example: "string"
+                  "dist":
+                    type: string
+                    example: "string"
+                  "lang":
+                    type: string
+                    example: "string"
+                  "lm":
+                    type: string
+                    example: "string"
+                  "loc":
+                    type: string
+                    example: "string"
+                  "name":
+                    type: string
+                    example: "string"
+                  "pc":
+                    type: string
+                    example: "string"
+                  "state":
+                    type: string
+                    example: "string"
+                  "vtc":
+                    type: string
+                    example: "string"
+              "Pht":
+              #no sub children
+                    type: string
+                    properties: {}
+              "Prn":
+              #has sub children
+                type: object
+                properties:
+                  "type":
+                    type: string
+                    example: "string"
+                  "text":
+                    type: string
+                    example: "string"
+              "tkn":
+              #no sub children
+                    type: string
+                    properties: {}
+              "uid":
+              #no sub children
+                    type: string
+                    properties: {}
+      
+        Signature:
+            type: object
+            properties:
+            #has children
+              "SignedInfo":
+              #has sub children
+                type: object
+                properties:
+                  "CanonicalizationMethod":
+                    type: object
+                    properties:
+                      "Algorithm":
+                        type: string
+                        example: "string"
+                  "SignatureMethod":
+                    type: object
+                    properties:
+                      "Algorithm":
+                        type: string
+                        example: "string"
+                  "Reference":
+                    type: object
+                    properties:
+                      "Transforms":
+                        type: object
+                        properties:
+                          "Transform":
+                            type: object
+                            properties:
+                              "Algorithm":
+                                type: string
+                                example: "string"
+                      "DigestMethod":
+                        type: object
+                        properties:
+                          "Algorithm":
+                            type: string
+                            example: "string"
+                      "DigestValue":
+                        type: string
+                        example: "string"
+                      "URI":
+                        type: string
+                        example: "string"
+              "SignatureValue":
+              #no sub children
+                    type: string
+                    properties: {}
+              "KeyInfo":
+              #has sub children
+                type: object
+                properties:
+                  "X509Data":
+                    type: object
+                    properties:
+                      "X509SubjectName":
+                        type: string
+                        example: "string"
+                      "X509Certificate":
+                        type: string
+                        example: "string"
+              "xmlns":
+              #no sub children
+                    type: string
+                    properties: {}
+      
+        code:
+            #no children
+            type: string
+            example: "string"
+        ret:
+            #no children
+            type: string
+            example: "string"
+        ts:
+            #no children
+            type: string
+            example: "string"
+        ttl:
+            #no children
+            type: string
+            example: "string"
+        txn:
+            #no children
+            type: string
+            example: "string"
+      xml:
+        wrapped: true
+        name: 'KycRes'
+
+
+
+  examples:
+    DemoAuthResponse1:
+      value:
+        rs: S
+        rc: 200
+        rd: OK
+        pd: {'Status': {'Status': 'Issued Order', 'code': 2003}, 'apiVersion': '1.0', 'success': True}
+    DemoAuthResponse2:
+      value:
+        rs: S1
+        rc: 200
+        rd: OK
+        pd: {'Status': {'Status': 'Issued Order', 'code': 2005}, 'apiVersion': '2.0', 'success': True}

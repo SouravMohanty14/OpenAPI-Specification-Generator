@@ -128,6 +128,17 @@
             {{content_type}}:
               schema:
                 {% if content_type == "application/json" %}
+                {% if api.responses[response_code][content_type]|length > 1 %}
+                anyOf:
+                {% for i in api.responses[response_code][content_type] %}
+                - $ref: "#/components/schemas/{{i}}"
+                {% endfor %}
+              examples:
+                {% for i in api.responses[response_code][content_type] %}
+                {{i}}:
+                  $ref: "#/components/examples/{{i}}"
+                {% endfor %}
+                {% else %}
                 properties:
                 {% for json_object in api.responses[response_code][content_type] %}
                 {% for param in json_object %}
@@ -190,6 +201,7 @@
                     {% endif %}
                 {% endfor %}
                 {% endfor %}
+                {% endif %}
 
                 {% elif content_type == "application/xml" %}
                 {% for param in api.responses[response_code][content_type] %}
