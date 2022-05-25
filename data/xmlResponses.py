@@ -2,7 +2,7 @@ xml_data = {
     "employee" : '''<Employees>
                   <Employee>
                     <EmpId>001</EmpId>
-                    <Name>Steven</Name>
+                    <Name>Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)</Name>
                     <Mobile>1-541-754-3010</Mobile>
                     <EmailId>steven@yourcomany.com</EmailId>
                   </Employee>

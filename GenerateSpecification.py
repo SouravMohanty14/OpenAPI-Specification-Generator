@@ -1,6 +1,6 @@
 '''Author : Sourav Mohanty, Sukhpreet Kaur
    Code Review : Moorchanna Pattnaik
-   description: It's a Jinja App to generate Open API Specification using JSON data.
+   Description: It's a Jinja App to generate Open API Specification using JSON data.
    Last Modified On:  17/05/2022 
 '''
 #Import libraries
@@ -25,7 +25,7 @@ xml_tags = {}
 
 #Info about API [openapiVersion, title, description, termsOfService, contactName, contactUrl, infoVersion, servers]
 try:
-    info_file = open('./data/info.json') 
+    info_file = open('./data/info.json', encoding='utf8') 
     info = json.load(info_file) #Dictionary data of info_file
     info_file.close()
 except:
@@ -44,13 +44,16 @@ schema_file = "schema.yaml"
 xml_file = "xml_schema.yaml"
 
 #Erase Spec File
-open(filename, 'w').close()
-open(schema_file, 'w').close()
-open(xml_file, 'w').close()
+try:
+    open(filename, 'w', encoding='utf8').close()
+    open(schema_file, 'w', encoding='utf8').close()
+    open(xml_file, 'w', encoding='utf8').close()
+except:
+    print("Error occurred while erasing spec files")
 
 #Get Description data from Json File
 try:
-    descriptions_file = open('./data/descriptions.json',) 
+    descriptions_file = open('./data/descriptions.json', encoding='utf8') 
     descriptions = json.load(descriptions_file)
     descriptions_file.close()
 except:
@@ -59,7 +62,7 @@ except:
 
 #Get Format data from Json File
 try:
-    format_file = open('./data/format.json',) 
+    format_file = open('./data/format.json', encoding='utf8') 
     format = json.load(format_file)
     format_file.close()
 except:
@@ -223,11 +226,14 @@ def generate_api_spec():
     # Opening info template file
     info_template = env.get_template('info-template.yaml')
     print ("Info Template loaded successfully...")
-    with open(filename, "a") as spec_file:
-        print("Writing Info")
-        info_temp = info_template.render(info=info)
-        spec_file.write(info_temp)
-        spec_file.close()
+    try:
+        with open(filename, "a", encoding='utf8') as spec_file:
+            print("Writing Info")
+            info_temp = info_template.render(info=info)
+            spec_file.write(info_temp)
+            spec_file.close()
+    except:
+        print("Error while writing Info template")
 
     # Opening template file
     template = env.get_template('openapi-template.yaml')
@@ -237,50 +243,65 @@ def generate_api_spec():
         api_list = api_dict[path]
         #for api in api_list:
         api = api_list[0]
-        with open(filename, "a") as spec_file:
-            print("Creating specification for " + api.path)
-            spec = template.render(api=api,total_apis=len(api_list))
-            spec_file.write(spec)
-            spec_file.close()
+        try:
+            with open(filename, "a", encoding='utf8') as spec_file:
+                print("Creating specification for " + api.path)
+                spec = template.render(api=api,total_apis=len(api_list))
+                spec_file.write(spec)
+                spec_file.close()
+        except:
+            print("Error while writing path for api:{},path:{}".format(api,path))
         #xml schema
         #if api.content_type == 'application/xml':
         xml_template = env.get_template('xml-schema.yaml')
-        with open(xml_file, "a") as xml_schemas:
-            print("Writing XML Schema")
-            xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
-            xml_schemas.write(xml_schema)
-            xml_schemas.close()
+        try:
+            with open(xml_file, "a", encoding='utf8') as xml_schemas:
+                print("Writing Schemas")
+                xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
+                xml_schemas.write(xml_schema)
+                xml_schemas.close()
+        except:
+            print("Error while writing schemas for api:{},path:{}".format(api,path))
         #AnyOf schema
         if len(api_list) > 1:
             schema_template = env.get_template('components-schema.yaml')
-            with open(schema_file, "a") as schemas:
-                print("Writing Components Schema")
-                schema = schema_template.render(api_list=api_list,total_apis=len(api_list))
-                schemas.write(schema)
-                schemas.close()
+            try:
+                with open(schema_file, "a", encoding='utf8') as schemas:
+                    print("Writing Components Schema")
+                    schema = schema_template.render(api_list=api_list,total_apis=len(api_list))
+                    schemas.write(schema)
+                    schemas.close()
+            except:
+                print("Error while writing Components for api:{},path:{}".format(api,path))
 
-    # Opening components template file
+    # Opening security template file
     component_template = env.get_template('components-template.yaml')
-    print ("Component Template loaded successfully...")
-    with open(filename, "a") as spec_file:
-        print("Writing Components")
-        components = component_template.render()
-        spec_file.write(components)
-        spec_file.close()
+    print ("Security Template loaded successfully...")
+    try:
+        with open(filename, "a", encoding='utf8') as spec_file:
+            print("Writing Security")
+            components = component_template.render()
+            spec_file.write(components)
+            spec_file.close()
+    except:
+        print("Error while writing Security for api:{},path:{}".format(api,path))
 
     data = data2 = data3 = ""
-    with open(filename) as fp:
-        data = fp.read()
-    with open(schema_file) as fp:
-        data2 = fp.read()
-    with open(xml_file) as fp:
-        data3 = fp.read()
-    data += "\n"
-    data += data2
-    data += data3
-    open(filename, 'w').close()
-    with open (filename, 'a') as fp:
-        fp.write(data)
+    try:
+        with open(filename, encoding='utf8') as fp:
+            data = fp.read()
+        with open(schema_file, encoding='utf8') as fp:
+            data2 = fp.read()
+        with open(xml_file, encoding='utf8') as fp:
+            data3 = fp.read()
+        data += "\n"
+        data += data2
+        data += data3
+        open(filename, 'w', encoding='utf8').close()
+        with open (filename, 'a', encoding='utf8') as fp:
+            fp.write(data)
+    except:
+        print("Error while writing Specification")
 
     print("Specification created successfully")
     # except Exception as e:
@@ -305,10 +326,16 @@ if __name__ == "__main__":
     choice = str(input())
     
     if choice == '1':
-        generate_api_object()
+        try:
+            generate_api_object()
+        except:
+            print("Error occured while adding API Object")
     elif choice == '2':
         print ("Generating Open API Specification")
-        generate_api_spec()
+        try:
+            generate_api_spec()
+        except:
+            print("Error occured while Generating Specification")
     else:
         print ("Generating Open API Specification")
         generate_api_spec()

@@ -6,7 +6,7 @@
                 "rd": "OK",
                 "pd": {
                     "Status": {
-                        "Status": "Issued Order",
+                        "Status": "Tamil News Doordarshan Podhigai தமிழ் செய்திகள் தூர்தர்ஷன்  பொதிகை",
                         "code": 2003
                     },
                     "apiVersion": "1.0",
@@ -19,7 +19,7 @@
                     "rd": "OK",
                     "pd": {
                         "Status": {
-                            "Status": "Issued Order",
+                            "Status": "Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)",
                             "code": 2005
                         },
                         "apiVersion": "2.0",

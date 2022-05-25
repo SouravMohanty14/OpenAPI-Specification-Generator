@@ -24,7 +24,7 @@ paths:
           name: Tkn
           schema:
             type: string
-            example: ""
+            example: "Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)"
           required: true
         - in: header
           name: deptid
@@ -115,7 +115,7 @@ paths:
                     example: EKA00036716
                   Authorization:
                     type: string
-                    example: Tamil News Doordarshan Podhigai
+                    example: Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)
       responses:
         200:
           description: Successful Response
@@ -188,7 +188,7 @@ components:
         Name:
             #no children
             type: string
-            example: "Steven"
+            example: "Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)"
         Mobile:
             #no children
             type: string
@@ -253,11 +253,11 @@ components:
         rs: S
         rc: 200
         rd: OK
-        pd: {'Status': {'Status': 'Issued Order', 'code': 2003}, 'apiVersion': '1.0', 'success': True}
+        pd: {'Status': {'Status': 'Tamil News Doordarshan Podhigai தமிழ் செய்திகள் தூர்தர்ஷன்  பொதிகை', 'code': 2003}, 'apiVersion': '1.0', 'success': True}
     DemoAuthResponse2:
       value:
         rs: S1
         rc: 200
         rd: OK
-        pd: {'Status': {'Status': 'Issued Order', 'code': 2005}, 'apiVersion': '2.0', 'success': True}
+        pd: {'Status': {'Status': 'Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)', 'code': 2005}, 'apiVersion': '2.0', 'success': True}
 
