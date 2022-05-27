@@ -1,12 +1,19 @@
 {
     "openapiVersion": "3.0.1",
-    "title": "Umang Services – Coffee Board API",
-    "description": "Coffee board services to be onboarded onUMANGPlatform",
+    "title": "Umang Services– CRIS-NTES API v1.0",
+    "description": "CRIS-NTES services to be onboarded on UMANGPlatform",
     "termsOfService": "https://web.umang.gov.in/",
-    "contactName": "Umang Services – Coffee Board API",
+    "contactName": "Umang Services – CRIS-NTES API",
     "contactUrl": "https://web.umang.gov.in/customer_support",
     "infoVersion": "1.0.0",
     "servers":[
-        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/cbApi/ws1"
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s1",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s2",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s3",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s4",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s5",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s6",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s7",
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s8"
     ]
 }

@@ -98,7 +98,9 @@ def get_type(value):
         return "array"
     if type(value) == dict:
         return "object"
-    return type(value)
+    else:
+        return type(value)
+    
 
 #Function to check datatype of parameter using value in a nested array
 def get_nestedarray_type(value):
@@ -295,6 +297,8 @@ def generate_api_spec():
         with open(xml_file, encoding='utf8') as fp:
             data3 = fp.read()
         data += "\n"
+        if((data2 + data3) != ""):
+            data += "\n  schemas:"
         data += data2
         data += data3
         open(filename, 'w', encoding='utf8').close()
@@ -334,8 +338,15 @@ if __name__ == "__main__":
         print ("Generating Open API Specification")
         try:
             generate_api_spec()
-        except:
+        except Exception as e:
             print("Error occured while Generating Specification")
+            # except Exception as e:
+    #     print("Error while generating Specification")
+            exc_type, exc_obj, exc_traceback = sys.exc_info()
+            fname = os.path.split(exc_traceback.tb_frame.f_code.co_filename)
+            print(exc_type) #Exception
+            print(fname) #Exception occured in which file
+            print(exc_traceback.tb_lineno) #Exception lineno
     else:
         print ("Generating Open API Specification")
         generate_api_spec()

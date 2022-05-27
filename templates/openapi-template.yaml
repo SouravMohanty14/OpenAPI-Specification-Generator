@@ -141,53 +141,73 @@
                 {% else %}
                 properties:
                 {% for json_object in api.responses[response_code][content_type] %}
-                {% for param in json_object %}
+                {% for param in api.responses[response_code][content_type][json_object] %}
                   {{param}}:
-                    type: {{json_object[param]|get_type}}
-                    {% if (json_object[param]|get_type) == 'object' %}
+                    type: {{api.responses[response_code][content_type][json_object][param]|get_type}}
+                    {% if (api.responses[response_code][content_type][json_object][param]|get_type) == 'object' %}
                     properties:
-                    {% for obj_param in json_object[param] %}
+                    {% for obj_param in api.responses[response_code][content_type][json_object][param] %}
                       {{obj_param}}: 
-                        type: {{json_object[param][obj_param]|get_type}}                        
-                        {% if (json_object[param][obj_param]|get_type) == 'object' %}
+                        type: {{api.responses[response_code][content_type][json_object][param][obj_param]|get_type}}                        
+                        {% if (api.responses[response_code][content_type][json_object][param][obj_param]|get_type) == 'object' %}
                         properties:
-                        {% for nested_obj_param in json_object[param][obj_param] %}
+                        {% for nested_obj_param in api.responses[response_code][content_type][json_object][param][obj_param] %}
                           {{nested_obj_param}}: 
                             type: {{nested_obj_param|get_type}}
-                            example: {{json_object[param][obj_param][nested_obj_param]}}
+                            {% if api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param]|get_type == 'string' %}
+                            example: "{{ api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param] }}"
+                            {% else %}
+                            example: {{ api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param] }}
+                            {% endif %}
                         {% endfor %}
-                        {% elif (json_object[param][obj_param]|get_type) == 'array' %}
+                        {% elif (api.responses[response_code][content_type][json_object][param][obj_param]|get_type) == 'array' %}
                         items:
                           type: object
+                          {% if (api.responses[response_code][content_type][json_object][param][obj_param]|length > 0) and (api.responses[response_code][content_type][json_object][param][obj_param][0]|get_type == 'string') %}
+                        example: {{api.responses[response_code][content_type][json_object][param][obj_param]}}
+                          {% else %}
                           properties:
-                            {% for element in api.responses[response_code][content_type][param][obj_param][0] %}
+                            {% for element in api.responses[response_code][content_type][json_object][param][obj_param][0] %}
                             {{element}}:
-                              type: {{api.responses[response_code][content_type][param][obj_param][0][element]|get_type}}
+                              type: {{api.responses[response_code][content_type][json_object][param][obj_param][0][element]|get_nestedarray_type}}
                             {% endfor %}
                         example:
-                        {% for nested_array_param in api.responses[response_code][content_type][param][obj_param] %}
+                        {% for nested_array_param in api.responses[response_code][content_type][json_object][param][obj_param] %}
                         {% for element in nested_array_param %}
                           {% if loop.first %}
+                            {% if nested_array_param[element]|get_type == 'string' %}
+                        -  {{element}}: "{{nested_array_param[element]}}"
+                            {% else %}
                         -  {{element}}: {{nested_array_param[element]}}
+                            {% endif %}
                           {% else %}
+                            {% if nested_array_param[element]|get_type == 'string' %}
+                           {{element}}: "{{nested_array_param[element]}}"
+                            {% else %}
                            {{element}}: {{nested_array_param[element]}}
+                            {% endif %}
                           {% endif %}
                         {% endfor %}
                         {% endfor %}
+                        {% endif %}
                         {% else %}
-                        example: {{json_object[param][obj_param]}}
+                        {% if api.responses[response_code][content_type][json_object][param][obj_param]|get_type == 'string' %}
+                        example: "{{ api.responses[response_code][content_type][json_object][param][obj_param] }}"
+                        {% else %}
+                        example: {{ api.responses[response_code][content_type][json_object][param][obj_param] }}
+                        {% endif %}
                         {% endif %}
                     {% endfor %}
-                    {% elif (json_object[param]|get_type) == 'array' %}
+                    {% elif (api.responses[response_code][content_type][json_object][param]|get_type) == 'array' %}
                     items:
                       type: object
                       properties:
-                        {% for element in json_object[param][0] %}
+                        {% for element in api.responses[response_code][content_type][json_object][param][0] %}
                         {{element}}:
-                          type: {{json_object[param][0][element]|get_nestedarray_type}}
+                          type: {{api.responses[response_code][content_type][json_object][param][0][element]|get_nestedarray_type}}
                         {% endfor %}
                     example:
-                    {% for array_param in json_object[param] %}
+                    {% for array_param in api.responses[response_code][content_type][json_object][param] %}
                      {% for element in array_param %}
                       {% if loop.first %}
                       -  {{element}}: {{array_param[element]}}
@@ -197,7 +217,7 @@
                      {% endfor %}
                     {% endfor %}
                     {% else %}
-                    example: {{json_object[param]}}
+                    example: {{api.responses[response_code][content_type][json_object][param]}}
                     {% endif %}
                 {% endfor %}
                 {% endfor %}

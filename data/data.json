@@ -1,11 +1,11 @@
 {
     "method" : "post",
-    "path" : "inwardstatus",
-    "operationId" : "inwardstatus",
-    "tag" : "Inward Status",
-    "summary" : "The following APIs are used for inward status",
+    "path" : "spotTrainSchedule",
+    "operationId" : "spotTrainSchedule",
+    "tag" : "Spot Train Schedule [Master]",
+    "summary" : "The following API is used for Spot Train Schedule [Master]",
     "content_type" : "application/json",
-    "mandatory" : ["Tkn"],
+    "mandatory" : [],
     "authorization" : "bearerAuth",
     "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
 }

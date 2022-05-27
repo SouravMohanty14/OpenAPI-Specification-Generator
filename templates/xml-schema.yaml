@@ -1,4 +1,4 @@
-  schemas:
+
   {% for response_code in api.responses %}
       {% for response_content_type in api.responses[response_code] %}
         {% if response_content_type == 'application/json' %}
@@ -78,10 +78,12 @@
     {% if child|child_not_present %}     
       {% for subchild in param.findall(child.tag) %}
       {% set subchild_name = subchild.tag|get_child_name %}
+        ## Loop through every Subchild ##
     {{ subchild_name }}:
       type: object
       properties:
         {% if subchild.attrib|length > 0 %}
+        ## Loop through all attribute of subchild ##
         {% for attribute in subchild.attrib %}
         "{{attribute}}":
           type: string
@@ -90,12 +92,15 @@
           xml:
                 attribute: true
           {% endfor %}
+        ## End of loop for subchild attribute ##
         {% endif %}
         {% for element in subchild %}
+        ## Loop through every element inside subchild ##
             {% if element.attrib|length > 0 %}
         "{{element.tag}}":
           type: string
           example:
+          ## Loop through every attribute of element ##
           {% for attribute in element.attrib %}
             - "{{attribute}}"
           xml:
@@ -103,6 +108,7 @@
       
         name: '{{subchild.tag}}'
             {% endfor %}
+          ## End of loop element attribute ##
             {% else %}
         {{element.tag}}:
             {% if subchild.find(element.tag)|child_exists %}

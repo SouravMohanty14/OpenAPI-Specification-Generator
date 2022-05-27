@@ -196,5 +196,22 @@ xml_data = {
                       <year>2005</year>
                       <gdppc>141100</gdppc>
                   </country>
-                </Employees>'''
+                </Employees>''',
+                "Envelope" : '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SOAP-ENV:Body>
+		<rpc:SubmitApplicationResponse xmlns:rpc="http://siebel.com/CustomUI">
+			<FinalResponse>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48TGlzdE9mUGdTdHVkZW50TWFzdGVySW8KPjxIbHNEaXNlYXNlCj48RXJyb3JDb2RlCj48L0Vycm9yQ29kZQo+PEVycm9yTWVzc2FnZQo+U3R1ZGVudCBEYXRhIGlzIHNhdmVkIGFuZCBzdWJtaXR0ZWQuPC9FcnJvck1lc3NhZ2UKPjwvSGxzRGlzZWFzZQo+PC9MaXN0T2ZQZ1N0dWRlbnRNYXN0ZXJJbwo+</FinalResponse>
+		</rpc:SubmitApplicationResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>''',
+"Book" : '''<"smp:book" xmlns:smp="http://example.com/schema">
+xml:
+    prefix: 'smp'
+    namespace: 'http://example.com/schema'
+</"smp:book">''',
+"xml-book" : '''<book>
+	<id>0</id>
+	<xml-title>string</xml-title>
+	<author>string</author>
+</book>'''
 }
