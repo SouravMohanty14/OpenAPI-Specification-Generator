@@ -1,6 +1,6 @@
 {
     "200" : {
-        "application/json" : {"abc":{
+        "application/json" : {"Aadhar_Not_Linked":{
             "rs": "S",
     "rc": "200",
     "rd": "Success.",
@@ -8,16 +8,22 @@
         "restServiceMessage": {
             "serviceCallFlag": "Y",
             "serviceDataFoundFlag": "N",
-            "serviceMessage": "No Data Found !!!"
+            "serviceMessage": "Aadhar Not Linked !!!"
         }
     }
-
-
-
-
-
-
-}}
+    },"Aadhar_Not_Available":{
+        "rs": "S12",
+    "rc": "200",
+    "rd": "Success.",
+    "pd": {
+    "restServiceMessage": {
+        "serviceCallFlag": "Y",
+        "serviceDataFoundFlag": "N",
+        "serviceMessage": "Aadhar Not Available !!!"
+    }
+    }
+    }},
+"application/xml" : ["xml-book"]
         },
         
     "400" : {}

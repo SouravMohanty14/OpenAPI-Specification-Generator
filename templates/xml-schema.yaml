@@ -57,14 +57,18 @@
       {% endfor %}
     {% endfor %}
   {% endif %}
-
     {% for response_code in api.responses %}
       {% for response_content_type in api.responses[response_code] %}
         {% if response_content_type == 'application/xml' %}
           {% for param in api.responses[response_code][response_content_type] %}
+          {% set prefix,root = param|get_xml_root_prefix %}
           {% set param = param|string_to_xml %}
-    {{param.tag}}:
+    {{root}}:
       type: object
+      {% if prefix != "" %}
+      xml:
+        prefix: '{{prefix}}'
+      {% endif %}
       properties:
       {% set temp = child|reset_xml_tags %}
       {% for child in param %}
