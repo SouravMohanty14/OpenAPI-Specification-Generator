@@ -46,24 +46,26 @@ xml:
 #     print(child.tag)
 
 #ns = re.match(r'{.*}', root.tag).group(0)
+def get_xml_root_prefix(xml_string):
+    first_line = xml_string.partition('\n')[0]
+    print(first_line)
+    list1 = []
+    list1 = first_line.split(' ')
+    list1[0] = list1[0].strip('<')
+    n = len(list1)
+    list1[n-1] = list1[n-1].strip('>')
+    print(list1)
+    prefix = ""
+    try:
+        prefix,roottag = list1[0].split(':')
+    except:
+        try:
+            roottag = list1[0].split(':') 
+            roottag = roottag[0]
+        except:
+            print("Error occured!")
 
-first_line = xml_string.partition('\n')[0]
-print(first_line)
-# first_line.rstrip('<')
-# first_line.rstrip('>')
-# print(first_line)
-list1 = []
-list1 = first_line.split(' ')
-# print(type(list1))
-# list1[0].translate('<')
-# print(list1[0])
-list1[0] = list1[0].strip('<')
-# print(list1[0])
-n = len(list1)
-list1[n-1] = list1[n-1].strip('>')
-print(list1)
+    return prefix,roottag
 
-prefix,roottag = list1[0].split(':')
 
-print(prefix)
-print(roottag)
+get_xml_root_prefix(xml_string)

@@ -74,7 +74,7 @@ xml_data = {
                     </data>''',
                     "Eaadhar" : '''<EaadharXamlSchema>
 	<KycRes>
-		<Rar>string</Rar>
+		<Rar>Hindi News Bulletin | हिंदी समाचार बुलेटिन</Rar>
 		<UidData>
 			<Poi>
 				<dob>string</dob>
@@ -204,13 +204,13 @@ xml_data = {
 		</rpc:SubmitApplicationResponse>
 	</SOAP-ENV:Body>
 </SOAP-ENV:Envelope>''',
-"Book" : '''<"smp:book" xmlns:smp="http://example.com/schema">
+"Book" : '''<smp:book xmlns:smp="http://example.com/schema">
 xml:
     prefix: 'smp'
     namespace: 'http://example.com/schema'
-</"smp:book">''',
+</smp:book>''',
 "xml-book" : '''<book>
-	<id>0</id>
+	<id>"0"</id>
 	<xml-title>string</xml-title>
 	<author>string</author>
 </book>'''

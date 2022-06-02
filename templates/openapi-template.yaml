@@ -227,19 +227,19 @@
                   {% if api.responses[response_code][content_type]|length > 1 %}
                 anyOf:
                   {% for param in api.responses[response_code][content_type] %}
-                  {% set xml_data = param|string_to_xml %}
-                  - $ref: '#/components/schemas/{{xml_data.tag}}'
+                  {% set prefix,root = param|get_xml_root_prefix %}
+                  - $ref: '#/components/schemas/{{root}}'
                   {% endfor %}
               examples:
                   {% for param in api.responses[response_code][content_type] %}
-                  {% set xml_data = param|string_to_xml %}
-                  {{xml_data.tag}}:
-                    $ref: "#/components/examples/{{xml_data.tag}}"
+                  {% set prefix,root = param|get_xml_root_prefix %}
+                  {{root}}:
+                    $ref: "#/components/examples/{{root}}"
                   {% endfor %}
                   {% else %}
                     {% for param in api.responses[response_code][content_type] %}
-                    {% set xml_data = param|string_to_xml %}
-                  $ref: '#/components/schemas/{{xml_data.tag}}'
+                    {% set prefix,root = param|get_xml_root_prefix %}
+                  $ref: '#/components/schemas/{{root}}'
                     {% endfor %}
                   {% endif %}
                 {% endif %}

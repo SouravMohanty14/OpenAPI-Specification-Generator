@@ -1,0 +1,212 @@
+openapi: 3.0.1
+info:
+  title: Umang Services– CRIS-NTES API v1.0
+  description: |-
+      CRIS-NTES services to be onboarded on UMANGPlatform
+  termsOfService: https://web.umang.gov.in/
+  contact:
+    name: Umang Services – CRIS-NTES API
+    url: https://web.umang.gov.in/customer_support
+  version: 1.0.0
+servers:
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s1
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s2
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s3
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s4
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s5
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s6
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s7
+- url: https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/CRISApi/ws1/1.0/ntes/s8
+paths:
+  /spotTrainSchedule:
+    post:
+      tags:
+      - Spot Train Schedule [Master]
+      summary: The following API is used for Spot Train Schedule [Master]
+      operationId: spotTrainSchedule
+      security:
+      - bearerAuth: []
+      parameters:
+        - in: header
+          name: deptid
+          schema:
+            type: string
+            example: "Hindi News Bulletin | हिंदी समाचार बुलेटिन -01 April, 2020 (8 pm)"
+        - in: header
+          name: srvid
+          schema:
+            type: integer
+            example: 1987
+        - in: header
+          name: subsid
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: subsid2
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: formtrkr
+          schema:
+            type: integer
+            example: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                  tkn:
+                    type: string
+                    example: Hindi News Bulletin | हिंदी समाचार बुलेटिन
+                  trkr:
+                    type: string
+                    example: 213132
+                  lang:
+                    type: string
+                    example: en
+                  lat:
+                    type: string
+                    example: 0
+                  lon:
+                    type: string
+                    example: 0
+                  lac:
+                    type: string
+                    example: 0
+                  usag:
+                    type: string
+                    example: 0
+                  usrid:
+                    type: string
+                    example: 0
+                  srvid:
+                    type: string
+                    example: 1987
+                  deptid:
+                    type: string
+                    example: 384
+                  mode:
+                    type: string
+                    example: web
+                  pltfrm:
+                    type: string
+                    example: 0
+                  did:
+                    type: string
+                    example: null
+                  subsid:
+                    type: string
+                    example: 0
+                  subsid2:
+                    type: string
+                    example: 0
+                  formtrkr:
+                    type: string
+                    example: 0
+                  trainNumber:
+                    type: string
+                    example: 12903
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: "#/components/schemas/Aadhar_Not_Linked"
+                - $ref: "#/components/schemas/Aadhar_Not_Available"
+              examples:
+                Aadhar_Not_Linked:
+                  $ref: "#/components/examples/Aadhar_Not_Linked"
+                Aadhar_Not_Available:
+                  $ref: "#/components/examples/Aadhar_Not_Available"
+
+            application/xml:
+              schema:
+                  $ref: '#/components/schemas/book'
+   
+        400:
+          description: Bad Request/Validation Error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Text
+
+
+  schemas:
+    Aadhar_Not_Linked:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+    Aadhar_Not_Available:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+
+    book:
+      type: object
+      properties:
+          id1:
+            $ref: '#/components/schemas/id1'
+          xml-title1:
+            $ref: '#/components/schemas/xml-title1'
+          author1:
+            $ref: '#/components/schemas/author1'
+
+     
+        ## Loop through every Subchild ##
+    id1:
+      type: object
+      properties:
+      xml:
+        wrapped: true
+        name: 'id'
+     
+        ## Loop through every Subchild ##
+    xml-title1:
+      type: object
+      properties:
+      xml:
+        wrapped: true
+        name: 'xml-title'
+     
+        ## Loop through every Subchild ##
+    author1:
+      type: object
+      properties:
+      xml:
+        wrapped: true
+        name: 'author'
+
+
+
+  examples:
+    Aadhar_Not_Linked:
+      value:
+        rs: S
+        rc: 200
+        rd: Success.
+        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Linked !!!'}}
+    Aadhar_Not_Available:
+      value:
+        rs: S12
+        rc: 200
+        rd: Success.
+        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Available !!!'}}
+

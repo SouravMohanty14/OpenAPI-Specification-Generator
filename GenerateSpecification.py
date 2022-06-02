@@ -187,6 +187,28 @@ def child_exists(parent_node):
     else:
         return False #no children
 
+#Function to get prefix and root of xml
+def get_xml_root_prefix(param):
+    xml_string = get_xml_data(param)
+    first_line = xml_string.partition('\n')[0]
+    # print(first_line)
+    list1 = []
+    list1 = first_line.split(' ')
+    list1[0] = list1[0].strip('<')
+    n = len(list1)
+    list1[n-1] = list1[n-1].strip('>')
+    # print(list1)
+    prefix = ""
+    try:
+        prefix,roottag = list1[0].split(':')
+    except:
+        try:
+            roottag = list1[0].split(':') 
+            roottag = roottag[0]
+        except:
+            print("Error occured!")
+
+    return prefix,roottag
 #
 def generate_api_object():
     #Creating API Object
@@ -220,6 +242,8 @@ def generate_api_spec():
     jinja2.filters.FILTERS['reset_xml_tags'] = reset_xml_tags
     jinja2.filters.FILTERS['child_not_present'] = child_not_present
     jinja2.filters.FILTERS['child_exists'] = child_exists
+    jinja2.filters.FILTERS['get_xml_root_prefix'] = get_xml_root_prefix
+    
 
     #try:
     file_loader = FileSystemLoader('templates')
