@@ -1,9 +1,9 @@
 {
     "method" : "post",
-    "path" : "spotTrainSchedule",
-    "operationId" : "spotTrainSchedule",
-    "tag" : "Spot Train Schedule [Master]",
-    "summary" : "The following API is used for Spot Train Schedule [Master]",
+    "path" : "sendotp",
+    "operationId" : "sendotp",
+    "tag" : "Send OTP",
+    "summary" : "This API will be used to send OTP.",
     "content_type" : "application/json",
     "mandatory" : [],
     "authorization" : "bearerAuth",
