@@ -1,29 +1,25 @@
 {
     "200" : {
-        "application/json" : {"Aadhar_Not_Linked":{
+        "application/json" : {"response1":{
             "rs": "S",
-    "rc": "200",
-    "rd": "Success.",
-    "pd": {
-        "restServiceMessage": {
-            "serviceCallFlag": "Y",
-            "serviceDataFoundFlag": "N",
-            "serviceMessage": "Aadhar Not Linked !!!"
-        }
-    }
-    },"Aadhar_Not_Available":{
-        "rs": "S12",
-    "rc": "200",
-    "rd": "Success.",
-    "pd": {
-    "restServiceMessage": {
-        "serviceCallFlag": "Y",
-        "serviceDataFoundFlag": "N",
-        "serviceMessage": "Aadhar Not Available !!!"
-    }
-    }
-    }},
-"application/xml" : ["xml-book"]
+            "rd": "Success",
+            "rc": "NT0000",
+            "pd": {
+                "ErrorCodes": "null",
+                "ResponseStatus": "Success",
+                "XmlDocumentResult": "null",
+                "AcsessTokenValue": "null",
+                "RefreshTokenValue": "null",
+                "ResponseEmail": "null",
+                "ResponseMobileNo": "null",
+                "ResponseUserType_CBEC": "null",
+                "ResponseFirstName": "null",
+                "ResponseLastName": "null",
+                "ResponseCountryCode": "null",
+                "ResponseUserId": 0.0,
+                "XmlDreports": "null"
+            }        
+    }}
         },
         
     "400" : {}

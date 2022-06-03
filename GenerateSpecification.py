@@ -328,7 +328,7 @@ def generate_api_spec():
         with open(xml_file, encoding='utf8') as fp:
             data3 = fp.read()
         data += "\n"
-        if((data2 + data3) != ""):
+        if((data2 + data3).strip() != ""):
             data += "\n  schemas:"
         data += data2
         data += data3
