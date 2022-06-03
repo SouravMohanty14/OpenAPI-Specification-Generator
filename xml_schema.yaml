@@ -31,26 +31,29 @@
             $ref: '#/components/schemas/author1'
 
      
-        ## Loop through every Subchild ##
     id1:
-      type: object
-      properties:
+      #no children
+      type: integer
+      properties: {}
+      example: 0
       xml:
         wrapped: true
         name: 'id'
      
-        ## Loop through every Subchild ##
     xml-title1:
-      type: object
-      properties:
+      #no children
+      type: string
+      properties: {}
+      example: "string"
       xml:
         wrapped: true
         name: 'xml-title'
      
-        ## Loop through every Subchild ##
     author1:
-      type: object
-      properties:
+      #no children
+      type: string
+      properties: {}
+      example: "string"
       xml:
         wrapped: true
         name: 'author'

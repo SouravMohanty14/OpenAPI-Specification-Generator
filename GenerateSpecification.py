@@ -85,7 +85,6 @@ def security_not_empty(value):
 
 #Function to check datatype of parameter using value
 def get_type(value):
-    #print(type(value))
     if type(value) == str:
         return "string"
     if type(value) == float:
@@ -118,6 +117,14 @@ def get_nestedarray_type(value):
     if type(value) == dict:
         return "object"
     return type(value)
+
+#Function to check datatype of xml parameter
+def get_xml_type(value):
+    try:
+        int(value)
+        return "integer"
+    except:
+        return "string"
 
 #Function to get description for parameter
 def get_description(value):
@@ -243,7 +250,7 @@ def generate_api_spec():
     jinja2.filters.FILTERS['child_not_present'] = child_not_present
     jinja2.filters.FILTERS['child_exists'] = child_exists
     jinja2.filters.FILTERS['get_xml_root_prefix'] = get_xml_root_prefix
-    
+    jinja2.filters.FILTERS['get_xml_type'] = get_xml_type
 
     #try:
     file_loader = FileSystemLoader('templates')
