@@ -210,7 +210,7 @@ xml:
     namespace: 'http://example.com/schema'
 </smp:book>''',
 "xml-book" : '''<book>
-	<id>"0"</id>
+	<id>0</id>
 	<xml-title>string</xml-title>
 	<author>string</author>
 </book>'''
