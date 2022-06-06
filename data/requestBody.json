@@ -1,23 +1,26 @@
 {
-    "tkn": "123132132",
-    "trkr": "12313",
-    "lang": "en",
-    "lat": "90",
-    "lon": "90",
-    "lac": "90",
-    "usag": "90",
-    "aud": "90",
-    "usrid": "90",
-    "srvid": "90",
-    "mode": "web",
-    "pltfrm": "andorid",
-    "apitrkr": "123132132",
-    "did": "null",
-    "deptid": "901",
-    "subsid": "23",
-    "subsid2": "0",
-    "formtrkr": "132132",
-    "emailid": "anil.cpsms@gmail.com",
-    "countrycode": "91",
-    "mobilenumber": "9910268862"
+    "application/json" : 
+    {"Aadhar_Not_Linked":{
+        "rs": "S",
+        "rc": "200",
+        "rd": "Success.",
+        "pd": {
+            "restServiceMessage": {
+                "serviceCallFlag": "Y",
+                "serviceDataFoundFlag": "N",
+                "serviceMessage": "Aadhar Not Linked !!!"
+            }
+}
+},"Aadhar_Not_Available":{
+    "rs": "S12",
+    "rc": "200",
+    "rd": "Success.",
+    "pd": {
+    "restServiceMessage": {
+        "serviceCallFlag": "Y",
+        "serviceDataFoundFlag": "N",
+        "serviceMessage": "Aadhar Not Available !!!"
+}
+}
+}}
 }

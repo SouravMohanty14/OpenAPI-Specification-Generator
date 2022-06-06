@@ -1,0 +1,94 @@
+#RequestBody Schemas#
+    req_Aadhar_Not_Linked:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+    req_Aadhar_Not_Available:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+#End of RequestBody Schemas#
+#Response Schemas#
+    Aadhar_Not_Linked:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+    Aadhar_Not_Available:
+      properties:
+        rs:
+          type: string
+        rc:
+          type: string
+        rd:
+          type: string
+        pd:
+          type: object
+
+    book:
+      type: object
+      properties:
+          id1:
+            $ref: '#/components/schemas/id1'
+          xml-title1:
+            $ref: '#/components/schemas/xml-title1'
+          author1:
+            $ref: '#/components/schemas/author1'
+          lang1:
+            $ref: '#/components/schemas/lang1'
+
+     
+    id1:
+      #no children
+      type: integer
+      properties: {}
+      example: 0
+      xml:
+        wrapped: true
+        name: 'id'
+     
+    xml-title1:
+      #no children
+      type: string
+      properties: {}
+      example: "string"
+      xml:
+        wrapped: true
+        name: 'xml-title'
+     
+    author1:
+      #no children
+      type: string
+      properties: {}
+      example: "string"
+      xml:
+        wrapped: true
+        name: 'author'
+     
+    lang1:
+      #no children
+      type: string
+      properties: {}
+      example: "আপনার দিনটি শুভ হোক"
+      xml:
+        wrapped: true
+        name: 'lang'
+
+#End of Response Schemas#
