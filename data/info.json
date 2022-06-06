@@ -1,12 +1,12 @@
 {
     "openapiVersion": "3.0.1",
-    "title": "UMANG NTRP Tech API v2.1",
-    "description": "Non-Tax Receipt Portal (NTRP) of Government of India enables citizens to deposit fees/fine/other money into the Government Account through a single interface.",
+    "title": "UMANG NEILT API v1.1",
+    "description": "National Institute of Electronics & Information Technology (NIELIT),(erstwhile DOEACC Society), an Autonomous Scientific Society under the administrative control of Ministry of Electronics & Information Technology (MoE&IT), Government of India, was set up to carry out Human Resource Development and related activities in the area of Information, Electronics & Communications Technology (IECT). NIELIT is engaged both in Formal & Non-Formal Education in the area of IECT besides development of industry oriented quality education and training programmes in the state-of-the-art areas. NIELIT has endeavoured to establish standards to be the country’s premier institution for Examination and Certification in the field of IECT. It is also one of the National Examination Body, which accredits institutes/organizations for conducting courses in IT in the non-formal sector.",
     "termsOfService": "https://web.umang.gov.in/",
-    "contactName": "UMANG NTRP Tech API v2.1",
+    "contactName": "UMANG NEILT API v1.1",
     "contactUrl": "https://web.umang.gov.in/customer_support",
     "infoVersion": "1.0.0",
     "servers":[
-        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/ntrpApi/ws1"
+        "https://app.umang.gov.in/t/negd.gov.in/umang/depttapi/NEILTApi/ws1/1.0"
     ]
 }

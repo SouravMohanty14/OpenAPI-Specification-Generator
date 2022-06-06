@@ -1,0 +1,45 @@
+#RequestBody Examples#
+{% for content_type in api.requestBody %}
+{% for key in api.requestBody[content_type] %}
+    req_{{key}}:
+      value:
+      {% for param in api.requestBody[content_type][key] %}
+        {{param}}: {{api.requestBody[content_type][key][param]}}
+      {% endfor %}
+{% endfor %}
+{% endfor %}
+#End of RequestBody Examples#
+#Response Examples#
+  {% for response_code in api.responses %}
+      {% for response_content_type in api.responses[response_code] %}
+        {% if response_content_type == 'application/json' %}
+          {% if api.responses[response_code][response_content_type]|length > 1 %}
+{% for i in api.responses[response_code][response_content_type] %}
+    {{i}}:
+      value:
+      {% for key in  api.responses[response_code][response_content_type][i] %}
+        {{key}}: {{ api.responses[response_code][response_content_type][i][key]}}
+      {% endfor %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+
+  {% for response_code in api.responses %}
+      {% for response_content_type in api.responses[response_code] %}
+        {% if response_content_type == 'application/xml' %}
+          {% if api.responses[response_code][response_content_type]|length > 1 %}
+{% for param in api.responses[response_code][content_type] %}
+{% set xml_data = param|string_to_xml %}
+    {{xml_data.tag}}:
+      value:
+      {% for key in  api.responses[response_code][response_content_type][i] %}
+        {{key}}: {{ api.responses[response_code][response_content_type][i][key]}}
+      {% endfor %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+  {% endfor %}
+#End of Response Examples

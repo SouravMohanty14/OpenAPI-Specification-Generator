@@ -1,0 +1,18 @@
+{% for content_type in api.requestBody %}
+{% for key in api.requestBody[content_type] %}
+   req_{{key}}:
+    properties:
+    {% for param in api.requestBody[content_type][key] %}
+      {{param}}:
+        type: {{api.requestBody[content_type][key][param]|get_type}}
+    {% endfor %}
+{% endfor %}
+  examples:
+{% for key in api.requestBody[content_type] %}
+    req_{{key}}:
+      value:
+      {% for param in api.requestBody[content_type][key] %}
+        {{param}}: {{api.requestBody[content_type][key][param]}}
+      {% endfor %}
+{% endfor %}
+{% endfor %}

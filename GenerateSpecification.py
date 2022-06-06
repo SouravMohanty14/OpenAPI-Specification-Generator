@@ -41,13 +41,13 @@ except:
 
 #Loading schema & xml files
 schema_file = "schema.yaml"
-xml_file = "xml_schema.yaml"
+examples_file = "examples.yaml"
 
 #Erase Spec File
 try:
     open(filename, 'w', encoding='utf8').close()
     open(schema_file, 'w', encoding='utf8').close()
-    open(xml_file, 'w', encoding='utf8').close()
+    open(examples_file, 'w', encoding='utf8').close()
 except:
     print("Error occurred while erasing spec files")
 
@@ -284,28 +284,37 @@ def generate_api_spec():
                 spec_file.close()
         except:
             print("Error while writing path for api:{},path:{}".format(api,path))
-        #xml schema
-        #if api.content_type == 'application/xml':
-        xml_template = env.get_template('xml-schema.yaml')
+        #schema
+        schema_template = env.get_template('schema-template.yaml')
         try:
-            with open(xml_file, "a", encoding='utf8') as xml_schemas:
+            with open(schema_file, "a", encoding='utf8') as schemas:
                 print("Writing Schemas")
-                xml_schema = xml_template.render(api=api,api_list=api_list,total_apis=len(api_list))
-                xml_schemas.write(xml_schema)
-                xml_schemas.close()
+                schema = schema_template.render(api=api,api_list=api_list,total_apis=len(api_list))
+                schemas.write(schema)
+                schemas.close()
         except:
             print("Error while writing schemas for api:{},path:{}".format(api,path))
-        #AnyOf schema
-        if len(api_list) > 1:
-            schema_template = env.get_template('components-schema.yaml')
-            try:
-                with open(schema_file, "a", encoding='utf8') as schemas:
-                    print("Writing Components Schema")
-                    schema = schema_template.render(api_list=api_list,total_apis=len(api_list))
-                    schemas.write(schema)
-                    schemas.close()
-            except:
-                print("Error while writing Components for api:{},path:{}".format(api,path))
+        #examples
+        examples_template = env.get_template('examples-template.yaml')
+        try:
+            with open(examples_file, "a", encoding='utf8') as examples:
+                print("Writing Examples")
+                example = examples_template.render(api=api,api_list=api_list,total_apis=len(api_list))
+                examples.write(example)
+                examples.close()
+        except:
+            print("Error while writing examples for api:{},path:{}".format(api,path))
+        # #AnyOf schema
+        # if len(api_list) > 1:
+        #     schema_template = env.get_template('components-schema.yaml')
+        #     try:
+        #         with open(schema_file, "a", encoding='utf8') as schemas:
+        #             print("Writing Components Schema")
+        #             schema = schema_template.render(api_list=api_list,total_apis=len(api_list))
+        #             schemas.write(schema)
+        #             schemas.close()
+        #     except:
+        #         print("Error while writing Components for api:{},path:{}".format(api,path))
 
     # Opening security template file
     component_template = env.get_template('components-template.yaml')
@@ -325,12 +334,14 @@ def generate_api_spec():
             data = fp.read()
         with open(schema_file, encoding='utf8') as fp:
             data2 = fp.read()
-        with open(xml_file, encoding='utf8') as fp:
+        with open(examples_file, encoding='utf8') as fp:
             data3 = fp.read()
         data += "\n"
-        if((data2 + data3).strip() != ""):
-            data += "\n  schemas:"
+        if((data2).strip() != ""):
+            data += "\n  schemas:\n"
         data += data2
+        if(data3 != ""):
+            data += "\n  examples:\n"
         data += data3
         open(filename, 'w', encoding='utf8').close()
         with open (filename, 'a', encoding='utf8') as fp:

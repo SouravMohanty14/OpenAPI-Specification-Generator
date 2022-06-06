@@ -28,6 +28,9 @@
           {% endif %}
       {% endfor %}
       {% endif %}
+
+      {% if (api.method != 'get') %}
+      {% if api.requestBody %}
       requestBody:
         content:
           {{api.content_type}}:
@@ -38,33 +41,44 @@
             {% if api.content_type == 'application/xml' %}
               $ref: '#/components/schemas/{{ api.requestBody.getroot().tag }}'
             {% else %}
-             {% if total_apis == 1 %}
+            {% for content_type in api.requestBody %}
+            {% if api.requestBody[content_type]|length > 1 %}
+              anyOf:
+                {% for key in api.requestBody[content_type] %}
+              - $ref: "#/components/schemas/req_{{key}}"
+                {% endfor %}
+            examples:
+              {% for key in api.requestBody[content_type] %}
+              {{key}}:
+                $ref: "#/components/examples/req_{{key}}"
+              {% endfor %}
+            {% else %}
               properties:
-                {% for key in api.requestBody %}
+                {% for key in api.requestBody[content_type] %}
                   {{key}}:
-                    type: {{api.requestBody[key]|get_type}}
-                    {% if (api.requestBody[key]|get_type) == 'object' %}
+                    type: {{api.requestBody[content_type][key]|get_type}}
+                    {% if (api.requestBody[content_type][key]|get_type) == 'object' %}
                     properties:
-                     {% for obj_param in api.requestBody[key] %}
+                     {% for obj_param in api.requestBody[content_type][key] %}
                       {{obj_param}}:
-                        type: {{api.requestBody[key][obj_param]|get_type}}
-                        {% if api.requestBody[key][obj_param]|get_type == 'object' %}
+                        type: {{api.requestBody[content_type][key][obj_param]|get_type}}
+                        {% if api.requestBody[content_type][key][obj_param]|get_type == 'object' %}
                         properties:
-                        {% for nested_obj_param in api.requestBody[key][obj_param] %}
+                        {% for nested_obj_param in api.requestBody[content_type][key][obj_param] %}
                          {{nested_obj_param}}:
                            type: {{nested_obj_param|get_type}}
-                           example: {{api.requestBody[key][obj_param][nested_obj_param]}}
+                           example: {{api.requestBody[content_type][key][obj_param][nested_obj_param]}}
                         {% endfor %}
-                        {% elif api.requestBody[key][obj_param]|get_type == 'array' %}
+                        {% elif api.requestBody[content_type][key][obj_param]|get_type == 'array' %}
                         items:
                           type: object
                           properties:
-                           {% for element in api.requestBody[key][obj_param][0] %}
+                           {% for element in api.requestBody[content_type][key][obj_param][0] %}
                             {{element}}:
-                              type: {{api.requestBody[key][obj_param][0][element]|get_type}}
+                              type: {{api.requestBody[content_type][key][obj_param][0][element]|get_type}}
                            {% endfor %}
                         example:
-                        {% for nested_array_param in api.requestBody[key][obj_param] %}
+                        {% for nested_array_param in api.requestBody[content_type][key][obj_param] %}
                         {% for element in nested_array_param %}
                           {% if loop.first %}
                         -  {{element}}: {{nested_array_param[element]}}
@@ -74,19 +88,19 @@
                         {% endfor %}
                         {% endfor %}
                         {% else %}
-                        example: {{api.requestBody[key][obj_param]}}
+                        example: {{api.requestBody[content_type][key][obj_param]}}
                         {% endif %}
                      {% endfor %}
-                    {% elif (api.requestBody[key]|get_type) == 'array' %}
+                    {% elif (api.requestBody[content_type][key]|get_type) == 'array' %}
                     items:
                       type: object
                       properties:
-                      {% for element in api.requestBody[key][0] %}
+                      {% for element in api.requestBody[content_type][key][0] %}
                         {{element}}:
-                          type: {{api.requestBody[key][0][element]|get_nestedarray_type}}
+                          type: {{api.requestBody[content_type][key][0][element]|get_nestedarray_type}}
                       {% endfor %}
                     example:
-                     {% for array_param in api.requestBody[key] %}
+                     {% for array_param in api.requestBody[content_type][key] %}
                       {% for element in array_param %}
                        {% if loop.first %}
                       -  {{element}}: {{array_param[element]}}
@@ -99,23 +113,15 @@
                     {% if key|get_format != "" %}
                     format: {{key|get_format}}
                     {% endif %}
-                    example: {{api.requestBody[key]}}
+                    example: {{api.requestBody[content_type][key]}}
                     {% endif %}
                 {% endfor %}
-             {% elif total_apis>1 %}
-              anyOf:
-                {% for i in range(total_apis) %}
-                {% set i = i + 1 %}
-              - $ref: "#/components/schemas/{{api.path}}_{{i}}"
-                {% endfor %}
-            examples:
-              {% for i in range(total_apis) %}
-              {% set i = i + 1 %}
-              {{api.path}} {{i}}:
-                $ref: "#/components/examples/{{api.path}}_{{i}}"
-              {% endfor %}
              {% endif %}
+            {% endfor %}
             {% endif %}
+      {% endif %}
+      {% endif %}
+      
       responses:
       {% for response_code in api.responses %}
         {{response_code}}:

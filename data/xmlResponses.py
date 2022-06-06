@@ -209,9 +209,10 @@ xml:
     prefix: 'smp'
     namespace: 'http://example.com/schema'
 </smp:book>''',
-"xml-book" : '''<book>
+"simplexml" : '''<book>
 	<id>0</id>
 	<xml-title>string</xml-title>
 	<author>string</author>
+  <lang>আপনার দিনটি শুভ হোক</lang>
 </book>'''
 }

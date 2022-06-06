@@ -1,9 +1,9 @@
 {
     "method" : "post",
-    "path" : "sendotp",
-    "operationId" : "sendotp",
-    "tag" : "Send OTP",
-    "summary" : "This API will be used to send OTP.",
+    "path" : "TrgCalendar",
+    "operationId" : "TrgCalendar",
+    "tag" : "Get Trg Calendar",
+    "summary" : "This API will be used to get Trg Calendar.",
     "content_type" : "application/json",
     "mandatory" : [],
     "authorization" : "bearerAuth",
