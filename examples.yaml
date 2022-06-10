@@ -1,29 +1,5 @@
 #RequestBody Examples#
-    req_Aadhar_Not_Linked:
-      value:
-        rs: S
-        rc: 200
-        rd: Success.
-        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Linked !!!'}}
-    req_Aadhar_Not_Available:
-      value:
-        rs: S12
-        rc: 200
-        rd: Success.
-        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Available !!!'}}
 #End of RequestBody Examples#
 #Response Examples#
-    Aadhar_Not_Linked:
-      value:
-        rs: S
-        rc: 200
-        rd: Success.
-        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Linked !!!'}}
-    Aadhar_Not_Available:
-      value:
-        rs: S12
-        rc: 200
-        rd: Success.
-        pd: {'restServiceMessage': {'serviceCallFlag': 'Y', 'serviceDataFoundFlag': 'N', 'serviceMessage': 'Aadhar Not Available !!!'}}
 
 #End of Response Examples

@@ -1,5 +1,6 @@
 #RequestBody Schemas#
 {% for content_type in api.requestBody %}
+{% if api.requestBody[content_type]|length > 1 %}
 {% for key in api.requestBody[content_type] %}
     req_{{key}}:
       properties:
@@ -8,6 +9,7 @@
           type: {{api.requestBody[content_type][key][param]|get_type}}
       {% endfor %}
 {% endfor %}
+{% endif %}
 {% endfor %}
 #End of RequestBody Schemas#
 #Response Schemas#
