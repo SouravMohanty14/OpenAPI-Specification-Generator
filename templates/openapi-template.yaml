@@ -19,7 +19,11 @@
           schema:
             type: {{api.parameters[key]|get_type}}
             {% if api.parameters[key]|get_type == 'string' %}
+              {% if api.parameters[key] == None %}
+            example: null
+              {% else %}
             example: "{{api.parameters[key]}}"
+              {% endif %}
             {% else %}
             example: {{api.parameters[key]}}
             {% endif %}
@@ -54,31 +58,32 @@
               {% endfor %}
             {% else %}
               properties:
-                {% for key in api.requestBody[content_type] %}
+                {% for req_body in api.requestBody[content_type] %}
+                {% for key in api.requestBody[content_type][req_body] %}
                   {{key}}:
-                    type: {{api.requestBody[content_type][key]|get_type}}
-                    {% if (api.requestBody[content_type][key]|get_type) == 'object' %}
+                    type: {{api.requestBody[content_type][req_body][key]|get_type}}
+                    {% if (api.requestBody[content_type][req_body][key]|get_type) == 'object' %}
                     properties:
-                     {% for obj_param in api.requestBody[content_type][key] %}
+                     {% for obj_param in api.requestBody[content_type][req_body][key] %}
                       {{obj_param}}:
-                        type: {{api.requestBody[content_type][key][obj_param]|get_type}}
-                        {% if api.requestBody[content_type][key][obj_param]|get_type == 'object' %}
+                        type: {{api.requestBody[content_type][req_body][key][obj_param]|get_type}}
+                        {% if api.requestBody[content_type][req_body][key][obj_param]|get_type == 'object' %}
                         properties:
-                        {% for nested_obj_param in api.requestBody[content_type][key][obj_param] %}
+                        {% for nested_obj_param in api.requestBody[content_type][req_body][key][obj_param] %}
                          {{nested_obj_param}}:
                            type: {{nested_obj_param|get_type}}
-                           example: {{api.requestBody[content_type][key][obj_param][nested_obj_param]}}
+                           example: {{api.requestBody[content_type][req_body][key][obj_param][nested_obj_param]}}
                         {% endfor %}
-                        {% elif api.requestBody[content_type][key][obj_param]|get_type == 'array' %}
+                        {% elif api.requestBody[content_type][req_body][key][obj_param]|get_type == 'array' %}
                         items:
                           type: object
                           properties:
-                           {% for element in api.requestBody[content_type][key][obj_param][0] %}
+                           {% for element in api.requestBody[content_type][req_body][key][obj_param][0] %}
                             {{element}}:
-                              type: {{api.requestBody[content_type][key][obj_param][0][element]|get_type}}
+                              type: {{api.requestBody[content_type][req_body][key][obj_param][0][element]|get_type}}
                            {% endfor %}
                         example:
-                        {% for nested_array_param in api.requestBody[content_type][key][obj_param] %}
+                        {% for nested_array_param in api.requestBody[content_type][req_body][key][obj_param] %}
                         {% for element in nested_array_param %}
                           {% if loop.first %}
                         -  {{element}}: {{nested_array_param[element]}}
@@ -88,19 +93,19 @@
                         {% endfor %}
                         {% endfor %}
                         {% else %}
-                        example: {{api.requestBody[content_type][key][obj_param]}}
+                        example: {{api.requestBody[content_type][req_body][key][obj_param]}}
                         {% endif %}
                      {% endfor %}
-                    {% elif (api.requestBody[content_type][key]|get_type) == 'array' %}
+                    {% elif (api.requestBody[content_type][req_body][key]|get_type) == 'array' %}
                     items:
                       type: object
                       properties:
-                      {% for element in api.requestBody[content_type][key][0] %}
+                      {% for element in api.requestBody[content_type][req_body][key][0] %}
                         {{element}}:
-                          type: {{api.requestBody[content_type][key][0][element]|get_nestedarray_type}}
+                          type: {{api.requestBody[content_type][req_body][key][0][element]|get_nestedarray_type}}
                       {% endfor %}
                     example:
-                     {% for array_param in api.requestBody[content_type][key] %}
+                     {% for array_param in api.requestBody[content_type][req_body][key] %}
                       {% for element in array_param %}
                        {% if loop.first %}
                       -  {{element}}: {{array_param[element]}}
@@ -113,8 +118,17 @@
                     {% if key|get_format != "" %}
                     format: {{key|get_format}}
                     {% endif %}
-                    example: {{api.requestBody[content_type][key]}}
+                      {% if api.requestBody[content_type][req_body][key]|get_type == "string" %}
+                        {% if api.requestBody[content_type][req_body][key] == None %}
+                    example: null
+                        {% else %}
+                    example: "{{api.requestBody[content_type][req_body][key]}}"
+                        {% endif %}
+                      {% else %}
+                    example: {{api.requestBody[content_type][req_body][key]}}
+                      {% endif %}
                     {% endif %}
+                {% endfor %}
                 {% endfor %}
              {% endif %}
             {% endfor %}
@@ -161,7 +175,11 @@
                           {{nested_obj_param}}: 
                             type: {{nested_obj_param|get_type}}
                             {% if api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param]|get_type == 'string' %}
+                              {% if api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param] == None %}
+                            example: null
+                              {% else %}
                             example: "{{ api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param] }}"
+                              {% endif %}
                             {% else %}
                             example: {{ api.responses[response_code][content_type][json_object][param][obj_param][nested_obj_param] }}
                             {% endif %}
@@ -198,7 +216,11 @@
                         {% endif %}
                         {% else %}
                         {% if api.responses[response_code][content_type][json_object][param][obj_param]|get_type == 'string' %}
+                          {% if api.responses[response_code][content_type][json_object][param][obj_param] == None %}
+                        example: null
+                          {% else %}
                         example: "{{ api.responses[response_code][content_type][json_object][param][obj_param] }}"
+                          {% endif %}
                         {% else %}
                         example: {{ api.responses[response_code][content_type][json_object][param][obj_param] }}
                         {% endif %}

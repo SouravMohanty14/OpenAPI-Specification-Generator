@@ -1,11 +1,1 @@
-{
-    "method" : "post",
-    "path" : "TrgCalendar",
-    "operationId" : "TrgCalendar",
-    "tag" : "Get Trg Calendar",
-    "summary" : "This API will be used to get Trg Calendar.",
-    "content_type" : "application/json",
-    "mandatory" : [],
-    "authorization" : "bearerAuth",
-    "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
-}
+{"method": "post", "path": "listofcategories", "operationId": "listofcategories", "tag": "List of Categories", "summary": "The following APIs(Leaf) are used for list of categories.", "content_type": "application/json", "mandatory": ["tkn"], "authorization": "bearerAuth", "securitySchemes": {"bearerAuth": "", "cookieAuth": "", "oauthsecurity": "", "oauthAuthorizeCode": "", "basicAuth": ""}}

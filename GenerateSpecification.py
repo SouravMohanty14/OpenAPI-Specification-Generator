@@ -5,6 +5,7 @@
 '''
 #Import libraries
 from glob import glob
+from http.client import responses
 from xmlrpc.client import Boolean
 import json
 import sys
@@ -14,6 +15,8 @@ import API
 import data.xmlResponses as xml_responses
 import xml.etree.ElementTree as ET
 import os
+import tkinter
+from tkinter import filedialog
 
 #Dictionary to store all the API Objects
 api_dict = {}
@@ -22,6 +25,21 @@ security_schemes = { "bearerAuth": False, "cookieAuth": False, "oauthsecurity": 
 
 #A dict to keep track of all xml tags
 xml_tags = {}
+
+#Tkinter for File Path
+tk_root = tkinter.Tk()
+tk_root.withdraw() #use to hide tkinter window
+
+#Get File Path
+def search_for_file_path ():
+    currdir = os.getcwd()
+    tempdir = filedialog.askdirectory(parent=tk_root, initialdir=currdir, title='Please select a directory')
+    if len(tempdir) > 0:
+        print ("You chose: %s" % tempdir)
+    return tempdir
+
+# file_path_variable = search_for_file_path()
+# print ("\nfile_path_variable = ", file_path_variable)
 
 #Info about API [openapiVersion, title, description, termsOfService, contactName, contactUrl, infoVersion, servers]
 try:
@@ -46,6 +64,7 @@ examples_file = "examples.yaml"
 #Erase Spec File
 try:
     open(filename, 'w', encoding='utf8').close()
+    print("Erasing spec files")
     open(schema_file, 'w', encoding='utf8').close()
     open(examples_file, 'w', encoding='utf8').close()
 except:
@@ -98,7 +117,7 @@ def get_type(value):
     if type(value) == dict:
         return "object"
     else:
-        return type(value)
+        return "string"
     
 
 #Function to check datatype of parameter using value in a nested array
@@ -358,11 +377,60 @@ def generate_api_spec():
     #     print(fname) #Exception occured in which file
     #     print(exc_traceback.tb_lineno) #Exception lineno
 
+def import_and_generate(filepath):
+    try:
+        data_file = open(filepath, encoding='utf8')
+        spec_data = json.load(data_file)
+        # print(spec_data)
+        # print("")
+
+        #info
+        with open('./data/info.json', 'w', encoding='utf-8') as f:
+            json.dump(spec_data["info"], f)
+        
+        #descriptions
+        with open('./data/descriptions.json', 'w', encoding='utf-8') as f:
+            json.dump(spec_data["descriptions"], f)
+        
+        print("Creating Objects")
+        #Create API Objects
+        for key in spec_data:
+            if(key != "info" and key != "descriptions"):
+                print(key)
+                api = spec_data[key]
+
+                data = api["data"]
+                with open('./data/data.json', 'w', encoding='utf-8') as f:
+                    json.dump(data, f)
+
+                parameters = api["parameters"]
+                with open('./data/parameters.json', 'w', encoding='utf-8') as f:
+                    json.dump(parameters, f)
+
+                requestBody = api["requestBody"]
+                with open('./data/requestBody.json', 'w', encoding='utf-8') as f:
+                    json.dump(requestBody, f)
+
+                responses = api["responses"]
+                with open('./data/responses.json', 'w', encoding='utf-8') as f:
+                    json.dump(responses, f)
+
+                generate_api_object()
+        
+        print("Creating Spec")
+        #Create Spec
+        generate_api_spec()
+        
+    except Exception as e:
+        print("Error")
+        print(e)
+
 if __name__ == "__main__":
 
   print ("Enter: ")
   print ("  [1] to add API Object")
-  print ("  [2] to generate Open API Specification")
+  print ("  [2] to generate Open API Specification from Objects")
+  print ("  [3] to import file & generate Open API Specification")
   print (" 0 to exit ")
   
   runner = True
@@ -389,6 +457,15 @@ if __name__ == "__main__":
             print(exc_type) #Exception
             print(fname) #Exception occured in which file
             print(exc_traceback.tb_lineno) #Exception lineno
+    elif choice == '3':
+        print("Importing Data from JSON file")
+        try:
+            file_path_variable = filedialog.askopenfilename() #search_for_file_path()
+            print ("\nfile_path_variable = ", file_path_variable)
+            import_and_generate(file_path_variable)
+            runner = False
+        except Exception as e:
+            print(e)
     else:
         print ("Generating Open API Specification")
         generate_api_spec()
