@@ -17,6 +17,16 @@ import xml.etree.ElementTree as ET
 import os
 import tkinter
 from tkinter import filedialog
+import config as cfg
+
+#Getting all file paths
+info_path = cfg.info_file_path
+descriptions_path = cfg.descriptions_file_path
+data_path = cfg.data_file_path
+parameters_path = cfg.parameters_file_path
+requestBody_path = cfg.requestBody_file_path
+responses_path = cfg.responses_file_path
+format_path = cfg.format_file_path
 
 #Dictionary to store all the API Objects
 api_dict = {}
@@ -43,11 +53,12 @@ def search_for_file_path ():
 
 #Info about API [openapiVersion, title, description, termsOfService, contactName, contactUrl, infoVersion, servers]
 try:
-    info_file = open('./data/info.json', encoding='utf8') 
+    info_file = open(info_path, encoding='utf8') 
     info = json.load(info_file) #Dictionary data of info_file
     info_file.close()
-except:
-    print("info.json not found")
+except Exception as e:
+    print(e)
+    #print("info.json not found")
     exit()
 
 #Specifying yaml file name
@@ -67,25 +78,28 @@ try:
     print("Erasing spec files")
     open(schema_file, 'w', encoding='utf8').close()
     open(examples_file, 'w', encoding='utf8').close()
-except:
-    print("Error occurred while erasing spec files")
+except Exception as e:
+    print(e)
+    #print("Error occurred while erasing spec files")
 
 #Get Description data from Json File
 try:
-    descriptions_file = open('./data/descriptions.json', encoding='utf8') 
+    descriptions_file = open(descriptions_path, encoding='utf8') 
     descriptions = json.load(descriptions_file)
     descriptions_file.close()
-except:
-    print("descriptions.json not found")
+except Exception as e:
+    print(e)
+    #print("descriptions.json not found")
     exit()
 
 #Get Format data from Json File
 try:
-    format_file = open('./data/format.json', encoding='utf8') 
+    format_file = open(format_path, encoding='utf8') 
     format = json.load(format_file)
     format_file.close()
-except:
-    print("format.json not found")
+except Exception as e:
+    print(e)
+    #print("format.json not found")
     exit()
 
 #Functions for Security Schemes
@@ -231,8 +245,9 @@ def get_xml_root_prefix(param):
         try:
             roottag = list1[0].split(':') 
             roottag = roottag[0]
-        except:
-            print("Error occured!")
+        except Exception as e:
+            print(e)
+            #print("Error occured!")
 
     return prefix,roottag
 #
@@ -284,7 +299,8 @@ def generate_api_spec():
             info_temp = info_template.render(info=info)
             spec_file.write(info_temp)
             spec_file.close()
-    except:
+    except Exception as e:
+        print(e)
         print("Error while writing Info template")
 
     # Opening template file
@@ -301,7 +317,8 @@ def generate_api_spec():
                 spec = template.render(api=api,total_apis=len(api_list))
                 spec_file.write(spec)
                 spec_file.close()
-        except:
+        except Exception as e:
+            print(e)
             print("Error while writing path for api:{},path:{}".format(api,path))
         #schema
         schema_template = env.get_template('schema-template.yaml')
@@ -311,7 +328,8 @@ def generate_api_spec():
                 schema = schema_template.render(api=api,api_list=api_list,total_apis=len(api_list))
                 schemas.write(schema)
                 schemas.close()
-        except:
+        except Exception as e:
+            print(e)
             print("Error while writing schemas for api:{},path:{}".format(api,path))
         #examples
         examples_template = env.get_template('examples-template.yaml')
@@ -321,7 +339,8 @@ def generate_api_spec():
                 example = examples_template.render(api=api,api_list=api_list,total_apis=len(api_list))
                 examples.write(example)
                 examples.close()
-        except:
+        except Exception as e:
+            print(e)
             print("Error while writing examples for api:{},path:{}".format(api,path))
         # #AnyOf schema
         # if len(api_list) > 1:
@@ -344,7 +363,8 @@ def generate_api_spec():
             components = component_template.render()
             spec_file.write(components)
             spec_file.close()
-    except:
+    except Exception as e:
+        print(e)
         print("Error while writing Security for api:{},path:{}".format(api,path))
 
     data = data2 = data3 = ""
@@ -365,7 +385,8 @@ def generate_api_spec():
         open(filename, 'w', encoding='utf8').close()
         with open (filename, 'a', encoding='utf8') as fp:
             fp.write(data)
-    except:
+    except Exception as e:
+        print(e)
         print("Error while writing Specification")
 
     print("Specification created successfully")
@@ -385,11 +406,11 @@ def import_and_generate(filepath):
         # print("")
 
         #info
-        with open('./data/info.json', 'w', encoding='utf-8') as f:
+        with open(info_path, 'w', encoding='utf-8') as f:
             json.dump(spec_data["info"], f)
         
         #descriptions
-        with open('./data/descriptions.json', 'w', encoding='utf-8') as f:
+        with open(descriptions_path, 'w', encoding='utf-8') as f:
             json.dump(spec_data["descriptions"], f)
         
         print("Creating Objects")
@@ -400,19 +421,19 @@ def import_and_generate(filepath):
                 api = spec_data[key]
 
                 data = api["data"]
-                with open('./data/data.json', 'w', encoding='utf-8') as f:
+                with open(data_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f)
 
                 parameters = api["parameters"]
-                with open('./data/parameters.json', 'w', encoding='utf-8') as f:
+                with open(parameters_path, 'w', encoding='utf-8') as f:
                     json.dump(parameters, f)
 
                 requestBody = api["requestBody"]
-                with open('./data/requestBody.json', 'w', encoding='utf-8') as f:
+                with open(requestBody_path, 'w', encoding='utf-8') as f:
                     json.dump(requestBody, f)
 
                 responses = api["responses"]
-                with open('./data/responses.json', 'w', encoding='utf-8') as f:
+                with open(responses_path, 'w', encoding='utf-8') as f:
                     json.dump(responses, f)
 
                 generate_api_object()
@@ -422,7 +443,6 @@ def import_and_generate(filepath):
         generate_api_spec()
         
     except Exception as e:
-        print("Error")
         print(e)
 
 if __name__ == "__main__":
@@ -442,7 +462,8 @@ if __name__ == "__main__":
     if choice == '1':
         try:
             generate_api_object()
-        except:
+        except Exception as e:
+            print(e)
             print("Error occured while adding API Object")
     elif choice == '2':
         print ("Generating Open API Specification")
