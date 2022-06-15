@@ -17,6 +17,16 @@ import xml.etree.ElementTree as ET
 import os
 import tkinter
 from tkinter import filedialog
+import config as cfg
+
+#Getting all file paths
+info_path = cfg.info_file_path
+descriptions_path = cfg.descriptions_file_path
+data_path = cfg.data_file_path
+parameters_path = cfg.parameters_file_path
+requestBody_path = cfg.requestBody_file_path
+responses_path = cfg.responses_file_path
+format_path = cfg.format_file_path
 
 #Dictionary to store all the API Objects
 api_dict = {}
@@ -35,19 +45,17 @@ def search_for_file_path ():
     currdir = os.getcwd()
     tempdir = filedialog.askdirectory(parent=tk_root, initialdir=currdir, title='Please select a directory')
     if len(tempdir) > 0:
-        print ("You chose: %s" % tempdir)
+        print ("You Chose: %s" % tempdir)
     return tempdir
-
-# file_path_variable = search_for_file_path()
-# print ("\nfile_path_variable = ", file_path_variable)
 
 #Info about API [openapiVersion, title, description, termsOfService, contactName, contactUrl, infoVersion, servers]
 try:
-    info_file = open('./data/info.json', encoding='utf8') 
+    info_file = open(info_path, encoding='utf8') 
     info = json.load(info_file) #Dictionary data of info_file
     info_file.close()
-except:
-    print("info.json not found")
+except Exception as FileNotFoundError:
+    print(FileNotFoundError)
+    #print("info.json not found")
     exit()
 
 #Specifying yaml file name
@@ -63,29 +71,32 @@ examples_file = "examples.yaml"
 
 #Erase Spec File
 try:
+    #print("Erasing Spec Files")
     open(filename, 'w', encoding='utf8').close()
-    print("Erasing spec files")
     open(schema_file, 'w', encoding='utf8').close()
     open(examples_file, 'w', encoding='utf8').close()
-except:
-    print("Error occurred while erasing spec files")
+except Exception as FileNotFoundError:
+    print(FileNotFoundError)
+    #print("Error occurred while erasing spec files")
 
 #Get Description data from Json File
 try:
-    descriptions_file = open('./data/descriptions.json', encoding='utf8') 
+    descriptions_file = open(descriptions_path, encoding='utf8') 
     descriptions = json.load(descriptions_file)
     descriptions_file.close()
-except:
-    print("descriptions.json not found")
+except Exception as FileNotFoundError:
+    print(FileNotFoundError)
+    #print("descriptions.json not found")
     exit()
 
 #Get Format data from Json File
 try:
-    format_file = open('./data/format.json', encoding='utf8') 
+    format_file = open(format_path, encoding='utf8') 
     format = json.load(format_file)
     format_file.close()
-except:
-    print("format.json not found")
+except Exception as FileNotFoundError:
+    print(FileNotFoundError)
+    #print("format.json not found")
     exit()
 
 #Functions for Security Schemes
@@ -163,7 +174,7 @@ def get_xml_data(param):
     if param in xml_responses.xml_data.keys():
         return xml_responses.xml_data[param]
     else:
-        print("xml data not found, param {}".format(param))
+        print("XML Data Not Found, Param {}".format(param))
 
 #Function to convert string to XML
 def string_to_xml(param):
@@ -205,10 +216,10 @@ def child_not_present(child_node):
 
 #Function to check if Parent node has any children nodes
 def child_exists(parent_node):
-    count = 0
+    child_count = 0
     for child in parent_node:
-        count += 1
-    if count>0:
+        child_count += 1
+    if child_count>0:
         return True #has children
     else:
         return False #no children
@@ -231,8 +242,9 @@ def get_xml_root_prefix(param):
         try:
             roottag = list1[0].split(':') 
             roottag = roottag[0]
-        except:
-            print("Error occured!")
+        except Exception as e:
+            print(e)
+            #print("Error occured!")
 
     return prefix,roottag
 #
@@ -241,16 +253,16 @@ def generate_api_object():
     obj = API.apiObject()
 
     if obj.path in api_dict: #Key Exists, Add to Value
-        print("adding to value")
+        #print("adding to value")
         api_list = api_dict[obj.path]
         api_list.append(obj)
     else:
-        print("new pair")
+        #print("new pair")
         api_list = [] 
         api_list.append(obj)
         api_dict.update({obj.path: api_list})
 
-    print("Object created for {}".format(obj.path))
+    print("Object Created For {}".format(obj.path))
 
 def generate_api_spec():
 
@@ -277,19 +289,20 @@ def generate_api_spec():
 
     # Opening info template file
     info_template = env.get_template('info-template.yaml')
-    print ("Info Template loaded successfully...")
+    print ("Info Template Loaded Successfully...")
     try:
         with open(filename, "a", encoding='utf8') as spec_file:
             print("Writing Info")
             info_temp = info_template.render(info=info)
             spec_file.write(info_temp)
             spec_file.close()
-    except:
-        print("Error while writing Info template")
+    except Exception as FileNotFoundError:
+        print(FileNotFoundError)
+        print("Error While Writing Info Template")
 
     # Opening template file
     template = env.get_template('openapi-template.yaml')
-    print ("Template loaded successfully...")
+    print ("Template Loaded Successfully...")
 
     for path in api_dict:
         api_list = api_dict[path]
@@ -297,12 +310,13 @@ def generate_api_spec():
         api = api_list[0]
         try:
             with open(filename, "a", encoding='utf8') as spec_file:
-                print("Creating specification for " + api.path)
+                print("Creating Specification For " + api.path)
                 spec = template.render(api=api,total_apis=len(api_list))
                 spec_file.write(spec)
                 spec_file.close()
-        except:
-            print("Error while writing path for api:{},path:{}".format(api,path))
+        except Exception as FileNotFoundError:
+            print(FileNotFoundError)
+            print("Error While Writing Path For API:{}, Path:{}".format(api,path))
         #schema
         schema_template = env.get_template('schema-template.yaml')
         try:
@@ -311,8 +325,9 @@ def generate_api_spec():
                 schema = schema_template.render(api=api,api_list=api_list,total_apis=len(api_list))
                 schemas.write(schema)
                 schemas.close()
-        except:
-            print("Error while writing schemas for api:{},path:{}".format(api,path))
+        except Exception as FileNotFoundError:
+            print(FileNotFoundError)
+            print("Error While Writing Schemas For API:{}, Path:{}".format(api,path))
         #examples
         examples_template = env.get_template('examples-template.yaml')
         try:
@@ -321,8 +336,9 @@ def generate_api_spec():
                 example = examples_template.render(api=api,api_list=api_list,total_apis=len(api_list))
                 examples.write(example)
                 examples.close()
-        except:
-            print("Error while writing examples for api:{},path:{}".format(api,path))
+        except Exception as FileNotFoundError:
+            print(FileNotFoundError)
+            print("Error While Writing Examples For API:{}, Path:{}".format(api,path))
         # #AnyOf schema
         # if len(api_list) > 1:
         #     schema_template = env.get_template('components-schema.yaml')
@@ -337,38 +353,48 @@ def generate_api_spec():
 
     # Opening security template file
     component_template = env.get_template('components-template.yaml')
-    print ("Security Template loaded successfully...")
+    print ("Security Template Loaded Successfully...")
     try:
         with open(filename, "a", encoding='utf8') as spec_file:
             print("Writing Security")
             components = component_template.render()
             spec_file.write(components)
             spec_file.close()
-    except:
-        print("Error while writing Security for api:{},path:{}".format(api,path))
+    except Exception as FileNotFoundError:
+        print(FileNotFoundError)
+        print("Error While Writing Security For API:{}, Path:{}".format(api,path))
 
-    data = data2 = data3 = ""
+    #Concatenating spec, schema and example template data
+    spec_data = schema_data = example_data = ""
     try:
         with open(filename, encoding='utf8') as fp:
-            data = fp.read()
+            spec_data = fp.read()
         with open(schema_file, encoding='utf8') as fp:
-            data2 = fp.read()
+            schema_data = fp.read()
         with open(examples_file, encoding='utf8') as fp:
-            data3 = fp.read()
-        data += "\n"
-        if((data2).strip() != ""):
-            data += "\n  schemas:\n"
-        data += data2
-        if(data3 != ""):
-            data += "\n  examples:\n"
-        data += data3
-        open(filename, 'w', encoding='utf8').close()
-        with open (filename, 'a', encoding='utf8') as fp:
-            fp.write(data)
-    except:
-        print("Error while writing Specification")
+            example_data = fp.read()
+        spec_data += "\n"
+        if((schema_data).strip() != ""):
+            spec_data += "\n  schemas:\n"
+        spec_data += schema_data
+        if((example_data).strip() != ""):
+            spec_data += "\n  examples:\n"
+        spec_data += example_data
 
-    print("Specification created successfully")
+        #Saving File
+        # open(filename, 'w', encoding='utf8').close()
+        # with open (filename, 'a', encoding='utf8') as fp:
+        #     fp.write(spec_data)
+
+        file_type = [('YAML Document', '*.yaml')]
+        spec_output_file = filedialog.asksaveasfile(mode='w', filetypes = file_type, defaultextension = file_type, title = "Save Specification", initialfile = filename)
+        spec_output_file.write(spec_data)
+
+    except Exception as FileNotFoundError:
+        print(FileNotFoundError)
+        print("Error While Writing Specification")
+
+    print("Specification Created Successfully")
     # except Exception as e:
     #     print("Error while generating Specification")
     #     exc_type, exc_obj, exc_traceback = sys.exc_info()
@@ -385,11 +411,11 @@ def import_and_generate(filepath):
         # print("")
 
         #info
-        with open('./data/info.json', 'w', encoding='utf-8') as f:
+        with open(info_path, 'w', encoding='utf-8') as f:
             json.dump(spec_data["info"], f)
         
         #descriptions
-        with open('./data/descriptions.json', 'w', encoding='utf-8') as f:
+        with open(descriptions_path, 'w', encoding='utf-8') as f:
             json.dump(spec_data["descriptions"], f)
         
         print("Creating Objects")
@@ -400,38 +426,37 @@ def import_and_generate(filepath):
                 api = spec_data[key]
 
                 data = api["data"]
-                with open('./data/data.json', 'w', encoding='utf-8') as f:
+                with open(data_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f)
 
                 parameters = api["parameters"]
-                with open('./data/parameters.json', 'w', encoding='utf-8') as f:
+                with open(parameters_path, 'w', encoding='utf-8') as f:
                     json.dump(parameters, f)
 
                 requestBody = api["requestBody"]
-                with open('./data/requestBody.json', 'w', encoding='utf-8') as f:
+                with open(requestBody_path, 'w', encoding='utf-8') as f:
                     json.dump(requestBody, f)
 
                 responses = api["responses"]
-                with open('./data/responses.json', 'w', encoding='utf-8') as f:
+                with open(responses_path, 'w', encoding='utf-8') as f:
                     json.dump(responses, f)
 
                 generate_api_object()
         
-        print("Creating Spec")
+        print("Creating Specification")
         #Create Spec
         generate_api_spec()
         
-    except Exception as e:
-        print("Error")
-        print(e)
+    except Exception as FileNotFoundError:
+        print(FileNotFoundError)
 
 if __name__ == "__main__":
 
   print ("Enter: ")
-  print ("  [1] to add API Object")
-  print ("  [2] to generate Open API Specification from Objects")
-  print ("  [3] to import file & generate Open API Specification")
-  print (" 0 to exit ")
+  print ("  [1] To Import File & Generate Open API Specification")
+  print ("  [2] To Add API Object")
+  print ("  [3] To Generate Open API Specification From Objects")
+  print ("  [0] To Exit ")
   
   runner = True
 
@@ -440,34 +465,36 @@ if __name__ == "__main__":
     choice = str(input())
     
     if choice == '1':
-        try:
-            generate_api_object()
-        except:
-            print("Error occured while adding API Object")
-    elif choice == '2':
-        print ("Generating Open API Specification")
-        try:
-            generate_api_spec()
-        except Exception as e:
-            print("Error occured while Generating Specification")
-            # except Exception as e:
-    #     print("Error while generating Specification")
-            exc_type, exc_obj, exc_traceback = sys.exc_info()
-            fname = os.path.split(exc_traceback.tb_frame.f_code.co_filename)
-            print(exc_type) #Exception
-            print(fname) #Exception occured in which file
-            print(exc_traceback.tb_lineno) #Exception lineno
-    elif choice == '3':
-        print("Importing Data from JSON file")
+        print("Importing Data From Json File")
         try:
             file_path_variable = filedialog.askopenfilename() #search_for_file_path()
             print ("\nfile_path_variable = ", file_path_variable)
             import_and_generate(file_path_variable)
             runner = False
+        except Exception as FileNotFoundError:
+            print(FileNotFoundError)
+    elif choice == '2':
+        try:
+            generate_api_object()
         except Exception as e:
             print(e)
+            print("Error Occured While Adding API Object")
+    elif choice == '3':
+        print ("Generating Open-API Specification")
+        try:
+            generate_api_spec()
+        except Exception as e:
+            print(e)
+            print("Error Occured While Generating Specification")
+            # except Exception as e:
+    #     print("Error while generating specification")
+            exc_type, exc_obj, exc_traceback = sys.exc_info()
+            fname = os.path.split(exc_traceback.tb_frame.f_code.co_filename)
+            print(exc_type) #Exception
+            print(fname) #Exception occured in which file
+            print(exc_traceback.tb_lineno) #Exception lineno
     else:
-        print ("Generating Open API Specification")
+        print ("Generating Open-API Specification")
         generate_api_spec()
         print ("Exiting.")
         runner = False

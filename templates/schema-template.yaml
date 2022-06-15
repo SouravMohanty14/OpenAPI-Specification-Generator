@@ -1,6 +1,6 @@
-#RequestBody Schemas#
 {% for content_type in api.requestBody %}
 {% if api.requestBody[content_type]|length > 1 %}
+#JSON RequestBody Schemas#
 {% for key in api.requestBody[content_type] %}
     req_{{key}}:
       properties:
@@ -9,14 +9,14 @@
           type: {{api.requestBody[content_type][key][param]|get_type}}
       {% endfor %}
 {% endfor %}
+#End of JSON RequestBody Schemas#
 {% endif %}
 {% endfor %}
-#End of RequestBody Schemas#
-#Response Schemas#
   {% for response_code in api.responses %}
       {% for response_content_type in api.responses[response_code] %}
         {% if response_content_type == 'application/json' %}
           {% if api.responses[response_code][response_content_type]|length > 1 %}
+#JSON Response Schemas#
             {% for i in api.responses[response_code][response_content_type] %}
     {{i}}:
       properties:
@@ -25,12 +25,13 @@
           type: {{ api.responses[response_code][response_content_type][i][key]|get_type}}
       {% endfor %}
 {% endfor %}
+#End of JSON Response Schemas#
           {% endif %}
         {% endif %}
       {% endfor %}
   {% endfor %}
-
   {% if api.content_type == 'application/xml' %}
+#XML RequestBody Schemas#
    {{ api.requestBody.getroot().tag }}:
     type: object
     properties:
@@ -70,10 +71,12 @@
         {% endfor %}
       {% endfor %}
     {% endfor %}
+#End of XML RequestBody Schemas#
   {% endif %}
     {% for response_code in api.responses %}
       {% for response_content_type in api.responses[response_code] %}
         {% if response_content_type == 'application/xml' %}
+#XML Response Schemas#
           {% for param in api.responses[response_code][response_content_type] %}
           {% set prefix,root = param|get_xml_root_prefix %}
           {% set param = param|string_to_xml %}
@@ -207,7 +210,7 @@
     {% endfor %}
 
           {% endfor %}
+#End of XML Response Schemas#
         {% endif %}
       {% endfor %}
     {% endfor %}
-#End of Response Schemas#
