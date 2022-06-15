@@ -1,0 +1,200 @@
+openapi: 3.0.1
+info:
+  title: ATAL Pension API
+  description: |-
+      ATAL Pension API
+  termsOfService: https://web.umang.gov.in/
+  contact:
+    name: ATAL Pension API
+    url: https://web.umang.gov.in/customer_support
+  version: 1.0.0
+servers:
+- url: https://stagingapp.umang.gov.in/umang/depttapi/atalApi/ws1
+paths:
+  /listofcategories:
+    post:
+      tags:
+      - List of Categories
+      summary: The following APIs(Leaf) are used for list of categories.
+      operationId: listofcategories
+      security:
+      - bearerAuth: []
+      parameters:
+        - in: header
+          name: tkn
+          schema:
+            type: string
+            example: ""
+          required: true
+        - in: header
+          name: fielderror
+          schema:
+            type: string
+            example: null
+        - in: header
+          name: deptid
+          schema:
+            type: integer
+            example: 190
+        - in: header
+          name: srvid
+          schema:
+            type: integer
+            example: 1353
+        - in: header
+          name: subsid
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: subsid2
+          schema:
+            type: integer
+            example: 0
+        - in: header
+          name: formtrkr
+          schema:
+            type: integer
+            example: 0
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                  fieldErrors:
+                    type: string
+                    example: null
+                  tkn:
+                    type: string
+                    example: "bb2aa8cdf0-b83-42f0-95db-51dae3caa947/2"
+                  trkr:
+                    type: string
+                    example: "213132"
+                  lang:
+                    type: string
+                    example: "en"
+                  lat:
+                    type: string
+                    example: "21"
+                  lon:
+                    type: string
+                    example: "90"
+                  lac:
+                    type: string
+                    example: "90"
+                  did:
+                    type: string
+                    example: "123234"
+                  usag:
+                    type: string
+                    example: "90"
+                  apitrkr:
+                    type: string
+                    example: "123234"
+                  usrid:
+                    type: string
+                    example: "09"
+                  srvid:
+                    type: string
+                    example: "1353"
+                  mode:
+                    type: string
+                    example: "web"
+                  pltfrm:
+                    type: string
+                    example: "andorid"
+                  deptid:
+                    type: string
+                    example: "190"
+                  subsid:
+                    type: string
+                    example: "0"
+                  subsid2:
+                    type: string
+                    example: "0"
+                  formtrkr:
+                    type: string
+                    example: "0"
+                  mosVer:
+                    type: string
+                    example: "9"
+                  maVer:
+                    type: string
+                    example: "3.0.1"
+                  appName:
+                    type: string
+                    example: "NSDL"
+                  mdOS:
+                    type: string
+                    example: "ANDROID"
+                  mIMEMI:
+                    type: string
+                    example: "111111111111111"
+                  mdUUID:
+                    type: string
+                    example: "0b39f4280fc61e18"
+                  source:
+                    type: string
+                    example: "LITE"
+                  accessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1MDAwMTA2NDg3MTYiLCJpYXQiOjE1OTk4MjgxMjgsInN1YiI6Ik5QUyIsImlzcyI6Ik5TREwifQ.Akqa58hqcoMWWtw5aKkivvBTkIf6O7w7K01H9mih7bI"
+                  pran:
+                    type: string
+                    example: "500010648716"
+                  grvncType:
+                    type: string
+                    example: "G"
+      
+      responses:
+        200:
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                properties:
+                  rs:
+                    type: string
+                    example: S
+                  rc:
+                    type: string
+                    example: 200
+                  rd:
+                    type: string
+                    example: OK
+                  pd:
+                    type: object
+                    properties:
+                      grvncCatList: 
+                        type: array                        
+                        items:
+                          type: object
+                        example: ['Against NPS Trust', 'Contribution related', 'Processing of change request by the Nodal Office', 'PRAN Related', 'Transaction Statement related', 'Withdrawal']
+                      fieldErrors: 
+                        type: string                        
+                        example: null
+                      tokenNumber: 
+                        type: string                        
+                        example: null
+                      grvncSubCat: 
+                        type: string                        
+                        example: null
+                      againstEntMap: 
+                        type: string                        
+                        example: null
+                      againstEntity: 
+                        type: string                        
+                        example: null
+
+   
+        400:
+          description: Bad Request/Validation Error
+        401:
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Text

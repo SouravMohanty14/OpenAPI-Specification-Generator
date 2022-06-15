@@ -1,0 +1,58 @@
+{
+    "info":{
+        "openapiVersion": "",
+        "title": "",
+        "description": "",
+        "termsOfService": "https://web.umang.gov.in/",
+        "contactName": "",
+        "contactUrl": "https://web.umang.gov.in/customer_support",
+        "infoVersion": "1.0.0",
+        "servers":[
+        ]
+    },
+    "descriptions":{
+        "rs": "Request Status",
+        "rc": "Response Code",
+        "rd": "Response Description",
+        "pd": "Response Data",
+        "200": "Successful Response",
+        "400": "Bad Request/Validation Error",
+        "401": "Unauthorized",
+        "204": "No RECORD Found",
+        "500": "Internal Server Error",
+        "Tkn": "UMANG user login token",
+        "srvid": "UMANG service id",
+        "deptid": "UMANG deptid"
+    },
+    "api1":{
+        "data":{
+            "method" : "",
+            "path" : "",
+            "operationId" : "",
+            "tag" : "",
+            "summary" : "",
+            "content_type" : "",
+            "mandatory" : [],
+            "authorization" : "",
+            "securitySchemes" : { "bearerAuth":"", "cookieAuth":"", "oauthsecurity":"", "oauthAuthorizeCode":"", "basicAuth":""}
+        },
+        "parameters":{
+        },
+        "requestBody":{
+            "application/json" : 
+            {
+                "respBody1":{}                                                    
+            }
+        },
+        "responses":{
+            "200" : {
+                "application/json" : 
+                    {
+                        "response1":{}                                                  
+                    }
+                },     
+            "400" : {},
+            "401" : {}
+            }
+    }
+}

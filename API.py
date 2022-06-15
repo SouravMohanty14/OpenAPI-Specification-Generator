@@ -28,16 +28,16 @@ class apiObject:
       self.mandatory = data["mandatory"]
 
       file.close()
-    except Exception as e:
-      print(e)
+    except Exception as FileNotFoundError:
+      print(FileNotFoundError)
       #print("Error while opening/reading data.json file")
 
     try:
       file = open(parameters_path, encoding='utf8') 
       self.parameters = json.load(file)
       file.close()
-    except Exception as e:
-      print(e)
+    except Exception as FileNotFoundError:
+      print(FileNotFoundError)
       #print("Error while opening/reading parameters.json file")
 
     #file = open(requestBody_path,)
@@ -45,22 +45,22 @@ class apiObject:
       try:
         file = open(requestBody_path, encoding='utf8')
         self.requestBody = json.load(file)
-      except Exception as e:
-        print(e)
+      except Exception as FileNotFoundError:
+        print(FileNotFoundError)
         #print("Error while opening/reading requestBody.json file")
     elif self.content_type=='application/x-www-form-urlencoded':
       try:
         file = open(requestBody_path, encoding='utf8')
         self.requestBody = json.load(file)
-      except Exception as e:
-        print(e)
+      except Exception as FileNotFoundError:
+        print(FileNotFoundError)
         #print("Error while opening/reading requestBody.json file")
     else:
       try:
         file = open('./data/requestBody.xml', encoding='utf8')
         self.requestBody = ET.parse(file)
-      except Exception as e:
-        print(e)
+      except Exception as FileNotFoundError:
+        print(FileNotFoundError)
         #print("Error while opening/reading requestBody.xml file")
     
     file.close()
@@ -69,6 +69,6 @@ class apiObject:
       file = open(responses_path, encoding='utf8') 
       self.responses = json.load(file)
       file.close()
-    except Exception as e:
-      print(e)
+    except Exception as FileNotFoundError:
+      print(FileNotFoundError)
       #print("Error while opening/reading responses.json file")
