@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: ATAL Pension API
   description: |-
-      ATAL Pension API
+      ATAL Pension API <i>[Updated on 15 June 2022]</i>
   termsOfService: https://web.umang.gov.in/
   contact:
     name: ATAL Pension API

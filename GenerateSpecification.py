@@ -15,6 +15,8 @@ import API
 import data.xmlResponses as xml_responses
 import xml.etree.ElementTree as ET
 import os
+import datetime
+import calendar
 import tkinter
 from tkinter import filedialog
 import config as cfg
@@ -53,6 +55,9 @@ try:
     info_file = open(info_path, encoding='utf8') 
     info = json.load(info_file) #Dictionary data of info_file
     info_file.close()
+    info["description"] += " <i>[Updated on {} {} {}]</i>".format(datetime.datetime.now().day,
+                                                                calendar.month_name[datetime.datetime.now().month],
+                                                                datetime.datetime.now().year)
 except Exception as FileNotFoundError:
     print(FileNotFoundError)
     #print("info.json not found")
@@ -467,7 +472,8 @@ if __name__ == "__main__":
     if choice == '1':
         print("Importing Data From Json File")
         try:
-            file_path_variable = filedialog.askopenfilename() #search_for_file_path()
+            file_type = [('JSON Document', '*.json')]
+            file_path_variable = filedialog.askopenfilename(filetypes = file_type, defaultextension = file_type) #search_for_file_path()
             print ("\nfile_path_variable = ", file_path_variable)
             import_and_generate(file_path_variable)
             runner = False
