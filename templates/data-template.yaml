@@ -18,7 +18,7 @@
         "200": "Successful Response",
         "400": "Bad Request/Validation Error",
         "401": "Unauthorized",
-        "204": "No RECORD Found",
+        "401": "Forbidden Error",
         "500": "Internal Server Error",
         "Tkn": "UMANG user login token",
         "srvid": "UMANG service id",
