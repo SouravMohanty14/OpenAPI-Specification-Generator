@@ -11,7 +11,7 @@
       - {{api.authorization}}: []
        {% endif %}
       {% endif %}
-      {% if api.parameters.length != 0 %}
+      {% if api.parameters %}
       parameters:
       {% for key in api.parameters %}
         - in: header
@@ -200,13 +200,21 @@
                         {% for element in nested_array_param %}
                           {% if loop.first %}
                             {% if nested_array_param[element]|get_type == 'string' %}
+                              {% if nested_array_param[element] == None %}
+                        -  {{element}}: null
+                              {% else %}
                         -  {{element}}: "{{nested_array_param[element]}}"
+                              {% endif %}
                             {% else %}
                         -  {{element}}: {{nested_array_param[element]}}
                             {% endif %}
                           {% else %}
                             {% if nested_array_param[element]|get_type == 'string' %}
+                              {% if nested_array_param[element] == None %}
+                           {{element}}: null
+                              {% else %}
                            {{element}}: "{{nested_array_param[element]}}"
+                              {% endif %}
                             {% else %}
                            {{element}}: {{nested_array_param[element]}}
                             {% endif %}

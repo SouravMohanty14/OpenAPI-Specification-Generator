@@ -151,7 +151,7 @@ def get_nestedarray_type(value):
         return "object"
     if type(value) == dict:
         return "object"
-    return type(value)
+    return "string"
 
 #Function to check datatype of xml parameter
 def get_xml_type(value):

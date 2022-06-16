@@ -25,7 +25,6 @@ paths:
           schema:
             type: string
             example: ""
-          required: true
         - in: header
           name: fielderror
           schema:
@@ -170,7 +169,29 @@ paths:
                         type: array                        
                         items:
                           type: object
-                        example: ['Against NPS Trust', 'Contribution related', 'Processing of change request by the Nodal Office', 'PRAN Related', 'Transaction Statement related', 'Withdrawal']
+                          properties:
+                            stsDesc:
+                              type: string
+                            closingTmstmp:
+                              type: string
+                            tokenNumber:
+                              type: integer
+                            crtdTmstmp:
+                              type: string
+                            audAttLog:
+                              type: string
+                            closingRem:
+                              type: string
+                            pran:
+                              type: string
+                        example:
+                        -  stsDesc: "Assigned"
+                           closingTmstmp: null
+                           tokenNumber: 60114783
+                           crtdTmstmp: "05/08/2020 19:40:57"
+                           audAttLog: null
+                           closingRem: null
+                           pran: "500010648716"
                       fieldErrors: 
                         type: string                        
                         example: null
